@@ -1,0 +1,46 @@
+.sidebar {
+    position: fixed;
+    background: #000000;
+    width: 12.5rem;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    top:0;
+    box-shadow: 12px 0px 45px -15px rgba(124, 124, 124, 0.25);
+    border-radius: 0px 35px 35px 0px;
+}
+
+.logo {
+    position: absolute;
+    width: 6.25rem;
+    height: 6.25rem;
+    left: 50px;
+    top: 30px;
+}
+
+.trilliant{
+    position: absolute;
+    width: 9.188rem;
+    height: 2.938rem;
+    left: 1.625rem;
+    top: 8.125rem;
+    
+    font-style: normal;
+    font-weight: 600;
+    font-size: 2.5rem;
+    line-height: 3.75rem;
+    text-decoration-line: underline;
+
+    color: #49AB48;
+}
+
+.menuItems {
+    position: absolute;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+}
+
+.menuItem {
+    position: absolute;
+}
