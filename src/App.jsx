@@ -1,16 +1,16 @@
 import Sidebar from './components/Sidebar';
 import { BrowserRouter as Router, Routes, Route} from 'react-router-dom';
+import Home from './pages/Home';
 
 function App(){
     return (
         <>
-        <Router>
-            <Sidebar />
-            <Routes>
-                <Route exact path="/">
-                </Route>
-            </Routes>
-        </Router>
+            <Router>
+                <Sidebar />
+                <Routes>
+                    <Route exact path="/home" component={Home} />
+                </Routes>
+            </Router>
         </>
     );
 }

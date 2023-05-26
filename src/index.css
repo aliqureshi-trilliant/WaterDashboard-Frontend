@@ -2,6 +2,8 @@
 
 * {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 :root {
@@ -29,7 +31,7 @@
 }
 
 body {
-  margin: 0;
   text-align: center;
   color: #000000;
 }
+
