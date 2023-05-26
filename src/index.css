@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Reem+Kufi&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Reem+Kufi:300,400,500,600,700&display=swap');
 
 * {
   box-sizing: border-box;
@@ -34,4 +34,3 @@ body {
   text-align: center;
   color: #000000;
 }
-

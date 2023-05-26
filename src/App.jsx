@@ -8,7 +8,7 @@ function App(){
             <Router>
                 <Sidebar />
                 <Routes>
-                    <Route exact path="/home" component={Home} />
+                    <Route exact path="/home" element={<Home />} />
                 </Routes>
             </Router>
         </>

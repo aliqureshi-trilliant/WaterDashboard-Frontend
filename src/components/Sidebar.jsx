@@ -9,8 +9,15 @@ import { BiLogOut } from'react-icons/bi';
 
 function Sidebar() {
 
-    const toggleMenuItem = () => {
-        document.getElementById('menuItem').classList.toggle(classes.active);
+    const toggleMenuItem = (event) => {
+        event.preventDefault();
+
+        const menuItems = document.querySelectorAll(`.${classes.menuItem}`);
+        menuItems.forEach((el) => el.classList.remove(classes.active));
+
+        const clickedItem = event.target.closest(`.${classes.menuItem}`);
+        clickedItem.classList.add(classes.active);  
+        
     }
 
     return (
@@ -20,40 +27,40 @@ function Sidebar() {
                 <h3 className={classes.trilliant}>Trilliant</h3>
             </div>
             <ul className={classes.menuItems}>
-                <li className={classes.menuItem} onClick={toggleMenuItem}>
-                    <Link to="/home">
+                <li className={classes.menuItem}>
+                    <Link to="/home" onClick={toggleMenuItem}>
                         <AiFillHome  className={classes.icons}/>
                         <span>Home</span>
                     </Link>
                 </li>
                 <li className={classes.menuItem}>
-                    <Link to="#">
+                    <Link to="#" onClick={toggleMenuItem}>
                         <MdElectricMeter  className={classes.icons}/>
                         <span>Meters</span>
                     </Link>
                 </li>
                 <li className={classes.menuItem}>
-                    <Link to="#">
+                    <Link to="#" onClick={toggleMenuItem}>
                         <SiGoogleanalytics  className={classes.icons}/>
                         <span>Metrics</span>
                     </Link>
                 </li>
                 <li className={classes.menuItem}>
-                    <Link to="#">
+                    <Link to="#" onClick={toggleMenuItem}>
                         <IoMapSharp  className={classes.icons}/>
                         <span>Maps</span>
                     </Link>
                 </li>
                 <li className={classes.menuItem}>
-                    <Link to="#">
+                    <Link to="#" onClick={toggleMenuItem}>
                         <AiFillSetting className={classes.icons}/>
-                        <span>Settings</span>
+                        <span>About</span>
                     </Link>
                 </li>
             </ul>
             <div className={classes.logoutContainer}>
                 <div className={`${classes.menuItem} ${classes.logout}`}>
-                    <Link to="#">
+                    <Link to="#" onClick={toggleMenuItem}>
                         <BiLogOut className={classes.icons}/>
                         <span>Logout</span>
                     </Link>
