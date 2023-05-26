@@ -1,12 +1,13 @@
-import classes from './Card.module.css';
+import classes from './DeviceCard.module.css';
 import { HiOutlineStatusOnline, HiOutlineStatusOffline } from 'react-icons/hi';
 
-function Card (props) {
+function DeviceCard (props) {
 
     const statusClass = classes.deviceStatus + ' ' +(props.deviceStatus === 'Online'? classes.online : classes.offline);
+    const additionalStyles = props.additionalStyles? props.additionalStyles : '';
 
     return (
-        <div className={classes.card}>
+        <div className={`${classes.card} ${additionalStyles}`}>
             <div className={classes.deviceName}>
                 {props.deviceName}
             </div>
@@ -24,4 +25,4 @@ function Card (props) {
     )
 }
 
-export default Card;
+export default DeviceCard;

@@ -1,6 +1,7 @@
 .tile {
     width: 12.5rem;
     height: 4.375rem;
+    margin-right: 2rem;
     display: flex;
     flex-direction: row;
     justify-content: start;

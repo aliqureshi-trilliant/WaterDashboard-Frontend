@@ -1,6 +1,86 @@
 .home {
-    height: 100vh;
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-rows: 25% 25% 25% 25%;
+}
+
+.card {
+    margin-right: 1rem;
+}
+
+.viewCard {
+    margin-right: 1rem;
+}
+
+.tray {
+    margin-top: 1rem;
+}
+
+.topContainer {
+    width: 95%;
+    height: 100%;
+    grid-row: 1 / 2;
+    display: grid;
+    grid-template-columns: 60% 40%;
+}
+
+.titleTileContainer {
+    width:100%;
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    justify-content: start;
+    grid-column: 1 / 2;
+}
+
+.pageTitle {
+    height: 50%;
+    display: flex;
+    flex-direction: column;
     justify-content: center;
+    align-items: baseline;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 1.5rem;
+    line-height: 176.7%;
+}
+.tileContainer{
+    height: 50%;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.summaryContainer {
+    height: 90%;
+    grid-column: 2 / 3;
+}
+
+.middleContainerOne {
+    width: 100%;
+    grid-row: 2 / 3;
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: center;
+}
+
+.middleContainerTwo {
+    width: 100%;
+    grid-row: 3 / 4;
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: center;
+}
+
+.bottomContainer {
+    width: 100%;
+    grid-row: 4 / 5;
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: center;
 }
