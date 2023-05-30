@@ -8,12 +8,12 @@ function App(){
         <>
             <Router>
                 <div className='sidebar'>
-                <Sidebar />
+                    <Sidebar />
                 </div>
                 <div className='pages'>
-                <Routes>
-                    <Route exact path="/home" element={<Home />} />
-                </Routes>
+                    <Routes>
+                        <Route exact path="/home" element={<Home />} />
+                    </Routes>
                 </div>
             </Router>
         </>

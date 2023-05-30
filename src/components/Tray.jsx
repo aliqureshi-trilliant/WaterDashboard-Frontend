@@ -1,18 +1,18 @@
 import classes from './Tray.module.css';
-import DeviceCard from './DeviceCard'
-import ViewCard from './ViewCard'
 
 function Tray(props) {
 
-    const additionalStyles = props.additionalStyles? props.additionalStyles : '';
-
+    const mapStyles = props.trayMap? classes.trayMap : classes.tray;
+    const cardContainerStyle = props.trayMap? classes.cardContainerMap: classes.cardContainer;
+    const trayTextContainerStyle = props.trayMap? classes.trayTextContainerMap: classes.trayTextContainer;
+    
     return (
-        <div className={`${classes.tray} ${additionalStyles}`}>
-            <div className={classes.trayTextContainer}>
+        <div className={mapStyles}>
+            <div className={trayTextContainerStyle}>
                 <h2 className={classes.trayHeading}>{props.listType}</h2>
                 <p className={classes.trayText}>{props.listDesc}</p>
             </div>
-            <div className={classes.cardContainer}>
+            <div className={cardContainerStyle}>
                 {props.children}
             </div>
         </div>

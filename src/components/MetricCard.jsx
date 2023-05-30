@@ -1,16 +1,32 @@
 import classes from './MetricCard.module.css';
-import { AiFillPlayCircle } from 'react-icons/ai'
+import { FcAlarmClock, FcDam, FcEngineering, FcBusinessContact, FcCloseUpMode} from 'react-icons/fc';
 
+function MetricCard (props) {
 
-function MetricCard () {
+    const additionalStyles = props.additionalStyles? props.additionalStyles : '';
+
+    const getIcon = (title) => {
+        switch(title) {
+            case 'Alarm':
+                return <FcAlarmClock className={classes.icon} />
+            case 'Water Level':
+                return <FcDam className={classes.icon} />
+            case 'Metric 3':
+                return <FcCloseUpMode className={classes.icon} />
+            case 'Metric 4':
+                return <FcEngineering className={classes.icon} />
+            case 'Metric 5':
+                return <FcBusinessContact className={classes.icon} />
+        }
+    }
 
     return (
-        <div className={classes.card}>
+        <div className={`${classes.card} ${additionalStyles}`}>
                 <div className={classes.cardText}>
-                    View All
+                    {props.title}
                 </div>
                 <div className={classes.iconContainer}>
-                    <AiFillPlayCircle className={classes.icon}/>
+                    {getIcon(props.title)}
                 </div>
         </div>
     )

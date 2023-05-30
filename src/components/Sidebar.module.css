@@ -21,6 +21,7 @@
 .logo {
     width: 45%;
     height: auto;
+    cursor: pointer;
 }
 
 .trilliant{
@@ -33,6 +34,7 @@
     text-decoration: underline;
     text-underline-offset: 10px;
     color: var(--pigment-green);
+    cursor: pointer;
 }
 
 .menuItems {

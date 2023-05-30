@@ -10,7 +10,6 @@ import { BiLogOut } from'react-icons/bi';
 function Sidebar() {
 
     const toggleMenuItem = (event) => {
-        event.preventDefault();
 
         const menuItems = document.querySelectorAll(`.${classes.menuItem}`);
         menuItems.forEach((el) => el.classList.remove(classes.active));

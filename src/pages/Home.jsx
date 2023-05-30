@@ -4,6 +4,7 @@ import DeviceCard from '../components/DeviceCard';
 import ViewCard from '../components/ViewCard';
 import Summary from '../components/Summary';
 import Tile from '../components/Tile';
+import MetricCard from '../components/MetricCard';
 
 function Home() {
     return (
@@ -26,29 +27,27 @@ function Home() {
                 </div>
             </div>
             <div className={classes.middleContainerOne}>
-            <Tray listType="Meter List" listDesc="View a  list of meters for Water MIU" additionalStyle={classes.tray}>
-                <DeviceCard deviceName="Canary 188" deviceStatus="Online" additionalStyles={classes.card}/>
-                <DeviceCard deviceName="Canary 198" deviceStatus="Offline" additionalStyles={classes.card}/>
-                <DeviceCard deviceName="Canary 148" deviceStatus="Online" additionalStyles={classes.card}/>
-                <DeviceCard deviceName="Canary 128" deviceStatus="Online" additionalStyles={classes.card}/>
+            <Tray listType="View Maps" listDesc="View a map of all the active Water MIUs" trayMap={true}>
                 <ViewCard />
             </Tray>
             </div>
             <div className={classes.middleContainerTwo}>
-            <Tray listType="Meter List" listDesc="View a  list of meters for Water MIU" additionalStyle={classes.tray}>
+            <Tray listType="Meter List" listDesc="View a list of meters for Water MIU">
                 <DeviceCard deviceName="Canary 188" deviceStatus="Online" additionalStyles={classes.card}/>
                 <DeviceCard deviceName="Canary 198" deviceStatus="Offline" additionalStyles={classes.card}/>
                 <DeviceCard deviceName="Canary 148" deviceStatus="Online" additionalStyles={classes.card}/>
                 <DeviceCard deviceName="Canary 128" deviceStatus="Online" additionalStyles={classes.card}/>
+                <DeviceCard deviceName="Canary 169" deviceStatus="Offline" additionalStyles={classes.card}/>
                 <ViewCard />
             </Tray>
             </div>
             <div className={classes.bottomContainer}>
-            <Tray listType="Meter List" listDesc="View a  list of meters for Water MIU" additionalStyle={classes.tray}>
-                <DeviceCard deviceName="Canary 188" deviceStatus="Online" additionalStyles={classes.card}/>
-                <DeviceCard deviceName="Canary 198" deviceStatus="Offline" additionalStyles={classes.card}/>
-                <DeviceCard deviceName="Canary 148" deviceStatus="Online" additionalStyles={classes.card}/>
-                <DeviceCard deviceName="Canary 128" deviceStatus="Online" additionalStyles={classes.card}/>
+            <Tray listType="KPI List" listDesc="View a list of KPIs for Water MIU">
+                <MetricCard title="Alarm" additionalStyles={classes.card}/>
+                <MetricCard title="Water Level" additionalStyles={classes.card}/>
+                <MetricCard title="Metric 3" additionalStyles={classes.card}/>
+                <MetricCard title="Metric 4" additionalStyles={classes.card}/>
+                <MetricCard title="Metric 5" additionalStyles={classes.card}/>
                 <ViewCard />
             </Tray>
             </div>
