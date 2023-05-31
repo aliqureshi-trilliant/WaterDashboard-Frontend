@@ -32,7 +32,7 @@ function Home() {
             </Tray>
             </div>
             <div className={classes.middleContainerTwo}>
-            <Tray listType="Meter List" listDesc="View a list of meters for Water MIU">
+            <Tray listType="Meter List" listDesc="View a list of meters for the Water MIU">
                 <DeviceCard deviceName="Canary 188" deviceStatus="Online" additionalStyles={classes.card}/>
                 <DeviceCard deviceName="Canary 198" deviceStatus="Offline" additionalStyles={classes.card}/>
                 <DeviceCard deviceName="Canary 148" deviceStatus="Online" additionalStyles={classes.card}/>
@@ -42,7 +42,7 @@ function Home() {
             </Tray>
             </div>
             <div className={classes.bottomContainer}>
-            <Tray listType="KPI List" listDesc="View a list of KPIs for Water MIU">
+            <Tray listType="KPI List" listDesc="View a list of KPIs for the Water MIU">
                 <MetricCard title="Alarm" additionalStyles={classes.card}/>
                 <MetricCard title="Water Level" additionalStyles={classes.card}/>
                 <MetricCard title="Metric 3" additionalStyles={classes.card}/>

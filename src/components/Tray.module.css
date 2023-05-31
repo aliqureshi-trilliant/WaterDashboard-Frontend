@@ -26,14 +26,14 @@
     margin-left: 10%;
     font-style: normal;
     font-weight: 700;
-    font-size: 8.5cqw;
+    font-size: min(8.5cqmax,2rem);
     line-height: 4.25rem;
 }
 
 .trayText {
     font-style: normal;
     font-weight: 400;
-    font-size: 4.5cqw;
+    font-size: min(4.5cqmax,1.2rem);
     line-height: 1.875rem;
 }
 
@@ -58,7 +58,7 @@
     background: linear-gradient(rgba(216, 255, 216, 0.3),rgba(216, 255, 216, 0.3)), url(/images/map.png);
     border-radius: 2rem;
     background-size: 100% auto;
-    transition: all 0.3s ease-in-out;
+    transition: all 0.2s ease-in-out;
 }
 
 
@@ -90,5 +90,5 @@
 }
 
 .tray:hover{
-    background: rgb(197, 234, 197,0.6);
+    background: rgb(197, 234, 197,0.2);
 }
