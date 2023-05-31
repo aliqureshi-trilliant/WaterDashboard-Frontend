@@ -1,6 +1,7 @@
 import classes from './Sidebar.module.css';
 import logo from '/images/logo_trilliant.png';
-import { Link } from'react-router-dom';
+import { useEffect } from 'react';
+import { Link, useLocation } from'react-router-dom';
 import { AiFillHome, AiFillSetting } from 'react-icons/ai';
 import { MdElectricMeter } from 'react-icons/md';
 import { SiGoogleanalytics } from 'react-icons/si';
@@ -8,6 +9,8 @@ import { IoMapSharp } from'react-icons/io5';
 import { BiLogOut } from'react-icons/bi';
 
 function Sidebar() {
+
+    const location = useLocation();
 
     const toggleMenuItem = (event) => {
 
@@ -18,6 +21,20 @@ function Sidebar() {
         clickedItem.classList.add(classes.active);  
         
     }
+
+    const selectMenuItem = (name) => {
+        for (const a of document.querySelectorAll("a")) {
+            if (a.textContent.includes(name)) {
+                toggleMenuItem({target: a});
+            }
+        }
+    }
+    
+    useEffect(() => {
+        switch (location.pathname) {
+            case '/home': selectMenuItem('Home'); break;
+        }
+    }, [location]);
 
     return (
         <div className={classes.sidebar}>
@@ -33,25 +50,25 @@ function Sidebar() {
                     </Link>
                 </li>
                 <li className={classes.menuItem}>
-                    <Link to="#" onClick={toggleMenuItem}>
+                    <Link to="/meters" onClick={toggleMenuItem}>
                         <MdElectricMeter  className={classes.icons}/>
                         <span>Meters</span>
                     </Link>
                 </li>
                 <li className={classes.menuItem}>
-                    <Link to="#" onClick={toggleMenuItem}>
+                    <Link to="/metrics" onClick={toggleMenuItem}>
                         <SiGoogleanalytics  className={classes.icons}/>
                         <span>Metrics</span>
                     </Link>
                 </li>
                 <li className={classes.menuItem}>
-                    <Link to="#" onClick={toggleMenuItem}>
+                    <Link to="/maps" onClick={toggleMenuItem}>
                         <IoMapSharp  className={classes.icons}/>
                         <span>Maps</span>
                     </Link>
                 </li>
                 <li className={classes.menuItem}>
-                    <Link to="#" onClick={toggleMenuItem}>
+                    <Link to="/about" onClick={toggleMenuItem}>
                         <AiFillSetting className={classes.icons}/>
                         <span>About</span>
                     </Link>
@@ -59,7 +76,7 @@ function Sidebar() {
             </ul>
             <div className={classes.logoutContainer}>
                 <div className={`${classes.menuItem} ${classes.logout}`}>
-                    <Link to="#" onClick={toggleMenuItem}>
+                    <Link to="/logout" onClick={toggleMenuItem}>
                         <BiLogOut className={classes.icons}/>
                         <span>Logout</span>
                     </Link>
