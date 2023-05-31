@@ -1,0 +1,58 @@
+.summary {
+    cursor: pointer;
+    container: card / size;
+    width: 100%;
+    height: 90%;
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    filter: drop-shadow(0px 15px 35px rgba(0, 0, 0, 0.15));
+    background: linear-gradient(90deg, #76C076 -51.74%, rgba(150, 222, 149, 0) 167.24%);
+    border-radius: 2rem;
+    transition: all 0.2s ease-in-out;
+}
+
+.summaryTextContainer {
+    width: 100%;
+    display : flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: baseline;
+    color: #F6FDFB;
+    
+}
+
+.summaryHeading {
+    margin-left: 10%;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 8.235cqw;
+    line-height: 4.25rem;
+}
+
+.summaryText {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 3.5cqw;
+    line-height: 1.875rem;
+}
+
+.imageContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: auto;
+}
+
+.imageContainer img {
+    width: 50%;
+    height: auto;
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+    margin: 10% 0;
+}
+
+.summary:hover {
+    transform: scale(1.05);
+}

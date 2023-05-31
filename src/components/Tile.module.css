@@ -1,0 +1,76 @@
+.tile {
+    width: 12.5rem;
+    height: 4.375rem;
+    margin-right:3rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    background: #96DE95;
+    mix-blend-mode: normal;
+    opacity: 0.75;
+    box-shadow: 0px 5px 10px rgba(61, 150, 202, 0.5), inset 0px 5px 10px rgba(61, 150, 202, 0.5);
+    border-radius: 1rem;
+}
+
+.tileTextContainer {
+    width: 100%;
+    display : flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: baseline;
+    color: #F6FDFB;
+    
+}
+
+.tileHeading {
+    margin-left: 10%;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 1.25rem;
+    line-height: 2rem;
+    color: #6C7172;
+}
+
+.tileText {
+    margin-left: 20%;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 1.8rem;
+    line-height: 2.25rem;
+    color: #000000;
+}
+
+.iconContainer {
+    width: 100%;
+    height: auto;
+    color: #F6FDFB;
+    display: flex;
+    justify-content: center;
+}
+
+.icon{
+    width: 65%;
+    height: auto;
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+}
+
+.tile:hover{
+    animation: shake 0.5s;
+    animation-iteration-count: infinite;
+}
+
+@keyframes shake {
+    10%, 90% {
+      transform: translate3d(-1px, 0, 0);
+    }
+    20%, 80% {
+      transform: translate3d(2px, 0, 0);
+    }
+    
+    30%, 50%, 70% {
+      transform: translate3d(-2px, 0, 0);
+    }
+    40%, 60% {
+      transform: translate3d(2px, 0, 0);
+    }
+}
