@@ -18,21 +18,22 @@ function Sidebar() {
         menuItems.forEach((el) => el.classList.remove(classes.active));
 
         const clickedItem = event.target.closest(`.${classes.menuItem}`);
-        clickedItem.classList.add(classes.active);  
-        
-    }
+        clickedItem.classList.add(classes.active);
+
+    };
 
     const selectMenuItem = (name) => {
-        for (const a of document.querySelectorAll("a")) {
+        for (const a of document.querySelectorAll('a')) {
             if (a.textContent.includes(name)) {
                 toggleMenuItem({target: a});
             }
         }
-    }
-    
+    };
+
     useEffect(() => {
         switch (location.pathname) {
-            case '/home': selectMenuItem('Home'); break;
+        case '/home': selectMenuItem('Home'); break;
+        case '/device' : selectMenuItem('Meters'); break;
         }
     }, [location]);
 
@@ -45,25 +46,25 @@ function Sidebar() {
             <ul className={classes.menuItems}>
                 <li className={classes.menuItem}>
                     <Link to="/home" onClick={toggleMenuItem}>
-                        <AiFillHome  className={classes.icons}/>
+                        <AiFillHome className={classes.icons}/>
                         <span>Home</span>
                     </Link>
                 </li>
                 <li className={classes.menuItem}>
-                    <Link to="/meters" onClick={toggleMenuItem}>
-                        <MdElectricMeter  className={classes.icons}/>
+                    <Link to="/device" onClick={toggleMenuItem}>
+                        <MdElectricMeter className={classes.icons}/>
                         <span>Meters</span>
                     </Link>
                 </li>
                 <li className={classes.menuItem}>
                     <Link to="/metrics" onClick={toggleMenuItem}>
-                        <SiGoogleanalytics  className={classes.icons}/>
+                        <SiGoogleanalytics className={classes.icons}/>
                         <span>Metrics</span>
                     </Link>
                 </li>
                 <li className={classes.menuItem}>
                     <Link to="/maps" onClick={toggleMenuItem}>
-                        <IoMapSharp  className={classes.icons}/>
+                        <IoMapSharp className={classes.icons}/>
                         <span>Maps</span>
                     </Link>
                 </li>

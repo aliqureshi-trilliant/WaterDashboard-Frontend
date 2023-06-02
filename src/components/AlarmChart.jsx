@@ -6,24 +6,24 @@ import { Doughnut } from 'react-chartjs-2';
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 const data = {
-    labels: ["High Flow","Back Flow","Failed Reads"],
+    labels: ['High Flow','Back Flow','Failed Reads'],
     datasets: [
-      {
-        label: '',
-        data: [12, 19, 3],
-        backgroundColor: [
-          'rgb(120, 178, 119)',
-          'rgb(150, 222, 149)',
-          'rgb(40, 45, 41)',
-        ],
-        borderColor: [
-            'rgb(120, 178, 119)',
-            'rgb(150, 222, 149)',
-            'rgb(40, 45, 41)',
-        ],
-        borderWidth: 1,
-        cutout: "80%"
-      },
+        {
+            label: '',
+            data: [12, 19, 3],
+            backgroundColor: [
+                'rgb(120, 178, 119)',
+                'rgb(150, 222, 149)',
+                'rgb(40, 45, 41)',
+            ],
+            borderColor: [
+                'rgb(120, 178, 119)',
+                'rgb(150, 222, 149)',
+                'rgb(40, 45, 41)',
+            ],
+            borderWidth: 1,
+            cutout: '80%'
+        },
     ],
 };
 
@@ -32,15 +32,15 @@ const plugins = [{
         var width = chart.width,
             height = chart.height,
             ctx = chart.ctx;
-            ctx.restore();
-            var fontSize = (height / 160).toFixed(2);
-            ctx.font = fontSize + "em Reem Kufi";
-            ctx.textBaseline = "top";
-            var text = "Total Alarms",
+        ctx.restore();
+        var fontSize = (height / 160).toFixed(2);
+        ctx.font = fontSize + 'em Reem Kufi';
+        ctx.textBaseline = 'top';
+        var text = 'Total Alarms',
             textX = Math.round((width - ctx.measureText(text).width) / 2),
             textY = height / 2;
-            ctx.fillText(text, textX, textY);
-            ctx.save();
+        ctx.fillText(text, textX, textY);
+        ctx.save();
     },
     onHover: (e, activeElements, chart) => {
         if (activeElements[0]) {
@@ -50,7 +50,7 @@ const plugins = [{
             console.log(label + ': ' + value);
         }
     },
-}]
+}];
 
 const options = {
     plugins: {
@@ -59,14 +59,14 @@ const options = {
         },
         tooltip: {
             titleFont: {
-              family: "Reem Kufi"
+                family: 'Reem Kufi'
             },
             bodyFont: {
-              family: "Nunito"
-              
+                family: 'Nunito'
+
             },
             footerFont: {
-              family: "Nunito"
+                family: 'Nunito'
             }
         }
     },
@@ -91,7 +91,7 @@ function AlarmChart(){
                 <div className={classes.dataContainer}>
                     <div className={classes.data}>
                         <div className={classes.dataText}>
-                            Back Flow                            
+                            Back Flow
                         </div>
                         <div className={classes.dataNumber}>
                             14%
@@ -107,7 +107,7 @@ function AlarmChart(){
                     </div>
                     <div className={classes.data}>
                         <div className={classes.dataText}>
-                            Failed Read                            
+                            Failed Read
                         </div>
                         <div className={classes.dataNumber}>
                             47%

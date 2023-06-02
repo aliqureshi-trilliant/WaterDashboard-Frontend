@@ -16,13 +16,13 @@ function DeviceCard (props) {
             </div>
             <div className={classes.status}>
                 {
-                    props.deviceStatus === 'Online'? 
-                    <HiOutlineStatusOnline className={`${classes.icon} ${classes.onlineStatus}`}/>: 
-                    <HiOutlineStatusOffline className={`${classes.icon} ${classes.offlineStatus}`}/>
+                    props.deviceStatus === 'Online'?
+                        <HiOutlineStatusOnline className={`${classes.icon} ${classes.onlineStatus}`}/>:
+                        <HiOutlineStatusOffline className={`${classes.icon} ${classes.offlineStatus}`}/>
                 }
             </div>
         </div>
-    )
+    );
 }
 
 export default DeviceCard;

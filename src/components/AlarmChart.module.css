@@ -78,3 +78,32 @@
 
     color: #212D21;
 }
+
+.iconContainer:hover {
+    animation: ring 4s ease-in-out;
+    transform-origin: 50% 0.05px;
+    cursor: pointer;
+}
+
+@keyframes ring {
+    0% { transform: rotate(0); }
+    1% { transform: rotate(20deg); }
+    3% { transform: rotate(-18deg); }
+    5% { transform: rotate(24deg); }
+    7% { transform: rotate(-22deg); }
+    9% { transform: rotate(20deg); }
+    11% { transform: rotate(-18deg); }
+    13% { transform: rotate(16deg); }
+    15% { transform: rotate(-14deg); }
+    17% { transform: rotate(12deg); }
+    19% { transform: rotate(-10deg); }
+    21% { transform: rotate(8deg); }
+    23% { transform: rotate(-6deg); }
+    25% { transform: rotate(4deg); }
+    27% { transform: rotate(-2deg); }
+    29% { transform: rotate(1deg); }
+    31% { transform: rotate(-1deg); }
+    33% { transform: rotate(0deg); }
+    35% { transform: rotate(0deg); }
+    100% { transform: rotate(0); }
+  }

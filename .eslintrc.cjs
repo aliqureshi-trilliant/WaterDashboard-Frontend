@@ -11,12 +11,12 @@ module.exports = {
     plugins: ['react-refresh'],
     rules: {
         'react-refresh/only-export-components': 'warn',
+        'react/prop-types': 0,
         'quotes': ['error','single'],
         'indent': ['error', 4],
         'semi': ['error', 'always'],
         'no-multi-spaces': 'error',
         'no-trailing-spaces': 'error',
-        'no-unused-vars': 'ignore',
         'eol-last': ['error','always']
     },
 };

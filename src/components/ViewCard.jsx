@@ -1,5 +1,5 @@
 import classes from './ViewCard.module.css';
-import { AiFillPlayCircle } from 'react-icons/ai'
+import { AiFillPlayCircle } from 'react-icons/ai';
 
 
 function ViewCard () {
@@ -15,7 +15,7 @@ function ViewCard () {
                 </div>
             </div>
         </div>
-    )
+    );
 }
 
 export default ViewCard;

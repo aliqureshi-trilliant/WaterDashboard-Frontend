@@ -1,14 +1,14 @@
 .card {
     width: 18.4rem;
     height: 6.875rem;
-
+    cursor: pointer;
     background: #96DE95;
     mix-blend-mode: normal;
-    opacity: 0.75;
     border-radius: 15px;
     display: flex;
     justify-content: center;
     align-items: center;
+    transition: all 0.2s ease-in-out;
 }
 
 .cardContainer {
@@ -27,21 +27,17 @@
     align-items: center;
 }
 
-span {
-    margin:0;
-}
-
 .iconContainer{
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
     background: #8DCF8C;
-    opacity: 0.75;
     mix-blend-mode: normal;
     border-radius: 4px;
     font-size: 1.3rem;
     padding: 3px;
+    margin:0;
 }
 
 .titleContainer{
@@ -52,12 +48,12 @@ span {
     line-height: 1.825rem;
     padding-left: 7px;
     color: #6C7172;
+    margin:0;
 }
 
 .percentChange{
     background: #71C36F;
     mix-blend-mode: normal;
-    opacity: 0.75;
     border-radius: 4px;
     font-family: 'Nunito';
     font-style: normal;
@@ -66,6 +62,7 @@ span {
     line-height: 1rem;
     color: #ffffff;
     padding: 5px;
+    margin:0;
 }
 
 .valueContainer{
@@ -81,8 +78,12 @@ span {
     font-weight: 800;
     font-size: 1.5rem;
     line-height: 2.2rem;
-    color: #212D21;
+    color: #141b14;
 
+}
+
+.card:hover {
+    transform: scale(1.1);
 }
     
 

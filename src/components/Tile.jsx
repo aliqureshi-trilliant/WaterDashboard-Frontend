@@ -6,14 +6,14 @@ function Tile (props) {
 
     const getIcon = (title) => {
         switch(title) {
-            case 'Active':
-                return <AiFillCheckCircle className={classes.icon} />
-            case 'Inactive':
-                return <MdCancel className={classes.icon} />
-            case 'Total':
-                return <MdIncompleteCircle className={classes.icon} />
+        case 'Active':
+            return <AiFillCheckCircle className={classes.icon} />;
+        case 'Inactive':
+            return <MdCancel className={classes.icon} />;
+        case 'Total':
+            return <MdIncompleteCircle className={classes.icon} />;
         }
-    }
+    };
 
     return (
         <div className={classes.tile}>
@@ -25,7 +25,7 @@ function Tile (props) {
                 {getIcon(props.title)}
             </div>
         </div>
-    )
+    );
 }
 
 export default Tile;
