@@ -17,6 +17,7 @@ module.exports = {
         'semi': ['error', 'always'],
         'no-multi-spaces': 'error',
         'no-trailing-spaces': 'error',
+        'no-unused-vars': 'ignore',
         'eol-last': ['error','always']
     },
 };
