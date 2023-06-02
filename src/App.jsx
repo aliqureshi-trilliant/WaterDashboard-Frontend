@@ -29,7 +29,7 @@ function App(){
                 }}>
                 <Routes location={displayLocation}>
                     <Route exact path="/home" element={<Home />} />
-                    <Route exact path="/device" element={<Device />} />
+                    <Route exact path="/meters/:deviceName" element={<Device />} />
                 </Routes>
             </div>
         </>

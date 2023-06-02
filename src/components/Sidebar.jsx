@@ -33,7 +33,10 @@ function Sidebar() {
     useEffect(() => {
         switch (location.pathname) {
         case '/home': selectMenuItem('Home'); break;
-        case '/device' : selectMenuItem('Meters'); break;
+        case '/meters' : selectMenuItem('Meters'); break;
+        case '/metrics' : selectMenuItem('Metrics'); break;
+        case '/maps' : selectMenuItem('Maps'); break;
+        case '/about' : selectMenuItem('About'); break;
         }
     }, [location]);
 
@@ -51,7 +54,7 @@ function Sidebar() {
                     </Link>
                 </li>
                 <li className={classes.menuItem}>
-                    <Link to="/device" onClick={toggleMenuItem}>
+                    <Link to="/meters" onClick={toggleMenuItem}>
                         <MdElectricMeter className={classes.icons}/>
                         <span>Meters</span>
                     </Link>

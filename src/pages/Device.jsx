@@ -5,11 +5,19 @@ import AlarmChart from '../components/AlarmChart';
 import Graph from '../components/Graph';
 import { HiOutlineStatusOnline, HiOutlineStatusOffline, HiOutlineRefresh } from 'react-icons/hi';
 import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import Skeleton, { SkeletonTheme } from 'react-loading-skeleton'
+import 'react-loading-skeleton/dist/skeleton.css'
 
 function Device(props) {
 
+    const { deviceName } = useParams();
     const [alarm,setAlarm] = useState(false);
     const [refresh,setRefresh] = useState(false);
+    const [data, setData] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+
     const iconContainerStyle = props.deviceStatus? classes.online:classes.offline;
 
     const toggle = (event) => {
@@ -28,14 +36,59 @@ function Device(props) {
         }
     };
 
+    const formatTimeAgo = (timestamp) => {
+        const currentDate = new Date();
+        const oldDate = new Date(timestamp);
+        const elapsed = currentDate - oldDate;
+        const days = Math.floor (elapsed / (1000 * 60 * 60 * 24));
 
+        if (days > 0) return `${days} days ago`;
+        else return 'today';
+    }
+
+    const getTimestamp = (timestamp) => {
+        const date = new Date(timestamp);
+        const formattedDate = date.toLocaleString('en-US',{
+            hour12: false,
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit',
+            month: '2-digit',
+            day: '2-digit',
+            year: '2-digit'
+        })
+        return formattedDate.split(', ').reverse().join(', ');
+    }
 
     useEffect(() => {
         const toggleEl = document.querySelector(`.${classes.toggle}`);
         const refreshEl = document.querySelector(`.${classes.iconContainer}[data-refresh='${true}']`);
         toggleEl.addEventListener('click', toggle);
-        refreshEl.addEventListener('click', () => setRefresh((() => !refresh)())); // Using IIFE to change value of refresh
-    },[]);
+        refreshEl.addEventListener('click', () => setRefresh((current) => !current));
+
+        fetch(`http://localhost:3000/api/waterMIUs/${deviceName}/reading`)
+        .then((response) => {
+             if(!response.ok) {
+                 throw new Error(`Error ${response.status}: ${response.message}`);
+             }
+             return response.json();
+        })
+        .then((data) => {
+            if (data.length > 0) {
+             setData(data);
+             setError(null);
+             console.log(data);
+            }
+            else {
+                throw new Error(`Error ${response.status}: ${response.message}`);
+            }
+        })
+        .catch((error) => {
+             setError(error);
+             setData(null);
+        })
+        .finally(() => setLoading(false));
+     },[]);
 
     return (
         <>
@@ -44,9 +97,9 @@ function Device(props) {
                     <div className={classes.headingContainer}>
                         <div className={classes.titleContainer}>
                             <h1 className={classes.title}>
-                                Canary 188
+                                {deviceName}
                             </h1>
-                            <p>View data for Canary 188 water MIU here !</p>
+                            <p>View data for {deviceName} water MIU here !</p>
                         </div>
                         <div className={classes.buttonContainer}>
                             <div title={`Device is ${props.deviceStatus || 'offline'}`}className={`${classes.iconContainer} ${iconContainerStyle}`}>
@@ -92,10 +145,17 @@ function Device(props) {
                         </div>
                         <div className={classes.valueContainer}>
                             <div className={classes.valueTray}>
-                                <ValueCard title="Water Level" value="15,123 Gallons" percent="7"/>
-                                <ValueCard title="Timestamp" value="11:45:24 AM" percent="1"/>
-                                <ValueCard title="Last Updated" value="45 mins ago" percent="3"/>
-                                <ValueCard title="Temperature" value="150 °C" percent="4"/>
+                                { loading && 
+                                    (<SkeletonTheme baseColor='#96DE95' highlightColor='#EFEFEF'>
+                                        {[0,1,2,3].map((el) => {
+                                            return ( <Skeleton key={el} className={classes.valueCardSkeleton} containerClassName={classes.cardSkeletonContainer} w/>)
+                                        })}
+                                    </SkeletonTheme>)
+                                }
+                                { data && (<><ValueCard title="Water Level" value={`${data[0].value.toLocaleString()} Gallons`} percent="7"/>
+                                <ValueCard title="Timestamp" value={getTimestamp(data[0].readingTimestamp)} percent="1"/>
+                                <ValueCard title="Last Updated" value={formatTimeAgo(data[0].readingTimestamp)} percent="3"/>
+                                <ValueCard title="Temperature" value="150 °C" percent="4"/></>)}
                             </div>
                         </div>
                     </div>

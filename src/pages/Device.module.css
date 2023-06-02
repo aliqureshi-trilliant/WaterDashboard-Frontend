@@ -224,3 +224,14 @@
     background: #C5EAC5;
     border-radius: 32px;
 }
+
+.cardSkeletonContainer{
+    margin:0
+}
+
+.valueCardSkeleton {
+    width: 18.4rem;
+    height: 6.875rem;
+    mix-blend-mode: normal;
+    border-radius: 15px;
+}
