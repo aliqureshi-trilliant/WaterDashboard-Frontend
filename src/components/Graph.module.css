@@ -29,6 +29,7 @@
     line-height: 1.5rem;
     color: #6C7172;
     border: none;
+    cursor: pointer;
 }
 
 .options{

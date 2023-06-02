@@ -2,7 +2,7 @@ import classes from './AlarmTile.module.css';
 import { MdOutlineSmsFailed } from 'react-icons/md';
 import { CiTempHigh } from 'react-icons/ci';
 import { IoArrowBackCircleOutline, IoWaterOutline } from 'react-icons/io5';
-import { BsBatteryFull } from 'react-icons/bs';
+import { BsBatteryFull, BsBattery } from 'react-icons/bs';
 
 
 
@@ -27,7 +27,7 @@ function AlarmTile (props) {
 
     return (
         <div className={`${classes.tile} ${alarmStyle}`}>
-            <div className={classes.tileContainer}>
+            <div title={`${props.title} alarm is ${props.alarm?'active !':'inactive.'}`} className={classes.tileContainer}>
                 <div className={classes.iconContainer}>
                     {getIcon(props.title)}
                 </div>

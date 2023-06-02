@@ -8,7 +8,7 @@ import { useEffect, useState } from 'react';
 
 function Device(props) {
 
-    const [alarm,setAlarm] = useState(true);
+    const [alarm,setAlarm] = useState(false);
     const [refresh,setRefresh] = useState(false);
     const iconContainerStyle = props.deviceStatus? classes.online:classes.offline;
 
@@ -34,7 +34,7 @@ function Device(props) {
         const toggleEl = document.querySelector(`.${classes.toggle}`);
         const refreshEl = document.querySelector(`.${classes.iconContainer}[data-refresh='${true}']`);
         toggleEl.addEventListener('click', toggle);
-        refreshEl.addEventListener('click', () => setRefresh(!refresh));
+        refreshEl.addEventListener('click', () => setRefresh((() => !refresh)())); // Using IIFE to change value of refresh
     },[]);
 
     return (
@@ -61,11 +61,11 @@ function Device(props) {
                             </div>
                             <div className={classes.tabContainer}>
                                 <div className={classes.toggle}>
-                                    <div className={`${classes.alarmToggle} ${classes.active} `}>
-                                        Alarm
-                                    </div>
-                                    <div className={classes.waterToggle}>
+                                    <div className={`${classes.waterToggle} ${classes.active} `}>
                                         Water Level
+                                    </div>
+                                    <div className={classes.alarmToggle}>
+                                        Alarm
                                     </div>
                                 </div>
                             </div>
@@ -73,9 +73,9 @@ function Device(props) {
                     </div>
                     <div className={classes.statusBar}>
                         <AlarmTile title="Failed Read"/>
-                        <AlarmTile title="Temperature"/>
-                        <AlarmTile title="Highflow" alarm={true}/>
                         <AlarmTile title="Backflow"/>
+                        <AlarmTile title="Highflow" alarm={true}/>
+                        <AlarmTile title="Temperature"/>
                         <AlarmTile title="Battery" alarm={true}/>
                     </div>
                     <div className={classes.firstChart}>
@@ -92,10 +92,10 @@ function Device(props) {
                         </div>
                         <div className={classes.valueContainer}>
                             <div className={classes.valueTray}>
-                                <ValueCard title="Last Updated" value="45 mins ago" percent="3"/>
                                 <ValueCard title="Water Level" value="15,123 Gallons" percent="7"/>
+                                <ValueCard title="Timestamp" value="11:45:24 AM" percent="1"/>
+                                <ValueCard title="Last Updated" value="45 mins ago" percent="3"/>
                                 <ValueCard title="Temperature" value="150 °C" percent="4"/>
-                                <ValueCard title="Timestamp" value="11:45:24AM" percent="1"/>
                             </div>
                         </div>
                     </div>
