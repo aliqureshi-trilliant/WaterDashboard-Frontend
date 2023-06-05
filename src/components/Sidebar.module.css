@@ -88,7 +88,7 @@
     font-size: 1.6rem;
 }
 
-span {
+.menuItem a>span {
     font-size: 1.2rem;
     margin-left: 1rem;
 }

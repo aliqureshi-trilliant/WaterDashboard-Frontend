@@ -6,19 +6,23 @@ import { Doughnut } from 'react-chartjs-2';
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 const data = {
-    labels: ['High Flow','Back Flow','Failed Reads'],
+    labels: ['High Flow','Back Flow','Failed Reads','Battery','Temperature'],
     datasets: [
         {
             label: '',
-            data: [12, 19, 3],
+            data: [12, 19, 13, 6, 4],
             backgroundColor: [
                 'rgb(120, 178, 119)',
                 'rgb(150, 222, 149)',
+                'rgb(42, 101, 42)',
+                'rgb(214, 237, 212)',
                 'rgb(40, 45, 41)',
             ],
             borderColor: [
                 'rgb(120, 178, 119)',
                 'rgb(150, 222, 149)',
+                'rgb(42, 101, 42)',
+                'rgb(214, 237, 212)',
                 'rgb(40, 45, 41)',
             ],
             borderWidth: 1,
@@ -78,7 +82,7 @@ function AlarmChart(){
             <div className={classes.headingContainer}>
                 <div className={classes.titleContainer}>
                     <h1>Active Alarms</h1>
-                    <p>View Alarm Data</p>
+                    <p>Alarm data for the last 24 hours.</p>
                 </div>
                 <div className={classes.iconContainer}>
                     <BsFillBellFill />
@@ -111,6 +115,22 @@ function AlarmChart(){
                         </div>
                         <div className={classes.dataNumber}>
                             47%
+                        </div>
+                    </div>
+                    <div className={classes.data}>
+                        <div className={classes.dataText}>
+                            Battery
+                        </div>
+                        <div className={classes.dataNumber}>
+                            16%
+                        </div>
+                    </div>
+                    <div className={classes.data}>
+                        <div className={classes.dataText}>
+                            Temperature
+                        </div>
+                        <div className={classes.dataNumber}>
+                            14%
                         </div>
                     </div>
                 </div>

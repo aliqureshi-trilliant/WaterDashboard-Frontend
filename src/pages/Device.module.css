@@ -225,13 +225,22 @@
     border-radius: 32px;
 }
 
-.cardSkeletonContainer{
-    margin:0
-}
 
 .valueCardSkeleton {
     width: 18.4rem;
     height: 6.875rem;
     mix-blend-mode: normal;
     border-radius: 15px;
+}
+
+.valueCardError {
+    width: 18.4rem;
+    height: 6.875rem;
+    background: #96DE95;
+    mix-blend-mode: normal;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }

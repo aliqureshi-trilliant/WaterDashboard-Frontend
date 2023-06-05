@@ -6,8 +6,9 @@ import Summary from '../components/Summary';
 import Tile from '../components/Tile';
 import MetricCard from '../components/MetricCard';
 import { useState, useEffect } from 'react';
-import Skeleton, { SkeletonTheme } from 'react-loading-skeleton'
-import 'react-loading-skeleton/dist/skeleton.css'
+import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css';
+import { BiError } from 'react-icons/bi';
 
 function Home() {
     
@@ -63,11 +64,13 @@ function Home() {
                         { loading && 
                             (<SkeletonTheme baseColor='#F6F6F6' highlightColor='#EFEFEF'>
                                 {[0,1,2,3,4].map((el) => {
-                                    return ( <Skeleton key={el} className={classes.cardSkeleton} containerClassName={classes.cardSkeletonContainer} w/>)
+                                    return ( <Skeleton key={el} className={classes.cardSkeleton} containerClassName={classes.cardSkeletonContainer}/>)
                                 })}
                             </SkeletonTheme>)
                         }
-                        { error && (<div>Error Fetching Data</div>)}
+                        { error && (<>{[0,1,2,3,4].map((el) => {
+                                    return ( <div key={el} className={classes.errorCard}><BiError></BiError>Error loading data !</div>)
+                                })}</>)}
                         { data && 
                             data.map(({device_mrid}) => {
                                 return ( <DeviceCard key={device_mrid} deviceName={device_mrid} deviceStatus="Online" additionalStyles={classes.card}/>)
