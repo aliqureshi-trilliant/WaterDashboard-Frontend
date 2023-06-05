@@ -5,7 +5,7 @@ function Tray(props) {
     const mapStyles = props.trayMap? classes.trayMap : classes.tray;
     const cardContainerStyle = props.trayMap? classes.cardContainerMap: classes.cardContainer;
     const trayTextContainerStyle = props.trayMap? classes.trayTextContainerMap: classes.trayTextContainer;
-    
+
     return (
         <div className={mapStyles}>
             <div className={trayTextContainerStyle}>
@@ -16,7 +16,7 @@ function Tray(props) {
                 {props.children}
             </div>
         </div>
-    )
+    );
 }
 
 export default Tray;

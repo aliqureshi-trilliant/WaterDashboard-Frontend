@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Reem+Kufi:300,400,500,600,700&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Nunito:800,900&display=swap');
 
 * {
   box-sizing: border-box;
@@ -48,7 +49,6 @@ body {
 }
 
 .pages{
-    animation: 1s ease-out 0s 1 slideInLeft;
     position: fixed;
     top: 0;
     left: 14%;
@@ -56,13 +56,32 @@ body {
     height:100vh;
 }
 
-@keyframes slideInLeft {
-  0% {
+.fadeIn {
+  animation: 0.4s fadeIn forwards;
+}
+
+.fadeOut {
+  animation: 0.4s fadeOut forwards;
+}
+
+@keyframes fadeIn {
+  from {
     opacity: 0;
-    transform: translateY(10%);
+    transform: translateY(3%);
   }
-  100% {
+  to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(3%);
+    opacity: 0;
   }
 }

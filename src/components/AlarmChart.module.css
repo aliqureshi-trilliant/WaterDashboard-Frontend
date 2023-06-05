@@ -1,0 +1,109 @@
+.card{
+    width: 21.625rem;
+    height: 20.188rem;
+    background: #C5EAC5;
+    border-radius: 32px;
+    display: flex;
+    flex-direction: column;
+}
+
+.headingContainer{
+    width: 100%;
+    height: 25%;
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    
+}
+
+.titleContainer{
+    width: 100%;
+    padding: 1.2rem;
+}
+
+.iconContainer{
+    width: 20%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    padding-right: 1rem;
+}
+
+.contentContainer{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.piechart{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 13rem;
+}
+
+.dataContainer{
+    padding-top:1.2rem;
+    width: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.data{
+    width: 100%;
+    padding-bottom: 6px;
+}
+
+.dataText{
+    font-style: normal;
+    font-weight: 600;
+    font-size: 1.25rem;
+    line-height: 1.875rem;
+
+    color: #6C7172;
+}
+
+.dataNumber{
+    font-family: 'Nunito';
+    font-style: normal;
+    font-weight: 900;
+    font-size: 1.25rem;
+    line-height: 1.625rem;
+
+    color: #212D21;
+}
+
+.iconContainer:hover {
+    animation: ring 4s ease-in-out;
+    transform-origin: 50% 0.05px;
+    cursor: pointer;
+}
+
+@keyframes ring {
+    0% { transform: rotate(0); }
+    1% { transform: rotate(20deg); }
+    3% { transform: rotate(-18deg); }
+    5% { transform: rotate(24deg); }
+    7% { transform: rotate(-22deg); }
+    9% { transform: rotate(20deg); }
+    11% { transform: rotate(-18deg); }
+    13% { transform: rotate(16deg); }
+    15% { transform: rotate(-14deg); }
+    17% { transform: rotate(12deg); }
+    19% { transform: rotate(-10deg); }
+    21% { transform: rotate(8deg); }
+    23% { transform: rotate(-6deg); }
+    25% { transform: rotate(4deg); }
+    27% { transform: rotate(-2deg); }
+    29% { transform: rotate(1deg); }
+    31% { transform: rotate(-1deg); }
+    33% { transform: rotate(0deg); }
+    35% { transform: rotate(0deg); }
+    100% { transform: rotate(0); }
+  }
