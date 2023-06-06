@@ -162,11 +162,15 @@ function Device(props) {
                         </div>
                     </div>
                     <div className={classes.statusBar}>
-                        <AlarmTile title="Failed Read" alarm={ data && isActive("Failed Read")}/>
-                        <AlarmTile title="Backflow" alarm={data && isActive("Backflow")}/>
-                        <AlarmTile title="Highflow" alarm={data &&isActive("Highflow")}/>
-                        <AlarmTile title="Temperature" alarm={data && isActive("Temperature")}/>
-                        <AlarmTile title="Battery" alarm={data && isActive("Battery")}/>
+                        <div className={classes.statusBarContainer}>
+                            <div className={classes.statusBarTitle}>Alarms <BsFillBellFill className={classes.statusBarIcon}/></div>
+                            {/* <div className={classes.statusBarIcon}></div> */}
+                            <AlarmTile title="Failed Read" alarm={ data && isActive("Failed Read")}/>
+                            <AlarmTile title="Backflow" alarm={data && isActive("Backflow")}/>
+                            <AlarmTile title="Highflow" alarm={data &&isActive("Highflow")}/>
+                            <AlarmTile title="Temperature" alarm={data && isActive("Temperature")}/>
+                            <AlarmTile title="Battery" alarm={data && isActive("Battery")}/>
+                        </div>
                     </div>
                     <div className={classes.firstChart}>
                         {alarm?<Graph key={Math.random()} title="Alarm data over time" graphId={1} />:<Graph title="Water level data over time" graphId={1} />}
