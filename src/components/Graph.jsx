@@ -13,6 +13,34 @@ import {
 import { useEffect, useRef } from 'react';
 import { Line } from 'react-chartjs-2';
 
+const getLastSevenDays = () => {
+    let dayNames = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+    let lastSevenDays = [];
+    const today = new Date();
+    today.setHours(0,0,0,0);
+
+    for (let i = 6; i >= 0; i--){
+        let day = new Date(today);
+        day.setDate(day.getDate()-i);
+        lastSevenDays.push(dayNames[day.getDay()]);
+    }
+    
+    return lastSevenDays;
+}
+
+const getLastThreeMonths = () => {
+    let monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    let lastThreeMonths = [];
+
+    for (let i = 2; i >= 0; i--){
+        let month = new Date();
+        month.setMonth(month.getMonth()-i);
+        lastThreeMonths.push(monthNames[month.getMonth()]);
+    }
+    
+    return lastThreeMonths;
+}
+
 function Graph(props){
 
     ChartJS.register(
@@ -26,7 +54,24 @@ function Graph(props){
     );
 
     const fontSize = window.getComputedStyle(document.documentElement, null).getPropertyValue('font-size');
-    const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+
+    let labels;
+    let selectEl = document.querySelector(`.${classes.select}[data-id='${props.graphId}']`);
+    switch(selectEl?.value) {
+        case '7 days': {    
+                            labels = getLastSevenDays();
+                            break;
+                        }
+        case '1 month': {
+                            labels = ['Week 1', 'Week 2', 'Week 3', 'Week 4'];
+                            break;
+                        }
+        case '3 months':{
+                            labels = getLastThreeMonths();
+                            break;
+                        }
+        default: labels = getLastSevenDays();
+    }
 
     const data = {
         labels,
@@ -98,15 +143,29 @@ function Graph(props){
         let data;
         const chart = chartReference.current;
         switch(this.value) {
-        case '7 days': data = labels.map(() => Math.round(Math.random() * labels.length)); break;
-        case '1 month': data = labels.map(() => Math.round(Math.random() * labels.length) * 3); break;
-        case '3 months': data = labels.map(() => Math.round(Math.random() * labels.length) * 8); break;
+        case '7 days': {    
+                            labels = getLastSevenDays();
+                            data = labels.map(() => Math.round(Math.random() * labels.length));
+                            break;
+                        }
+        case '1 month': {
+                            labels = ['Week 1', 'Week 2', 'Week 3', 'Week 4'];
+                            data = labels.map(() => Math.round(Math.random() * labels.length) * 3);
+                            break;
+                        }
+        case '3 months':{
+                            labels = getLastThreeMonths();
+                            data = labels.map(() => Math.round(Math.random() * labels.length) * 8);
+                            break;
+                        }
         }
+        chart.data.labels = labels;
         chart.data.datasets[0].data = data;
         chart.update();
     }
 
     const chartReference = useRef(null);
+    const refresh = useRef(false);
 
     useEffect( () => {
         const select = document.querySelector(`.${classes.select}[data-id='${props.graphId}']`);

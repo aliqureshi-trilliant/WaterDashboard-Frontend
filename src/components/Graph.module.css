@@ -18,7 +18,7 @@
 
 .selectBox{
     position:absolute;
-    top: 0.25rem;
+    top: 1%;
     right: 0;
 }
 
@@ -29,7 +29,7 @@
     font-size: 1rem;
     line-height: 1.5rem;
     color: #6C7172;
-    border: none;
+    border: 1px solid #a5a6a7;
     cursor: pointer;
 }
 
