@@ -1,5 +1,5 @@
 import classes from './Summary.module.css';
-import summaryImage from '/images/circuit.png';
+import summaryImage from '/images/WaterMIU.png';
 
 function Summary () {
     return (
@@ -9,7 +9,7 @@ function Summary () {
                 <p className={classes.summaryText}>A small water meter with the capabilites of a water meter.</p>
             </div>
             <div className={classes.imageContainer}>
-                <img className={classes.summaryImage} src={summaryImage} alt="summaryImage" />
+                <img className={classes.summaryImage} src={summaryImage} alt="Water MIU Image" />
             </div>
         </div>
     );
