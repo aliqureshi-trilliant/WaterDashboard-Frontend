@@ -2,6 +2,7 @@ import Sidebar from './components/Sidebar';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import Home from './pages/Home';
 import Device from './pages/Device';
+import About from './pages/About';
 import { useState, useEffect } from 'react';
 
 
@@ -13,6 +14,8 @@ function App(){
 
     useEffect(() => {
         if (location !== displayLocation) setTransistionStage('fadeOut');
+        if(location.pathname == '/about') document.documentElement.style.backgroundColor = '#D6EDD4';
+        else document.documentElement.style.backgroundColor = '#e3f3e2';
     }, [location, displayLocation]);
 
     return (
@@ -30,6 +33,7 @@ function App(){
                 <Routes location={displayLocation}>
                     <Route exact path="/home" element={<Home />} />
                     <Route exact path="/meters/:deviceName" element={<Device />} />
+                    <Route exact path="/about" element={<About />} />
                 </Routes>
             </div>
         </>

@@ -44,6 +44,7 @@
     justify-content: center;
     width: 100%;
     height: auto;
+    transition: transform 0.3s ease-in-out;
 }
 
 .imageContainer img {
@@ -55,4 +56,8 @@
 
 .summary:hover {
     transform: scale(1.05);
+}
+
+.summary:hover .imageContainer{
+    transform: scale(1.15);
 }

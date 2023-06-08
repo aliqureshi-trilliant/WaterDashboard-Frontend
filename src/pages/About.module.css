@@ -1,0 +1,207 @@
+.about {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: 70% 30%;
+}
+
+.mainContainer {
+    grid-column: 1/1;
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-rows: 65% 35%;
+    background-color: #D6EDD4;
+}
+
+.descContainer {
+    grid-row: 1/1;
+    width: 95%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: start;
+}
+
+.description{
+    width: 100%;
+    height: 100%;
+    margin-top: 1rem;
+    background: #FFFFFF;
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.coverImage{
+    margin-top: 2.5%;
+    width: 95%;
+    height: 45%;
+    background: url(/images/green_waves.jpg);
+    border-radius: 1rem;
+    background-size: cover;
+    background-position: center;
+}
+
+.titleCard{
+    position: relative;
+    width: 90%;
+    height: 8.75rem;
+    top: -13%;
+    margin-bottom: -6.5%;
+    background: rgba(237, 246, 237, 0.95);
+    mix-blend-mode: normal;
+    box-shadow: 0px 8px 35px rgba(0, 0, 0, 0.2);
+    border-radius: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.title{
+    height: 55%;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 3.4rem;
+    line-height: 176.7%;
+}
+
+.subTitle{
+    height: 100%;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 1.25rem;
+    line-height: 176.7%;
+}
+
+.descriptionText{
+    width: 90%;
+    margin-bottom: 2.5%;
+}
+
+.descriptionHeading{
+    font-style: normal;
+    font-weight: 600;
+    font-size: 1.5rem;
+    line-height: 176.7%;
+}
+
+.cardCarouselContainer {
+    grid-row: 2/2;
+    width: 95%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+}
+
+.icon {
+    position: absolute;
+    width: 3rem;
+    height: 3rem;
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+    color: #4B903D;
+    transition: all 0.2s ease-in-out;
+    cursor: pointer;
+}
+
+.forwardIcon{
+    right: -2.25%;
+    z-index: 1;
+}
+
+.backwardIcon {
+    left: -2.25%;
+   z-index: 1;
+}
+
+.icon:hover {
+    transform: scale(1.2);
+}
+
+.sideContainer {
+    grid-column: 2/2;
+    width: 100%;
+    height: 100%;
+    background: #EDF6ED;
+    box-shadow: inset 2px 0px 65px -45px rgba(0, 0, 0, 0.15);
+    border-radius: 32px 0px 0px 32px;
+    display: grid;
+    grid-template-rows: 55% 45%;
+}
+
+.imageContainer{
+    grid-row: 1/1;
+    margin: 1rem 10%;
+    background: linear-gradient(151.56deg, #F9FAF9 -50.5%, #F9FAF9 13.33%, #C5EAC5 104.22%);
+    box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.15);
+    border-radius: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.3s ease-in-out;
+}
+
+.waterMIUImage{
+    width: 55%;
+    height: auto;
+    filter: drop-shadow(0px 7px 5px rgba(0, 0, 0, 0.2));
+}
+
+.imageContainer:hover {
+    transform: scale(1.05);
+    cursor: pointer;
+}
+
+.summaryContainer{
+    grid-row: 2/2;
+    margin: 0 10%;
+    margin-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+}
+
+.summaryHeading {
+    font-style: normal;
+    font-weight: 600;
+    font-size: 1.5rem;
+    line-height: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.summaryContainer>hr {
+    width: 100%;
+    border-top: 1px solid #A5A6A7;
+    margin-bottom: 1rem;
+}
+
+.summaryItem{
+    width: 90%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 1.5rem;
+}
+
+.itemHeading {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 0.6cqw;
+    line-height: 1.125rem;
+    color: #A5A6A7;
+}
+
+.itemText {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 0.8cqw;
+    line-height: 1.25rem;
+    color: #000000;
+}

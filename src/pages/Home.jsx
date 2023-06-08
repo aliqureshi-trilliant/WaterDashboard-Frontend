@@ -37,7 +37,7 @@ function Home() {
 
     return (
         <>
-            <div className={classes.home} key={Math.round(Math.random()*10000)}>
+            <div className={classes.home}>
                 <div className= {classes.topContainer}>
                     <div className={classes.titleTileContainer}>
                         <div className= {classes.pageTitle}>

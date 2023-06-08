@@ -13,7 +13,7 @@ function DeviceCard (props) {
     useEffect(() => {
         const cardEl = document.querySelector(`.${classes.card}[data-id='${props.deviceName}']`);
         cardEl.addEventListener('click', () => navigate(`/meters/${props.deviceName}`));
-    });
+    }, []);
 
     return (
         <div className={`${classes.card} ${additionalStyles}`} data-id={props.deviceName}>
