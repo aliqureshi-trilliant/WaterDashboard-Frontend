@@ -43,7 +43,7 @@
     border-radius: 1rem;
     background-size: cover;
     background-position: center;
-    animation: waves 120s linear infinite;
+    animation: waves 60s linear infinite;
 }
 
 @keyframes waves {

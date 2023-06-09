@@ -56,7 +56,7 @@ function Home() {
                 </div>
                 <div className={classes.middleContainerOne}>
                     <Tray listType="View Maps" listDesc="View a map of all the active Water MIUs" trayMap={true}>
-                        <ViewCard />
+                        <ViewCard title="View Map"/>
                     </Tray>
                 </div>
                 <div className={classes.middleContainerTwo}>
@@ -76,7 +76,7 @@ function Home() {
                                 return ( <DeviceCard key={device_mrid} deviceName={device_mrid} deviceStatus="Online" additionalStyles={classes.card}/>);
                             })
                         }
-                        <ViewCard />
+                        <ViewCard title="View All"/>
                     </Tray>
                 </div>
                 <div className={classes.bottomContainer}>
@@ -86,7 +86,7 @@ function Home() {
                         <MetricCard title="Metric 3" additionalStyles={classes.card}/>
                         <MetricCard title="Metric 4" additionalStyles={classes.card}/>
                         <MetricCard title="Metric 5" additionalStyles={classes.card}/>
-                        <ViewCard />
+                        <ViewCard title="View KPIs"/>
                     </Tray>
                 </div>
             </div>

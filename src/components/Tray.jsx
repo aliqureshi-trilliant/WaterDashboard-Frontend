@@ -1,4 +1,6 @@
+import { useEffect } from 'react';
 import classes from './Tray.module.css';
+import { useNavigate } from 'react-router-dom';
 
 function Tray(props) {
 
@@ -6,6 +8,15 @@ function Tray(props) {
     const cardContainerStyle = props.trayMap? classes.cardContainerMap: classes.cardContainer;
     const trayTextContainerStyle = props.trayMap? classes.trayTextContainerMap: classes.trayTextContainer;
 
+    const navigate = useNavigate();
+
+    useEffect(()=>{
+        if (props.trayMap) {
+            const trayMapEl = document.querySelector(`.${classes.trayMap}`);
+            trayMapEl.addEventListener('click',() => navigate('/maps'));
+        }
+    },[]);
+    
     return (
         <div className={mapStyles}>
             <div className={trayTextContainerStyle}>
