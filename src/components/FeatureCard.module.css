@@ -8,6 +8,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: start;
+    margin-right: 1rem;
 }
 
 .title {
@@ -18,16 +19,17 @@
     font-size: 1.25rem;
     line-height: 140.62%;
     margin: 1rem ;
+    margin-bottom: 0;
     display: flex;
     justify-content: center;
 }
 
 .content {
-    width: 100%;
+    width: 70%;
     height: 70%;
     font-style: normal;
     font-weight: 400;
-    font-size: 1.125rem;
+    font-size: 0.8cqw;
     line-height: 176%;
     display: flex;
     justify-content: center;

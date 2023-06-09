@@ -2,8 +2,36 @@ import classes from './About.module.css';
 import waterMIUImage from '/images/WaterMIU.png';
 import FeatureCard from '../components/FeatureCard';
 import { IoCaretForwardCircleSharp , IoCaretBackCircleSharp } from 'react-icons/io5';
+import { useRef, useEffect } from 'react';
 
 function About() {
+
+    const currentSlide = useRef(0);
+
+    const goToSlide = (slides, slide) => {
+        slides.forEach((s,i) =>s.style.transform = `translateX(${107 * (i - slide)}%`);
+    }
+    const nextSlide = (slides) => {
+        if (currentSlide.current === slides.length - 1) currentSlide.current = 0;
+        else currentSlide.current++;
+
+        goToSlide(slides, currentSlide.current);
+    };
+
+    const prevSlide = (slides) => {
+        if (currentSlide.current === 0) currentSlide.current = slides.length - 1;
+        else currentSlide.current--;
+        
+        goToSlide(slides, currentSlide.current);
+    };
+
+    useEffect(() => {
+        const slides = document.querySelectorAll(`.${classes.slide}`);
+        const buttonForward = document.querySelector(`.${classes.forwardIcon}`);
+        const buttonBackward = document.querySelector(`.${classes.backwardIcon}`);
+        buttonForward.addEventListener('click',() => nextSlide(slides));
+        buttonBackward.addEventListener('click', () => prevSlide(slides));
+    },[]);
 
     return (
         <>
@@ -26,30 +54,108 @@ function About() {
                             </div>
                         </div>
                     </div>
-                    <div className={classes.cardCarouselContainer}>
-                        <IoCaretBackCircleSharp className={`${classes.icon} ${classes.backwardIcon}`}/>
-                        <FeatureCard title="Wireless Connectivity" category="Features">
-                            <ul>
-                                <li>RPMA Network</li>
-                                <li>Over 160dB Link Budget</li>
-                                <li>GPS Synchronization</li>
-                            </ul>
-                        </FeatureCard>
-                        <FeatureCard title="Meter Input" category="Features">
-                            <ul>
-                                <li>Sensus UI-1203</li>
-                                <li>Neptune E-Coder</li>
-                            </ul>
-                        </FeatureCard>
-                        <FeatureCard title="Indoor Outdoor Use" category="Features">
-                            <ul>
-                                <li>Robust Enclosure</li>
-                                <li>NEMA 250 Rated</li>
-                                <li>Pit and Wall Mount</li>
-                                <li>15-20 Year Life</li>
-                            </ul>
-                        </FeatureCard>
-                        <IoCaretForwardCircleSharp className={`${classes.icon} ${classes.forwardIcon}`}/>
+                    <div className={classes.cardCarousel}>
+                        <div className={classes.cardCarouselContainer}>
+                            <IoCaretBackCircleSharp className={`${classes.icon} ${classes.backwardIcon}`}/>
+                            <div className={`${classes.slide} ${classes.slide0}`}>
+                                <FeatureCard title="Wireless Connectivity" category="Features">
+                                    <ul>
+                                        <li>RPMA Network</li>
+                                        <li>Over 160dB Link Budget</li>
+                                        <li>GPS Synchronization</li>
+                                    </ul>
+                                </FeatureCard>
+                                <FeatureCard title="Meter Input" category="Features">
+                                    <ul>
+                                        <li>Sensus UI-1203</li>
+                                        <li>Neptune E-Coder</li>
+                                    </ul>
+                                </FeatureCard>
+                                <FeatureCard title="Indoor Outdoor Use" category="Features">
+                                    <ul>
+                                        <li>Robust Enclosure</li>
+                                        <li>NEMA 250 Rated</li>
+                                        <li>Pit and Wall Mount</li>
+                                        <li>15-20 Year Life</li>
+                                    </ul>
+                                </FeatureCard>
+                            </div>
+                            <div className={`${classes.slide} ${classes.slide1}`}>
+                                <FeatureCard title="Alarming" category="Features">
+                                    <ul>
+                                        <li>Configurable alarm conditions</li>
+                                        <li>High,low and outside threshold alarms</li>
+                                    </ul>
+                                </FeatureCard>
+                                <FeatureCard title="Deployment and Maintenance" category="Features">
+                                    <ul>
+                                        <li>Easy to install and configure</li>
+                                        <li>Monitoring and sampling intervals</li>
+                                        <li>Data logging for redundancy</li>
+                                    </ul>
+                                </FeatureCard>
+                                <FeatureCard title="Applications" category="Features">
+                                    <ul>
+                                        <li>Bolt on device for new and existing meters</li>
+                                        <li>NEMA 250 Rated</li>
+                                    </ul>
+                                </FeatureCard>
+                            </div>
+                            <div className={`${classes.slide} ${classes.slide2}`}>
+                                <FeatureCard title="Radio Performance" category="Specifications">
+                                    <ul>
+                                        <li>Sensitivity: -143 dBm</li>
+                                        <li>Transmit Power: +20 dBm (NA), +10 dBm (EU)</li>
+                                        <li>Data Throughput: 60kbps</li>
+                                        <li>Access Point Capacity: 64,000 Nodes</li>
+                                        
+                                    </ul>
+                                </FeatureCard>
+                                <FeatureCard title="Support and Protocols" category="Specifications">
+                                    <ul>
+                                        <li>Security: 128/256 bit encryption</li>
+                                        <li>Protocol: RPMA Network in 2.4 GHz ISM Band</li>
+                                        <li>Modulation: 1MHz Bandwidth</li>
+                                        <li>Diversity Support: Yes</li>
+                                    </ul>
+                                </FeatureCard>
+                                <FeatureCard title="Dimensions" category="Specifications">
+                                    <ul>
+                                        <li>Size: 94   x  74 x  49mm</li>
+                                        <li>Weight: 400g (excluding cable)</li>
+                                    </ul>
+                                </FeatureCard>
+                            </div>
+                            <div className={`${classes.slide} ${classes.slide3}`}>
+                                <FeatureCard title="Environmental" category="Specifications">
+                                    <ul>
+                                        <li>IEC 60529 (IP 68 to 1 meter for 30 days)</li>
+                                        <li>Operating Temperature:  -30 to +65&deg;C</li>
+                                        <li>Storage Temperature:  -30 to +85&deg;C</li>
+                                        <li>Humidity:  0% to 100  %, condensing</li>
+                                    </ul>
+                                </FeatureCard>
+                                <FeatureCard title="Regulatory Compliance" category="Specifications">
+                                    <ul>
+                                        <li>IEC 60068-1-1, -2,  -6,  -11,    -14,    -27,    -30</li>
+                                        <li>MIL  -STD-810G</li>
+                                        <li>NEMA 250 (Rating 6P)</li>
+                                        <li>EN/UL/CSA 60950-1</li>
+                                        <li>EN 60950-22</li>
+                                    </ul>
+                                </FeatureCard>
+                                <FeatureCard title="Regulatory Compliance" category="Specifications">
+                                    <ul>
+                                        <li>EN 63000:2018</li>
+                                        <li>EN 55035</li>
+                                        <li>EN 55032</li>
+                                        <li>EN 301 489-17</li>
+                                        <li>EN 300 440</li>
+                                    </ul>
+                                </FeatureCard>
+                            </div>
+                            <IoCaretForwardCircleSharp className={`${classes.icon} ${classes.forwardIcon}`}/>
+                        </div>
                     </div>
                 </div>
                 <div className= {classes.sideContainer}>

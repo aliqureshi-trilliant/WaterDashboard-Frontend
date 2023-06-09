@@ -89,15 +89,50 @@
     line-height: 176.7%;
 }
 
-.cardCarouselContainer {
+.cardCarousel {
     grid-row: 2/2;
-    width: 95%;
+    width: 103%;
+    height: 100%;
+    overflow:hidden;
+    margin-left: -3%;
+    margin-right: -3%;
+}
+
+.cardCarouselContainer {
+    width: 96.5%;
     height: 100%;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: flex-end;
     align-items: center;
-    position: relative;
+    position: relative; 
+}
+
+.slide {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: center;
+    padding-left: 3%;
+    transition: transform 0.3s ease-in-out;
+}
+.slide0 {
+    transform: translateX(0%);
+}
+
+.slide1 {
+    transform: translateX(107%);
+}
+
+.slide2 {
+    transform: translateX(214%);
+}
+
+.slide3 {
+    transform: translateX(321%);
 }
 
 .icon {
@@ -111,12 +146,12 @@
 }
 
 .forwardIcon{
-    right: -2.25%;
+    right: -0.75%;
     z-index: 1;
 }
 
 .backwardIcon {
-    left: -2.25%;
+    left: 0.75%;
    z-index: 1;
 }
 
