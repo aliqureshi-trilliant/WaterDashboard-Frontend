@@ -160,7 +160,13 @@ function About() {
                 </div>
                 <div className= {classes.sideContainer}>
                     <div className={classes.imageContainer}>
-                        <img className={classes.waterMIUImage} src={waterMIUImage} alt="Water MIU Image" />
+                        <div className={classes.cardFaceFront}>
+                            <img className={classes.waterMIUImage} src={waterMIUImage} alt="Water MIU Image" />
+                        </div>
+                        <div className={classes.cardFaceBack}>
+                            Water MIU<br/>
+                            &copy;Trilliant Networks Inc.
+                        </div>
                     </div>
                     <div className={classes.summaryContainer}>
                         <div className={classes.summaryHeading}>Summary</div>
