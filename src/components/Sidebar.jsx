@@ -37,7 +37,7 @@ function Sidebar() {
         case '/metrics' : selectMenuItem('Metrics'); break;
         case '/maps' : selectMenuItem('Maps'); break;
         case '/about' : selectMenuItem('About'); break;
-        default : document.querySelectorAll(`.${classes.menuItem}`).forEach((el) => el.classList.remove(classes.active)); 
+        default : document.querySelectorAll(`.${classes.menuItem}`).forEach((el) => el.classList.remove(classes.active));
         }
     }, [location]);
 

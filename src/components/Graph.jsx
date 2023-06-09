@@ -24,9 +24,9 @@ const getLastSevenDays = () => {
         day.setDate(day.getDate()-i);
         lastSevenDays.push(dayNames[day.getDay()]);
     }
-    
+
     return lastSevenDays;
-}
+};
 
 const getLastThreeMonths = () => {
     let monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
@@ -37,9 +37,9 @@ const getLastThreeMonths = () => {
         month.setMonth(month.getMonth()-i);
         lastThreeMonths.push(monthNames[month.getMonth()]);
     }
-    
+
     return lastThreeMonths;
-}
+};
 
 function Graph(props){
 
@@ -58,19 +58,19 @@ function Graph(props){
     let labels;
     let selectEl = document.querySelector(`.${classes.select}[data-id='${props.graphId}']`);
     switch(selectEl?.value) {
-        case '7 days': {    
-                            labels = getLastSevenDays();
-                            break;
-                        }
-        case '1 month': {
-                            labels = ['Week 1', 'Week 2', 'Week 3', 'Week 4'];
-                            break;
-                        }
-        case '3 months':{
-                            labels = getLastThreeMonths();
-                            break;
-                        }
-        default: labels = getLastSevenDays();
+    case '7 days': {
+        labels = getLastSevenDays();
+        break;
+    }
+    case '1 month': {
+        labels = ['Week 1', 'Week 2', 'Week 3', 'Week 4'];
+        break;
+    }
+    case '3 months':{
+        labels = getLastThreeMonths();
+        break;
+    }
+    default: labels = getLastSevenDays();
     }
 
     const data = {
@@ -143,21 +143,21 @@ function Graph(props){
         let data;
         const chart = chartReference.current;
         switch(this.value) {
-        case '7 days': {    
-                            labels = getLastSevenDays();
-                            data = labels.map(() => Math.round(Math.random() * labels.length));
-                            break;
-                        }
+        case '7 days': {
+            labels = getLastSevenDays();
+            data = labels.map(() => Math.round(Math.random() * labels.length));
+            break;
+        }
         case '1 month': {
-                            labels = ['Week 1', 'Week 2', 'Week 3', 'Week 4'];
-                            data = labels.map(() => Math.round(Math.random() * labels.length) * 3);
-                            break;
-                        }
+            labels = ['Week 1', 'Week 2', 'Week 3', 'Week 4'];
+            data = labels.map(() => Math.round(Math.random() * labels.length) * 3);
+            break;
+        }
         case '3 months':{
-                            labels = getLastThreeMonths();
-                            data = labels.map(() => Math.round(Math.random() * labels.length) * 8);
-                            break;
-                        }
+            labels = getLastThreeMonths();
+            data = labels.map(() => Math.round(Math.random() * labels.length) * 8);
+            break;
+        }
         }
         chart.data.labels = labels;
         chart.data.datasets[0].data = data;
@@ -165,7 +165,6 @@ function Graph(props){
     }
 
     const chartReference = useRef(null);
-    const refresh = useRef(false);
 
     useEffect( () => {
         const select = document.querySelector(`.${classes.select}[data-id='${props.graphId}']`);

@@ -7,8 +7,8 @@ import { HiOutlineStatusOnline, HiOutlineStatusOffline, HiOutlineRefresh } from 
 import { BiError } from 'react-icons/bi';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import Skeleton, { SkeletonTheme } from 'react-loading-skeleton'
-import 'react-loading-skeleton/dist/skeleton.css'
+import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css';
 import { BsFillBellFill } from 'react-icons/bs';
 
 const formatTimeAgo = (timestamp) => {
@@ -19,7 +19,7 @@ const formatTimeAgo = (timestamp) => {
 
     if (days > 0) return `${days} days ago`;
     else return 'today';
-}
+};
 
 const getTimestamp = (timestamp) => {
     const date = new Date(timestamp);
@@ -31,9 +31,9 @@ const getTimestamp = (timestamp) => {
         month: '2-digit',
         day: '2-digit',
         year: '2-digit'
-    })
+    });
     return formattedDate.split(', ').reverse().join(', ');
-}
+};
 
 function Device(props) {
 
@@ -64,14 +64,14 @@ function Device(props) {
 
     const isActive = (alarm) => {
         switch(alarm){
-            case "Failed Read": return data[1].event_id === "24.5.48.219";
-            case "Highflow": return data[1].event_id === "24.5.48.209";
-            case "Backflow": return data[1].event_id === "24.5.48.214";
-            case "Temperature": return data[1].event_id === "24.5.48.211";
-            case "Battery": return data[1].event_id === "24.5.48.249";
+        case 'Failed Read': return data[1].event_id === '24.5.48.219';
+        case 'Highflow': return data[1].event_id === '24.5.48.209';
+        case 'Backflow': return data[1].event_id === '24.5.48.214';
+        case 'Temperature': return data[1].event_id === '24.5.48.211';
+        case 'Battery': return data[1].event_id === '24.5.48.249';
         }
-    }
-   
+    };
+
     const fetchData = async (type) => {
         const response = await fetch(`http://localhost:3000/api/waterMIUs/${deviceName}/${type}`);
         if(!response.ok) {
@@ -82,7 +82,7 @@ function Device(props) {
             throw new Error(`There is no data available for ${deviceName}`);
         }
         return data[0];
-    }
+    };
 
     useEffect(() => {
         const toggleEl = document.querySelector(`.${classes.toggle}`);
@@ -99,7 +99,7 @@ function Device(props) {
             } finally {
                 setLoading(false);
             }
-        }
+        };
 
         fetchAllData();
         /*
@@ -125,7 +125,7 @@ function Device(props) {
         })
         .finally(() => setLoading(false));
         */
-     },[]);
+    },[]);
 
     return (
         <>
@@ -165,11 +165,11 @@ function Device(props) {
                         <div className={classes.statusBarContainer}>
                             <div className={classes.statusBarTitle}>Alarms <BsFillBellFill className={classes.statusBarIcon}/></div>
                             {/* <div className={classes.statusBarIcon}></div> */}
-                            <AlarmTile title="Failed Read" alarm={ data && isActive("Failed Read")}/>
-                            <AlarmTile title="Backflow" alarm={data && isActive("Backflow")}/>
-                            <AlarmTile title="Highflow" alarm={data &&isActive("Highflow")}/>
-                            <AlarmTile title="Temperature" alarm={data && isActive("Temperature")}/>
-                            <AlarmTile title="Battery" alarm={data && isActive("Battery")}/>
+                            <AlarmTile title="Failed Read" alarm={ data && isActive('Failed Read')}/>
+                            <AlarmTile title="Backflow" alarm={data && isActive('Backflow')}/>
+                            <AlarmTile title="Highflow" alarm={data &&isActive('Highflow')}/>
+                            <AlarmTile title="Temperature" alarm={data && isActive('Temperature')}/>
+                            <AlarmTile title="Battery" alarm={data && isActive('Battery')}/>
                         </div>
                     </div>
                     <div className={classes.firstChart}>
@@ -186,22 +186,22 @@ function Device(props) {
                         </div>
                         <div className={classes.valueContainer}>
                             <div className={classes.valueTray}>
-                                { loading && 
+                                { loading &&
                                     (<SkeletonTheme baseColor='#96DE95' highlightColor='#c5eac5'>
                                         {[0,1,2,3].map((el) => {
-                                            return ( <Skeleton key={el} className={classes.valueCardSkeleton} containerClassName={classes.cardSkeletonContainer}/>)
+                                            return ( <Skeleton key={el} className={classes.valueCardSkeleton} containerClassName={classes.cardSkeletonContainer}/>);
                                         })}
                                     </SkeletonTheme>)
                                 }
-                                { error && 
+                                { error &&
                                     (<>{[0,1,2,3].map((el) => {
-                                        return ( <div key={el} className={classes.valueCardError}><BiError/>{error.message} !</div>)
+                                        return ( <div key={el} className={classes.valueCardError}><BiError/>{error.message} !</div>);
                                     })}</>)
                                 }
                                 { data && (<><ValueCard title="Water Level" value={`${data[0].value.toLocaleString()} Gallons`} percent="7"/>
-                                <ValueCard title="Timestamp" value={getTimestamp(data[0].readingTimestamp)} percent="1"/>
-                                <ValueCard title="Last Updated" value={formatTimeAgo(data[0].readingTimestamp)} percent="3"/>
-                                <ValueCard title="Temperature" value="150 °C" percent="4"/></>)}
+                                    <ValueCard title="Timestamp" value={getTimestamp(data[0].readingTimestamp)} percent="1"/>
+                                    <ValueCard title="Last Updated" value={formatTimeAgo(data[0].readingTimestamp)} percent="3"/>
+                                    <ValueCard title="Temperature" value="150 °C" percent="4"/></>)}
                             </div>
                         </div>
                     </div>

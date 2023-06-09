@@ -10,7 +10,7 @@ function About() {
 
     const goToSlide = (slides, slide) => {
         slides.forEach((s,i) =>s.style.transform = `translateX(${107 * (i - slide)}%`);
-    }
+    };
     const nextSlide = (slides) => {
         if (currentSlide.current === slides.length - 1) currentSlide.current = 0;
         else currentSlide.current++;
@@ -21,7 +21,7 @@ function About() {
     const prevSlide = (slides) => {
         if (currentSlide.current === 0) currentSlide.current = slides.length - 1;
         else currentSlide.current--;
-        
+
         goToSlide(slides, currentSlide.current);
     };
 
@@ -108,7 +108,7 @@ function About() {
                                         <li>Transmit Power: +20 dBm (NA), +10 dBm (EU)</li>
                                         <li>Data Throughput: 60kbps</li>
                                         <li>Access Point Capacity: 64,000 Nodes</li>
-                                        
+
                                     </ul>
                                 </FeatureCard>
                                 <FeatureCard title="Support and Protocols" category="Specifications">

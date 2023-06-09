@@ -11,28 +11,28 @@ import 'react-loading-skeleton/dist/skeleton.css';
 import { BiError } from 'react-icons/bi';
 
 function Home() {
-    
+
     const [data, setData] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
     useEffect(() => {
-       fetch(`http://localhost:3000/api/waterMIUs/`)
-       .then((response) => {
-            if(!response.ok) {
-                throw new Error(`Error ${response.status}: ${response.message}`);
-            }
-            return response.json();
-       })
-       .then((data) => {
-            setData(data);
-            setError(null);
-       })
-       .catch((error) => {
-            setError(error);
-            setData(null);
-       })
-       .finally(() => setLoading(false));
+        fetch('http://localhost:3000/api/waterMIUs/')
+            .then((response) => {
+                if(!response.ok) {
+                    throw new Error(`Error ${response.status}: ${response.message}`);
+                }
+                return response.json();
+            })
+            .then((data) => {
+                setData(data);
+                setError(null);
+            })
+            .catch((error) => {
+                setError(error);
+                setData(null);
+            })
+            .finally(() => setLoading(false));
     },[]);
 
     return (
@@ -61,19 +61,19 @@ function Home() {
                 </div>
                 <div className={classes.middleContainerTwo}>
                     <Tray listType="Meter List" listDesc="View a list of meters for the Water MIU">
-                        { loading && 
+                        { loading &&
                             (<SkeletonTheme baseColor='#F6F6F6' highlightColor='#EFEFEF'>
                                 {[0,1,2,3,4].map((el) => {
-                                    return ( <Skeleton key={el} className={classes.cardSkeleton} containerClassName={classes.cardSkeletonContainer}/>)
+                                    return ( <Skeleton key={el} className={classes.cardSkeleton} containerClassName={classes.cardSkeletonContainer}/>);
                                 })}
                             </SkeletonTheme>)
                         }
                         { error && (<>{[0,1,2,3,4].map((el) => {
-                                    return ( <div key={el} className={classes.errorCard}><BiError></BiError>Error loading data !</div>)
-                                })}</>)}
-                        { data && 
+                            return ( <div key={el} className={classes.errorCard}><BiError></BiError>Error loading data !</div>);
+                        })}</>)}
+                        { data &&
                             data.map(({device_mrid}) => {
-                                return ( <DeviceCard key={device_mrid} deviceName={device_mrid} deviceStatus="Online" additionalStyles={classes.card}/>)
+                                return ( <DeviceCard key={device_mrid} deviceName={device_mrid} deviceStatus="Online" additionalStyles={classes.card}/>);
                             })
                         }
                         <ViewCard />
