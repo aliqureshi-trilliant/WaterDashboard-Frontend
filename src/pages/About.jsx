@@ -111,7 +111,7 @@ function About() {
 
                                     </ul>
                                 </FeatureCard>
-                                <FeatureCard title="Support and Protocols" category="Specifications">
+                                <FeatureCard title="Radio Performance" category="Specifications">
                                     <ul>
                                         <li>Security: 128/256 bit encryption</li>
                                         <li>Protocol: RPMA Network in 2.4 GHz ISM Band</li>
@@ -132,7 +132,7 @@ function About() {
                                         <li>IEC 60529 (IP 68 to 1 meter for 30 days)</li>
                                         <li>Operating Temperature:  -30 to +65&deg;C</li>
                                         <li>Storage Temperature:  -30 to +85&deg;C</li>
-                                        <li>Humidity:  0% to 100  %, condensing</li>
+                                        <li>Humidity:  0% to 100  %</li>
                                     </ul>
                                 </FeatureCard>
                                 <FeatureCard title="Regulatory Compliance" category="Specifications">
@@ -142,15 +142,17 @@ function About() {
                                         <li>NEMA 250 (Rating 6P)</li>
                                         <li>EN/UL/CSA 60950-1</li>
                                         <li>EN 60950-22</li>
+                                        <li>EN/UL 62368-1</li>
                                     </ul>
                                 </FeatureCard>
                                 <FeatureCard title="Regulatory Compliance" category="Specifications">
                                     <ul>
-                                        <li>EN 63000:2018</li>
-                                        <li>EN 55035</li>
-                                        <li>EN 55032</li>
-                                        <li>EN 301 489-17</li>
-                                        <li>EN 300 440</li>
+                                        <li>EN 63000:2018, EN 62311:2019</li>
+                                        <li>EN 55035, EN 55032</li>
+                                        <li>EN 301 489-17, EN 300 440</li>
+                                        <li>RSS-102, RSS-247</li>
+                                        <li> 47 CFR Part 247 - Subpart B Class B</li>
+                                        <li>47 CFR Part 2 - 1091, 47 CFR Part 247</li>
                                     </ul>
                                 </FeatureCard>
                             </div>

@@ -18,7 +18,7 @@ const formatTimeAgo = (timestamp) => {
     const days = Math.floor (elapsed / (1000 * 60 * 60 * 24));
 
     if (days > 0) return `${days} days ago`;
-    else return 'today';
+    else return 'Today';
 };
 
 const getTimestamp = (timestamp) => {

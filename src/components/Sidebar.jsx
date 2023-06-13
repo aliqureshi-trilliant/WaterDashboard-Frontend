@@ -1,7 +1,7 @@
 import classes from './Sidebar.module.css';
 import logo from '/images/logo_trilliant.png';
 import { useEffect } from 'react';
-import { Link, useLocation } from'react-router-dom';
+import { Link, useLocation, useNavigate } from'react-router-dom';
 import { AiFillHome, AiFillSetting } from 'react-icons/ai';
 import { MdElectricMeter } from 'react-icons/md';
 import { SiGoogleanalytics } from 'react-icons/si';
@@ -11,6 +11,7 @@ import { BiLogOut } from'react-icons/bi';
 function Sidebar() {
 
     const location = useLocation();
+    const navigate = useNavigate();
 
     const toggleMenuItem = (event) => {
 
@@ -39,6 +40,8 @@ function Sidebar() {
         case '/about' : selectMenuItem('About'); break;
         default : document.querySelectorAll(`.${classes.menuItem}`).forEach((el) => el.classList.remove(classes.active));
         }
+        const logoEl = document.querySelector(`.${classes.trilliantContainer}`);
+        logoEl.addEventListener('click', () => navigate('/'));
     }, [location]);
 
     return (
