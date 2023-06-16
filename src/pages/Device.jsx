@@ -10,6 +10,8 @@ import { useParams } from 'react-router-dom';
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
 import { BsFillBellFill } from 'react-icons/bs';
+import { GoogleMap, MarkerF, useLoadScript, InfoWindow } from "@react-google-maps/api";
+import { useMemo } from "react";
 
 const formatTimeAgo = (timestamp) => {
     const currentDate = new Date();
@@ -43,6 +45,17 @@ function Device(props) {
     const [data, setData] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [selectedMarker, setSelectedMarker] = useState(null);
+    const { isLoaded } = useLoadScript({
+        googleMapsApiKey: import.meta.env.MAPS_API_KEY,
+      });
+    const center = useMemo(() => ({ lat: 35.83162343101685, lng:-78.76705964937196 }), []);
+    const mapOptions = {
+        mapTypeControl: false,
+        streetViewControl: false,
+        fullscreenControl: false,
+        disableDefaultUI: true,
+    };
 
     const iconContainerStyle = props.deviceStatus? classes.online:classes.offline;
 
@@ -188,20 +201,50 @@ function Device(props) {
                             <div className={classes.valueTray}>
                                 { loading &&
                                     (<SkeletonTheme baseColor='#96DE95' highlightColor='#c5eac5'>
-                                        {[0,1,2,3].map((el) => {
+                                        {[0,1].map((el) => {
                                             return ( <Skeleton key={el} className={classes.valueCardSkeleton} containerClassName={classes.cardSkeletonContainer}/>);
                                         })}
+                                        <Skeleton className={classes.mapSkeleton}/>
                                     </SkeletonTheme>)
                                 }
                                 { error &&
-                                    (<>{[0,1,2,3].map((el) => {
+                                    (<>{[0,1].map((el) => {
                                         return ( <div key={el} className={classes.valueCardError}><BiError/>{error.message} !</div>);
-                                    })}</>)
+                                    })}
+                                    <div className={classes.mapSkeleton}><BiError/>{error.message} !</div>
+                                    </>)
                                 }
-                                { data && (<><ValueCard title="Water Level" value={`${data[0].value.toLocaleString()} Gallons`} percent="7"/>
-                                    <ValueCard title="Timestamp" value={getTimestamp(data[0].readingTimestamp)} percent="1"/>
-                                    <ValueCard title="Last Updated" value={formatTimeAgo(data[0].readingTimestamp)} percent="3"/>
-                                    <ValueCard title="Temperature" value="150 °C" percent="4"/></>)}
+                                { data && isLoaded && 
+                                    (<>
+                                        <ValueCard title="Water Level" value={`${data[0].value.toLocaleString()} Gallons`} percent="7"/>
+                                        <ValueCard title="Timestamp" value={getTimestamp(data[0].readingTimestamp)} percent="1"/>
+                                        <GoogleMap
+                                        mapContainerClassName={classes.mapContainer}
+                                        center={center}
+                                        zoom={10}
+                                        options={mapOptions}
+                                        >
+                                        <MarkerF position={center} onClick={() => setSelectedMarker(center)}/>
+                                        {selectedMarker && (
+                                        <InfoWindow
+                                            onCloseClick={() => {
+                                                setSelectedMarker(null);
+                                            }}
+                                            position={{
+                                                lat: selectedMarker.lat,
+                                                lng: selectedMarker.lng
+                                            }}
+                                        >
+                                            <>
+                                            <p>{deviceName}</p>
+                                            <p>Latitude: {parseFloat(selectedMarker.lat.toFixed(3))}</p>
+                                            <p>Longitude: {parseFloat(selectedMarker.lng.toFixed(3))}</p>
+                                            </>
+                                        </InfoWindow>
+                                        )}
+                                        </GoogleMap>
+                                    </>)
+                                }
                             </div>
                         </div>
                     </div>

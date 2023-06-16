@@ -41,7 +41,7 @@ function Sidebar() {
         default : document.querySelectorAll(`.${classes.menuItem}`).forEach((el) => el.classList.remove(classes.active));
         }
         const logoEl = document.querySelector(`.${classes.trilliantContainer}`);
-        logoEl.addEventListener('click', () => navigate('/'));
+        logoEl.addEventListener('click', () => window.location.href = 'http://localhost:8080');
     }, [location]);
 
     return (

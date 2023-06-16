@@ -288,6 +288,37 @@
     align-items: center;
 }
 
+.mapContainer {
+    width: 18.4rem;
+    height: 45%;
+    cursor: pointer;
+    background: #96DE95;
+    mix-blend-mode: normal;
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.2s ease-in-out;
+}
+
+.mapSkeleton {
+    width: 18.4rem;
+    height: 14.25rem;
+    cursor: pointer;
+    background: #96DE95;
+    mix-blend-mode: normal;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.2s ease-in-out;
+}
+
+.mapContainer:hover {
+    transform: scale(1.075);
+}
+
 @keyframes ring {
     0% { transform: rotate(0); }
     1% { transform: rotate(20deg); }
