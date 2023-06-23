@@ -3,6 +3,7 @@ import { Routes, Route, useLocation } from 'react-router-dom';
 import Home from './pages/Home';
 import Device from './pages/Device';
 import About from './pages/About';
+import Meters from './pages/Meters';
 import { useState, useEffect } from 'react';
 
 
@@ -32,6 +33,7 @@ function App(){
                 }}>
                 <Routes location={displayLocation}>
                     <Route exact path="/home" element={<Home />} />
+                    <Route exact path="/meters/" element={<Meters />} />
                     <Route exact path="/meters/:deviceName" element={<Device />} />
                     <Route exact path="/about" element={<About />} />
                 </Routes>

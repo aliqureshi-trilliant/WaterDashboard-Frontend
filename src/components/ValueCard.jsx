@@ -29,7 +29,7 @@ function ValueCard(props) {
                         {props.title}
                     </span>
                     <span className={classes.percentChange}>
-                        +{props.percent}%
+                        {props.percent}
                     </span>
                 </div>
                 <div className={classes.valueContainer}>

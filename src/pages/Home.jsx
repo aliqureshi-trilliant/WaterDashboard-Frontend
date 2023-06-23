@@ -9,15 +9,17 @@ import { useState, useEffect } from 'react';
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
 import { BiError } from 'react-icons/bi';
+import { useNavigate } from 'react-router-dom';
 
 function Home() {
 
     const [data, setData] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const navigate = useNavigate();
 
     useEffect(() => {
-        fetch('http://localhost:3000/api/waterMIUs/')
+        fetch('http://localhost:3000/api/waterMIUs?count=5')
             .then((response) => {
                 if(!response.ok) {
                     throw new Error(`Error ${response.status}: ${response.message}`);
@@ -33,6 +35,16 @@ function Home() {
                 setData(null);
             })
             .finally(() => setLoading(false));
+            const meterTrayEl = document.querySelector(`.${classes.middleContainerTwo}`).children[0];
+            const metricTrayEl = document.querySelector(`.${classes.bottomContainer}`).children[0];
+            meterTrayEl.addEventListener('click', (e) => {
+                if (e.target.closest(`.${classes.card}`)) return; 
+                navigate('/meters');
+            });
+            metricTrayEl.addEventListener('click', (e) => {
+                if (e.target.closest(`.${classes.card}`)) return; 
+                navigate('/metrics');
+            });
     },[]);
 
     return (

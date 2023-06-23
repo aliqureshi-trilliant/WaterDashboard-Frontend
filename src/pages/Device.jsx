@@ -49,7 +49,7 @@ function Device(props) {
     const { isLoaded } = useLoadScript({
         googleMapsApiKey: import.meta.env.MAPS_API_KEY,
       });
-    const center = useMemo(() => ({ lat: 35.83162343101685, lng:-78.76705964937196 }), []);
+    const center = useMemo(() => ({ lat: parseFloat(data?.[2].gps_location?.split(',')[0]) || 35.83162343101685, lng: parseFloat(data?.[2].gps_location?.split(',')[1]) || -78.76705964937196 }), [data]);
     const mapOptions = {
         mapTypeControl: false,
         streetViewControl: false,
@@ -105,7 +105,7 @@ function Device(props) {
 
         const fetchAllData = async () => {
             try {
-                const allData = await Promise.all(['reading','alarm'].map(fetchData),);
+                const allData = await Promise.all(['reading','alarm','gps'].map(fetchData),);
                 setData(allData);
             } catch(err) {
                 setError(err);
@@ -115,29 +115,6 @@ function Device(props) {
         };
 
         fetchAllData();
-        /*
-        fetch(`http://localhost:3000/api/waterMIUs/${deviceName}/reading`)
-        .then((response) => {
-             if(!response.ok) {
-                 throw new Error(`Error ${response.status}: ${response.message}`);
-             }
-             return response.json();
-        })
-        .then((data) => {
-            if (data.length > 0) {
-             setData(data);
-             setError(null);
-            }
-            else {
-                throw new Error(`Error ${response.status}: ${response.message}`);
-            }
-        })
-        .catch((error) => {
-             setError(error);
-             setData(null);
-        })
-        .finally(() => setLoading(false));
-        */
     },[]);
 
     return (
@@ -216,8 +193,8 @@ function Device(props) {
                                 }
                                 { data && isLoaded && 
                                     (<>
-                                        <ValueCard title="Water Level" value={`${data[0].value.toLocaleString()} Gallons`} percent="7"/>
-                                        <ValueCard title="Timestamp" value={getTimestamp(data[0].readingTimestamp)} percent="1"/>
+                                        <ValueCard title="Water Level" value={`${data[0].value.toLocaleString()} Gallons`} percent="+7%"/>
+                                        <ValueCard title="Timestamp" value={getTimestamp(data[0].readingTimestamp)} percent={formatTimeAgo(data[0].readingTimestamp)}/>
                                         <GoogleMap
                                         mapContainerClassName={classes.mapContainer}
                                         center={center}
