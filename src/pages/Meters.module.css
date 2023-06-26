@@ -2,22 +2,24 @@
     width: 100%;
     height: 100%;
     display: grid;
-    grid-template-rows: 25% 11% 64%;
+    grid-template-columns: 25% 75%;
 }
 
-.topContainer {
-    grid-row: 1;
-    width: 98%;
+.leftContainer {
+    grid-column: 1;
+    width: 100%;
     height: 100%;
+    margin-top: 5%;
     display: flex;
-    justify-content: center;
-    align-items: flex-end;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
     position: relative;
 }
 
 .coverImage{
     width: 95%;
-    height: 90%;
+    height: 20%;
     background: url(/images/green_waves.jpg);
     border-radius: 1rem;
     background-position: center;
@@ -30,25 +32,56 @@
     to {background-position: bottom right;}
 }
 
-.searchContainer{
-    position: absolute;
-    top: 100%;
-    left: 50%;
-    transform: translate(-50%,-50%);
-    width: 50%;
-    height: 10.5rem;
-    background: rgba(237, 246, 237, 0.95);
-    mix-blend-mode: normal;
-    box-shadow: 0px 8px 35px rgba(0, 0, 0, 0.2);
-    border-radius: 1rem;
+.meterCard {
+    margin-top: -30%;
+    width: 95%;
+    height: 26rem;
+    border-radius: 2rem;
+    background: linear-gradient(152deg, #F9FAF9 0.38%, #F9FAF9 41.48%, #C5EAC5 100%);
+    box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.15);
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    justify-content: start;
     align-items: center;
 }
 
+.waterMIUImage{
+    width: 35%;
+    height: auto;
+    filter: drop-shadow(0px 7px 5px rgba(0, 0, 0, 0.2));
+}
+
+.meterCard>h1 {
+    text-align: center;
+    font-size: 2.75rem;
+    font-weight: 500;
+    line-height: 140%;
+}
+
+.meterCard>p {
+    text-align: center;
+    font-size: 1.1rem;
+    font-weight: 400;
+    line-height: 170%;
+}
+
+.searchContainer{
+    width: 90%;
+    height: 4rem;
+    margin: 1rem 0;
+    background: rgba(237, 246, 237, 0.95);
+    mix-blend-mode: normal;
+    box-shadow: 0px 8px 35px rgba(0, 0, 0, 0.2);
+    border-radius: 1.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+}
+
 .searchBar{
-    width: 60%;
-    height: 40%;
+    width: 90%;
+    height: 70%;
     background: #FEFEFE;
     border-radius: 1.5rem;
     display: flex;
@@ -66,7 +99,7 @@
 
 .searchBar>input {
     height: 70%;
-    width: 75%;
+    width: 65%;
     border: none;
     font-family: 'Reem Kufi';
     font-style: normal;
@@ -80,8 +113,58 @@
     color: #D5D6D7;
 }
 
-.bottomContainer {
-    grid-row: 3;
+.filterContainer {
+    margin-top: 1.5rem;
+    width: 100%;
+    height: 40%;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: start;
+}
+
+.filterContainer>p {
+    color: #ABAEAF;
+    font-size: 1.25rem;
+    font-weight: 500;
+    line-height: 176.7%;
+}
+
+.filter{
+    width: 100%;
+    padding: 1rem;
+    border-radius: 1rem;
+    background: #D6EDD4;
+    margin: 0.5rem 0;
+    display: flex;
+    align-items: center;
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+}
+
+.icon{
+    width: 10%;
+    height: auto;
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+}
+
+.filter>p{
+    padding-left: 1rem;
+    font-size: 1.25rem;
+    font-weight: 400;
+    line-height: 176.7%;
+}
+
+.filter:hover {
+    transform: scale(1.1);
+}
+
+.filterActive {
+    background: #A2E1A1;
+}
+
+.rightContainer {
+    grid-column: 2;
     width: 98%;
     height: 100%;
     display: flex;
@@ -100,17 +183,17 @@
     padding: 1rem 0;
 }
 
-.bottomContainer::-webkit-scrollbar {
+.rightContainer::-webkit-scrollbar {
     width: 12px;
     background-color: var(--nyanza);
 }
 
-.bottomContainer::-webkit-scrollbar-track {
+.rightContainer::-webkit-scrollbar-track {
     -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.1); 
     border-radius: 10px;
 }
 
-.bottomContainer::-webkit-scrollbar-thumb {
+.rightContainer::-webkit-scrollbar-thumb {
     background-color: #96DE95;
     border-radius: 50px;
     box-shadow:0px 0px 4px 4px rgba(0, 0, 0, 0.1) inset;

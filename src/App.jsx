@@ -4,6 +4,7 @@ import Home from './pages/Home';
 import Device from './pages/Device';
 import About from './pages/About';
 import Meters from './pages/Meters';
+import Maps from './pages/Maps';
 import { useState, useEffect } from 'react';
 
 
@@ -35,6 +36,7 @@ function App(){
                     <Route exact path="/home" element={<Home />} />
                     <Route exact path="/meters/" element={<Meters />} />
                     <Route exact path="/meters/:deviceName" element={<Device />} />
+                    <Route exact path="/maps/" element={<Maps />} />
                     <Route exact path="/about" element={<About />} />
                 </Routes>
             </div>
