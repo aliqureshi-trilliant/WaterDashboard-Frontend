@@ -117,7 +117,7 @@ function Meters() {
                 </div>
                 <div className={classes.filterContainer}>
                     <p>Filters</p>
-                    <div className={classes.filter} data-type="All">
+                    <div className={`${classes.filter} ${classes.filterActive}`} data-type="All">
                         <MdIncompleteCircle className={classes.icon}/>
                         <p>All Meters</p>
                     </div>
@@ -132,24 +132,33 @@ function Meters() {
                 </div>
             </div>
             <div className={classes.rightContainer}>
-                {[0,1,2,3,4].map((el) => {return (<div key={el}className={classes.meterList}>
-                { loading &&
-                            (<SkeletonTheme baseColor='#F6F6F6' highlightColor='#EFEFEF'>
-                                {[0,1,2,3,4].map((el) => {
-                                    return ( <Skeleton key={el} className={classes.cardSkeleton} containerClassName={classes.cardSkeletonContainer}/>);
-                                })}
-                            </SkeletonTheme>)
-                        }
-                        { error && (<>
-                        {<div className={classes.errorContainer}>
-                            <div className={classes.errorCard}><BiError></BiError>Error loading data !</div>
-                        </div>}</>)}
-                        { data &&
-                            data.map(({device_mrid}) => {
-                                return ( <DeviceCard key={device_mrid} deviceName={device_mrid} deviceStatus={Math.round(Math.random())==1?"Online":"Offline"} additionalStyles={classes.card}/>);
-                            })
-                        }
-                </div>)})}
+                {   <>
+                    { loading &&
+                        (<SkeletonTheme baseColor='#F6F6F6' highlightColor='#EFEFEF'>
+                            {[0,1,2,3,4].map((el) => {
+                                return ( <Skeleton key={el} className={classes.cardSkeleton} containerClassName={classes.cardSkeletonContainer}/>);
+                            })}
+                        </SkeletonTheme>)
+                    }
+                    { error && (<>
+                    {<div className={classes.errorContainer}>
+                        <div className={classes.errorCard}><BiError></BiError>Error loading data !</div>
+                    </div>}</>)}
+                    { data &&
+                        data.reduce((accumulator, {device_mrid} , index) => {
+                            const meterListIndex = Math.floor(index / 5);
+                            if (!accumulator[meterListIndex]){
+                                accumulator[meterListIndex] = [];
+                            }
+                            accumulator[meterListIndex].push(<DeviceCard key={device_mrid} deviceName={device_mrid} deviceStatus={Math.round(Math.random())==1?"Online":"Offline"} additionalStyles={classes.card}/>);
+                            return accumulator;
+                        }, []).map((meterList,index) => (
+                            <div key={index} className={classes.meterList}>
+                                {meterList}
+                            </div>
+                        ))
+                    }
+                </>}
             </div>
         </div>
         </>
