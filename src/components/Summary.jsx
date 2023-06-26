@@ -1,6 +1,6 @@
 import classes from './Summary.module.css';
 import summaryImage from '/images/WaterMIU.png';
-import { useEffect } from 'react'
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 function Summary () {
@@ -9,7 +9,7 @@ function Summary () {
 
     useEffect(() => {
         const cardEl = document.querySelector(`.${classes.summary}`);
-        cardEl.addEventListener('click', () => navigate(`/about`));
+        cardEl.addEventListener('click', () => navigate('/about'));
     }, []);
 
     return (

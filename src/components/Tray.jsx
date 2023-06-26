@@ -16,7 +16,7 @@ function Tray(props) {
             trayMapEl.addEventListener('click',() => navigate('/maps'));
         }
     },[]);
-    
+
     return (
         <div className={mapStyles}>
             <div className={trayTextContainerStyle}>

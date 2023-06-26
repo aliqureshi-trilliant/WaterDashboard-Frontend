@@ -1,7 +1,7 @@
 import classes from './Sidebar.module.css';
 import logo from '/images/logo_trilliant.png';
 import { useEffect } from 'react';
-import { Link, useLocation, useNavigate } from'react-router-dom';
+import { Link, useLocation } from'react-router-dom';
 import { AiFillHome, AiFillSetting } from 'react-icons/ai';
 import { MdElectricMeter } from 'react-icons/md';
 import { SiGoogleanalytics } from 'react-icons/si';
@@ -11,7 +11,6 @@ import { BiLogOut } from'react-icons/bi';
 function Sidebar() {
 
     const location = useLocation();
-    const navigate = useNavigate();
 
     const toggleMenuItem = (event) => {
 

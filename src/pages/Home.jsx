@@ -35,16 +35,16 @@ function Home() {
                 setData(null);
             })
             .finally(() => setLoading(false));
-            const meterTrayEl = document.querySelector(`.${classes.middleContainerTwo}`).children[0];
-            const metricTrayEl = document.querySelector(`.${classes.bottomContainer}`).children[0];
-            meterTrayEl.addEventListener('click', (e) => {
-                if (e.target.closest(`.${classes.card}`)) return; 
-                navigate('/meters');
-            });
-            metricTrayEl.addEventListener('click', (e) => {
-                if (e.target.closest(`.${classes.card}`)) return; 
-                navigate('/metrics');
-            });
+        const meterTrayEl = document.querySelector(`.${classes.middleContainerTwo}`).children[0];
+        const metricTrayEl = document.querySelector(`.${classes.bottomContainer}`).children[0];
+        meterTrayEl.addEventListener('click', (e) => {
+            if (e.target.closest(`.${classes.card}`)) return;
+            navigate('/meters');
+        });
+        metricTrayEl.addEventListener('click', (e) => {
+            if (e.target.closest(`.${classes.card}`)) return;
+            navigate('/metrics');
+        });
     },[]);
 
     return (

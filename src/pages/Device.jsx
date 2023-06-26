@@ -10,8 +10,8 @@ import { useParams } from 'react-router-dom';
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
 import { BsFillBellFill } from 'react-icons/bs';
-import { GoogleMap, MarkerF, useLoadScript, InfoWindow } from "@react-google-maps/api";
-import { useMemo } from "react";
+import { GoogleMap, MarkerF, useLoadScript, InfoWindow } from '@react-google-maps/api';
+import { useMemo } from 'react';
 
 const formatTimeAgo = (timestamp) => {
     const currentDate = new Date();
@@ -48,7 +48,7 @@ function Device(props) {
     const [selectedMarker, setSelectedMarker] = useState(null);
     const { isLoaded } = useLoadScript({
         googleMapsApiKey: import.meta.env.MAPS_API_KEY,
-      });
+    });
     const center = useMemo(() => ({ lat: parseFloat(data?.[2].gps_location?.split(',')[0]) || 35.83162343101685, lng: parseFloat(data?.[2].gps_location?.split(',')[1]) || -78.76705964937196 }), [data]);
     const mapOptions = {
         mapTypeControl: false,
@@ -192,34 +192,34 @@ function Device(props) {
                                     <div className={classes.mapSkeleton}><BiError/>{error.message} !</div>
                                     </>)
                                 }
-                                { data && isLoaded && 
+                                { data && isLoaded &&
                                     (<>
                                         <ValueCard title="Water Level" value={`${data[0].value.toLocaleString()} Gallons`} percent="+7%"/>
                                         <ValueCard title="Timestamp" value={getTimestamp(data[0].readingTimestamp)} percent={formatTimeAgo(data[0].readingTimestamp)}/>
                                         <GoogleMap
-                                        mapContainerClassName={classes.mapContainer}
-                                        center={center}
-                                        zoom={10}
-                                        options={mapOptions}
+                                            mapContainerClassName={classes.mapContainer}
+                                            center={center}
+                                            zoom={10}
+                                            options={mapOptions}
                                         >
-                                        <MarkerF position={center} onClick={() => setSelectedMarker(center)}/>
-                                        {selectedMarker && (
-                                        <InfoWindow
-                                            onCloseClick={() => {
-                                                setSelectedMarker(null);
-                                            }}
-                                            position={{
-                                                lat: selectedMarker.lat,
-                                                lng: selectedMarker.lng
-                                            }}
-                                        >
-                                            <>
-                                            <p>{deviceName}</p>
-                                            <p>Latitude: {parseFloat(selectedMarker.lat.toFixed(3))}</p>
-                                            <p>Longitude: {parseFloat(selectedMarker.lng.toFixed(3))}</p>
-                                            </>
-                                        </InfoWindow>
-                                        )}
+                                            <MarkerF position={center} onClick={() => setSelectedMarker(center)}/>
+                                            {selectedMarker && (
+                                                <InfoWindow
+                                                    onCloseClick={() => {
+                                                        setSelectedMarker(null);
+                                                    }}
+                                                    position={{
+                                                        lat: selectedMarker.lat,
+                                                        lng: selectedMarker.lng
+                                                    }}
+                                                >
+                                                    <>
+                                                        <p>{deviceName}</p>
+                                                        <p>Latitude: {parseFloat(selectedMarker.lat.toFixed(3))}</p>
+                                                        <p>Longitude: {parseFloat(selectedMarker.lng.toFixed(3))}</p>
+                                                    </>
+                                                </InfoWindow>
+                                            )}
                                         </GoogleMap>
                                     </>)
                                 }

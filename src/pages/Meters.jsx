@@ -27,7 +27,7 @@ function Meters() {
 
     const searchFilter = (filter) => {
         // switch(filter.dataset.type){
-        // case "All": 
+        // case "All":
         // }
     };
 
@@ -74,7 +74,7 @@ function Meters() {
     };
 
     useEffect(() => {
-        fetchData();    
+        fetchData();
         const filterContainer = document.querySelector(`.${classes.filterContainer}`);
         filterContainer.addEventListener('click', (e) => {
             e.preventDefault();
@@ -82,7 +82,7 @@ function Meters() {
             if (filter){
                 toggleFilter(filter);
             }
-        })
+        });
 
         const searchEl = document.querySelector(`.${classes.searchBar}`).children[1];
         searchEl.addEventListener('keypress', (e) => {
@@ -100,67 +100,67 @@ function Meters() {
 
     return (
         <>
-        <div className={classes.meters}>
-            <div className={classes.leftContainer}>
-                <div className={classes.coverImage}>
-                </div>
-                <div className={classes.meterCard}>
-                    <img className={classes.waterMIUImage} src={waterMIUImage} alt="Water MIU Image" />
-                    <h1>Meter List</h1>
-                    <p>View  a list of the meters here !</p>
-                    <div className = {classes.searchContainer}>
-                        <div className={classes.searchBar}>
-                            <AiOutlineSearch className={classes.searchIcon}/>
-                            <input type='search' placeholder='Search..'/>
+            <div className={classes.meters}>
+                <div className={classes.leftContainer}>
+                    <div className={classes.coverImage}>
+                    </div>
+                    <div className={classes.meterCard}>
+                        <img className={classes.waterMIUImage} src={waterMIUImage} alt="Water MIU Image" />
+                        <h1>Meter List</h1>
+                        <p>View  a list of the meters here !</p>
+                        <div className = {classes.searchContainer}>
+                            <div className={classes.searchBar}>
+                                <AiOutlineSearch className={classes.searchIcon}/>
+                                <input type='search' placeholder='Search..'/>
+                            </div>
+                        </div>
+                    </div>
+                    <div className={classes.filterContainer}>
+                        <p>Filters</p>
+                        <div className={`${classes.filter} ${classes.filterActive}`} data-type="All">
+                            <MdIncompleteCircle className={classes.icon}/>
+                            <p>All Meters</p>
+                        </div>
+                        <div className={classes.filter} data-type="Online">
+                            <AiFillCheckCircle className={classes.icon}/>
+                            <p>Online Meters</p>
+                        </div>
+                        <div className={classes.filter} data-type="Offline">
+                            <MdCancel className={classes.icon}/>
+                            <p>Offline Meters</p>
                         </div>
                     </div>
                 </div>
-                <div className={classes.filterContainer}>
-                    <p>Filters</p>
-                    <div className={`${classes.filter} ${classes.filterActive}`} data-type="All">
-                        <MdIncompleteCircle className={classes.icon}/>
-                        <p>All Meters</p>
-                    </div>
-                    <div className={classes.filter} data-type="Online">
-                        <AiFillCheckCircle className={classes.icon}/>
-                        <p>Online Meters</p>
-                    </div>
-                    <div className={classes.filter} data-type="Offline">
-                        <MdCancel className={classes.icon}/>
-                        <p>Offline Meters</p>
-                    </div>
-                </div>
-            </div>
-            <div className={classes.rightContainer}>
-                {   <>
-                    { loading &&
+                <div className={classes.rightContainer}>
+                    { <>
+                        { loading &&
                         (<SkeletonTheme baseColor='#F6F6F6' highlightColor='#EFEFEF'>
                             {[0,1,2,3,4].map((el) => {
                                 return ( <Skeleton key={el} className={classes.cardSkeleton} containerClassName={classes.cardSkeletonContainer}/>);
                             })}
                         </SkeletonTheme>)
-                    }
-                    { error && (<>
-                    {<div className={classes.errorContainer}>
-                        <div className={classes.errorCard}><BiError></BiError>Error loading data !</div>
-                    </div>}</>)}
-                    { data &&
+                        }
+                        { error && (<>
+                            {<div className={classes.errorContainer}>
+                                <div className={classes.errorCard}><BiError></BiError>Error loading data !</div>
+                            </div>}</>)}
+                        { data &&
                         data.reduce((accumulator, {device_mrid} , index) => {
                             const meterListIndex = Math.floor(index / 5);
                             if (!accumulator[meterListIndex]){
                                 accumulator[meterListIndex] = [];
                             }
-                            accumulator[meterListIndex].push(<DeviceCard key={device_mrid} deviceName={device_mrid} deviceStatus={Math.round(Math.random())==1?"Online":"Offline"} additionalStyles={classes.card}/>);
+                            accumulator[meterListIndex].push(<DeviceCard key={device_mrid} deviceName={device_mrid} deviceStatus={Math.round(Math.random())==1?'Online':'Offline'} additionalStyles={classes.card}/>);
                             return accumulator;
                         }, []).map((meterList,index) => (
                             <div key={index} className={classes.meterList}>
                                 {meterList}
                             </div>
                         ))
-                    }
-                </>}
+                        }
+                    </>}
+                </div>
             </div>
-        </div>
         </>
     );
 }
