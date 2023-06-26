@@ -5,6 +5,8 @@ import MeterInfoCard from '../components/MeterInfoCard';
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
 import { BiError } from 'react-icons/bi';
+import { HiOutlineStatusOnline, HiOutlineStatusOffline } from 'react-icons/hi';
+
 
 function Maps() {
     const [data, setData] = useState(null);
@@ -30,10 +32,27 @@ function Maps() {
         mapRef.current = map;
     };
 
+    const toggleActive = (e) => {
+        const meter = e.target.closest(`.${classes.meterInfoCard}`);
+        
+        
+    };
+
     const selectMarker = (device_mrid) => {
-        const marker = parsedData.find((data) => data.device_mrid === device_mrid);
+        const meterInfoCards = document.querySelectorAll(`.${classes.meterInfoCard}`);
+        meterInfoCards.forEach((el) => el.classList.remove(classes.active));
+        const meter = document.querySelector(`[data-id='${device_mrid}']`);
+        meter.classList.add(classes.active);
+        const marker = parsedData.find((data) => data.device_mrid == device_mrid);
         setSelectedMarker(marker);
         mapRef.current.panTo({lat:marker.lat, lng:marker.lng});
+        mapRef.current.panBy(175,0);
+    }
+    
+    const clearMarker = () => {
+        setSelectedMarker(null);
+        const meterInfoCards = document.querySelectorAll(`.${classes.meterInfoCard}`);
+        meterInfoCards.forEach((el) => el.classList.remove(classes.active));
     }
 
     const mapOptions = {
@@ -79,13 +98,13 @@ function Maps() {
                                         options={mapOptions}
                                         >
                                         {
-                                            parsedData.map((data,index) => (<MarkerF key={index} position={{ lat:data.lat, lng:data.lng }} onClick={() => setSelectedMarker(data)}/>))
+                                            parsedData.map((data,index) => (<MarkerF key={index} position={{ lat:data.lat, lng:data.lng }} onClick={() => selectMarker(data.device_mrid)}/>))
                                         }
                                         
                                         {selectedMarker && (
                                         <InfoWindow
                                             onCloseClick={() => {
-                                                setSelectedMarker(null);
+                                                clearMarker();
                                             }}
                                             position={{
                                                 lat: selectedMarker.lat,
@@ -103,7 +122,13 @@ function Maps() {
                                     </>)}
                 </div>
                 <div className={classes.meterListContainer}>
-                    <h1>Meter List</h1>
+                    <div className={classes.titleContainer}>
+                        <h1>Meter List</h1>
+                            <HiOutlineStatusOnline className={classes.iconOnline}/> 
+                            <div className={classes.deviceCount}><p className={classes.statusTitle}>Online</p><p>276</p></div>
+                            <HiOutlineStatusOffline className={classes.iconOffline}/>
+                            <div className={classes.deviceCount}><p className={classes.statusTitle}> Offline</p><p>24</p></div>
+                    </div>
                     <div className={classes.meterList}>
                         {
                             <>
@@ -119,7 +144,7 @@ function Maps() {
                             })}</>)}
                             { data &&
                                 data.map(({device_mrid},index) => {
-                                    return ( <MeterInfoCard key={index} deviceName={device_mrid} deviceStatus={Math.round(Math.random())==1?"Online":"Offline"} serialNo="12392" rpmaID="150122" nodeID="1301" additionalStyles={classes.meterInfoCard} onClick={() => selectMarker(device_mrid)}/>);
+                                    return ( <MeterInfoCard key={index} deviceName={device_mrid} deviceStatus={Math.round(Math.random())==1?"Online":"Offline"} serialNo="12392" rpmaID="150122" nodeID="1301" additionalStyles={classes.meterInfoCard} onClick={() => {selectMarker(device_mrid)}}/>);
                                 })
                             }
                             </>

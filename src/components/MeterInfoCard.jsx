@@ -6,7 +6,7 @@ function MeterInfoCard(props) {
     const additionalStyles = props.additionalStyles? props.additionalStyles : '';
 
     return (<>
-        <div className={`${classes.card} ${additionalStyles}`} onClick={props.onClick}>
+        <div className={`${classes.card} ${additionalStyles}`} onClick={props.onClick} data-id={props.deviceName}>
             <div className={classes.titleContainer}>
                 <h4>{props.deviceName}</h4>
                 <div className={statusClass}>
