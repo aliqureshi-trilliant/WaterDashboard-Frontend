@@ -55,6 +55,7 @@ function Device(props) {
         streetViewControl: false,
         fullscreenControl: false,
         disableDefaultUI: true,
+        keyboardShortcuts: false,
     };
 
     const iconContainerStyle = props.deviceStatus? classes.online:classes.offline;

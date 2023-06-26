@@ -1,6 +1,10 @@
 import classes from './Maps.module.css';
 import { GoogleMap, MarkerF, useLoadScript, InfoWindow } from "@react-google-maps/api";
 import { useMemo, useState, useEffect } from "react";
+import MeterInfoCard from '../components/MeterInfoCard';
+import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css';
+import { BiError } from 'react-icons/bi';
 
 function Maps() {
     const [data, setData] = useState(null);
@@ -8,8 +12,32 @@ function Maps() {
     const [error, setError] = useState(null);
     const [selectedMarker, setSelectedMarker] = useState(null);
 
-    useEffect(() => {
-        fetch('http://localhost:3000/api/waterMIUs')
+    const { isLoaded } = useLoadScript({
+        googleMapsApiKey: import.meta.env.MAPS_API_KEY,
+      });
+    
+    const parseData = (data) => {
+        return { device_mrid: data.device_mrid, lat: parseFloat(data.gps_location?.split(',')[0]) || 35.83162343101685, lng: parseFloat(data.gps_location?.split(',')[1]) || -78.76705964937196 }
+    };
+
+    const parsedData = useMemo(() => (data?.map((el) => parseData(el))), [data]);
+
+    const onLoad = (map) => {
+        const bounds = new google.maps.LatLngBounds();
+        parsedData.forEach(({ lat, lng }) => bounds.extend({ lat, lng }));
+        map.fitBounds(bounds, 200);
+    };
+
+    const mapOptions = {
+        mapTypeControl: false,
+        streetViewControl: false,
+        fullscreenControl: false,
+        disableDefaultUI: true,
+        keyboardShortcuts: false,
+    };
+
+    const fetchData = (type = 'All') => {
+        fetch('http://localhost:3000/api/waterMIUs?gps=true')
             .then((response) => {
                 if(!response.ok) {
                     throw new Error(`Error ${response.status}: ${response.message}`);
@@ -18,6 +46,7 @@ function Maps() {
             })
             .then((data) => {
                 setData(data);
+                console.log(data);
                 setError(null);
             })
             .catch((error) => {
@@ -25,32 +54,27 @@ function Maps() {
                 setData(null);
             })
             .finally(() => setLoading(false));
-    },[]);
-
-    const { isLoaded } = useLoadScript({
-        googleMapsApiKey: import.meta.env.MAPS_API_KEY,
-      });
-    const center = useMemo(() => ({ lat: parseFloat(data?.[2].gps_location?.split(',')[0]) || 35.83162343101685, lng: parseFloat(data?.[2].gps_location?.split(',')[1]) || -78.76705964937196 }), [data]);
-    const mapOptions = {
-        mapTypeControl: false,
-        streetViewControl: false,
-        fullscreenControl: false,
-        disableDefaultUI: true,
     };
+
+    useEffect(() => {
+        fetchData();
+    },[]);
 
     return (
         <>
             <div className={classes.maps}>
                 <div className={classes.mapContainer}>
-                    {data && isLoaded && 
+                    {data && isLoaded &&
                                     (<>
                                         <GoogleMap
                                         mapContainerClassName={classes.mapContainer}
-                                        center={center}
-                                        zoom={10}
+                                        onLoad={onLoad}
                                         options={mapOptions}
                                         >
-                                        <MarkerF position={center} onClick={() => setSelectedMarker(center)}/>
+                                        {
+                                            parsedData.map(({ device_mrid, lat, lng },index) => (<MarkerF key={index} position={{ lat, lng }} onClick={() => setSelectedMarker({ device_mrid, lat, lng })}/>))
+                                        }
+                                        
                                         {selectedMarker && (
                                         <InfoWindow
                                             onCloseClick={() => {
@@ -62,7 +86,7 @@ function Maps() {
                                             }}
                                         >
                                             <>
-                                            <p>{selectedMarker.mrid}</p>
+                                            <p>{selectedMarker?.device_mrid}</p>
                                             <p>Latitude: {parseFloat(selectedMarker.lat.toFixed(3))}</p>
                                             <p>Longitude: {parseFloat(selectedMarker.lng.toFixed(3))}</p>
                                             </>
@@ -70,6 +94,31 @@ function Maps() {
                                         )}
                                         </GoogleMap>
                                     </>)}
+                </div>
+                <div className={classes.meterListContainer}>
+                    <h1>Meter List</h1>
+                    <div className={classes.meterList}>
+                        {
+                            <>
+                            { loading &&
+                            (<SkeletonTheme baseColor='#F6F6F6' highlightColor='#EFEFEF'>
+                                {[0,1,2,3,4,5].map((el) => {
+                                    return ( <Skeleton key={el} className={classes.cardSkeleton} containerClassName={classes.cardSkeletonContainer}/>);
+                                })}
+                            </SkeletonTheme>)
+                            }
+                            { error && (<>{[0,1,2,3,4,5].map((el) => {
+                                return ( <div key={el} className={classes.errorCard}><BiError></BiError>Error loading data !</div>);
+                            })}</>)}
+                            { data &&
+                                data.map(({device_mrid},index) => {
+                                    return ( <MeterInfoCard key={index} deviceName={device_mrid} deviceStatus={Math.round(Math.random())==1?"Online":"Offline"} serialNo="12392" rpmaID="150122" nodeID="1301" additionalStyles={classes.meterInfoCard}/>);
+                                })
+                            }
+                            </>
+                        }
+                        
+                    </div>
                 </div>
             </div>
         </>
