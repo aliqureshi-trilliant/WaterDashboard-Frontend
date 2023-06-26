@@ -1,6 +1,6 @@
 import classes from './Maps.module.css';
 import { GoogleMap, MarkerF, useLoadScript, InfoWindow } from "@react-google-maps/api";
-import { useMemo, useState, useEffect } from "react";
+import { useMemo, useState, useEffect, useRef } from "react";
 import MeterInfoCard from '../components/MeterInfoCard';
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
@@ -11,6 +11,7 @@ function Maps() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [selectedMarker, setSelectedMarker] = useState(null);
+    const mapRef = useRef(null);
 
     const { isLoaded } = useLoadScript({
         googleMapsApiKey: import.meta.env.MAPS_API_KEY,
@@ -25,8 +26,15 @@ function Maps() {
     const onLoad = (map) => {
         const bounds = new google.maps.LatLngBounds();
         parsedData.forEach(({ lat, lng }) => bounds.extend({ lat, lng }));
-        map.fitBounds(bounds, 200);
+        map.fitBounds(bounds, {top:250, bottom:250, right:250});
+        mapRef.current = map;
     };
+
+    const selectMarker = (device_mrid) => {
+        const marker = parsedData.find((data) => data.device_mrid === device_mrid);
+        setSelectedMarker(marker);
+        mapRef.current.panTo({lat:marker.lat, lng:marker.lng});
+    }
 
     const mapOptions = {
         mapTypeControl: false,
@@ -46,7 +54,6 @@ function Maps() {
             })
             .then((data) => {
                 setData(data);
-                console.log(data);
                 setError(null);
             })
             .catch((error) => {
@@ -72,7 +79,7 @@ function Maps() {
                                         options={mapOptions}
                                         >
                                         {
-                                            parsedData.map(({ device_mrid, lat, lng },index) => (<MarkerF key={index} position={{ lat, lng }} onClick={() => setSelectedMarker({ device_mrid, lat, lng })}/>))
+                                            parsedData.map((data,index) => (<MarkerF key={index} position={{ lat:data.lat, lng:data.lng }} onClick={() => setSelectedMarker(data)}/>))
                                         }
                                         
                                         {selectedMarker && (
@@ -112,7 +119,7 @@ function Maps() {
                             })}</>)}
                             { data &&
                                 data.map(({device_mrid},index) => {
-                                    return ( <MeterInfoCard key={index} deviceName={device_mrid} deviceStatus={Math.round(Math.random())==1?"Online":"Offline"} serialNo="12392" rpmaID="150122" nodeID="1301" additionalStyles={classes.meterInfoCard}/>);
+                                    return ( <MeterInfoCard key={index} deviceName={device_mrid} deviceStatus={Math.round(Math.random())==1?"Online":"Offline"} serialNo="12392" rpmaID="150122" nodeID="1301" additionalStyles={classes.meterInfoCard} onClick={() => selectMarker(device_mrid)}/>);
                                 })
                             }
                             </>
