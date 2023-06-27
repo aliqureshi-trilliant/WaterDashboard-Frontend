@@ -96,11 +96,11 @@ function Home() {
                 </div>
                 <div className={classes.bottomContainer}>
                     <Tray listType="KPI List" listDesc="View a list of KPIs for the Water MIU">
-                        <MetricCard title="Alarm" additionalStyles={classes.card}/>
-                        <MetricCard title="Water Level" additionalStyles={classes.card}/>
-                        <MetricCard title="Metric 3" additionalStyles={classes.card}/>
-                        <MetricCard title="Metric 4" additionalStyles={classes.card}/>
-                        <MetricCard title="Metric 5" additionalStyles={classes.card}/>
+                        <MetricCard title="High Flow" value="15" additionalStyles={classes.card}/>
+                        <MetricCard title="Back Flow" value="12" additionalStyles={classes.card}/>
+                        <MetricCard title="Failed Read" value="22" additionalStyles={classes.card}/>
+                        <MetricCard title="Temperature" value="3" additionalStyles={classes.card}/>
+                        <MetricCard title="Battery" value="9" additionalStyles={classes.card}/>
                         <ViewCard title="View KPIs"/>
                     </Tray>
                 </div>

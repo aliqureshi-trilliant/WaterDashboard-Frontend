@@ -91,7 +91,7 @@ function IndividualKPI(props) {
                 <div className={classes.leftContainer}>
                     <div className={classes.meterListContainer}>
                         <div className={classes.titleContainer}>
-                            <h1>Meter List</h1>
+                            <h1>{kpiName}</h1>
                             <HiOutlineStatusOnline className={classes.iconOnline}/>
                             <div className={classes.deviceCount}><p className={classes.statusTitle}>Online</p><p>276</p></div>
                             <HiOutlineStatusOffline className={classes.iconOffline}/>

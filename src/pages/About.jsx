@@ -1,5 +1,6 @@
 import classes from './About.module.css';
 import waterMIUImage from '/images/WaterMIU.png';
+import waterMIUMount from '/images/WaterMIUMount.png';
 import FeatureCard from '../components/FeatureCard';
 import { IoCaretForwardCircleSharp , IoCaretBackCircleSharp } from 'react-icons/io5';
 import { useRef, useEffect } from 'react';
@@ -31,6 +32,21 @@ function About() {
         const buttonBackward = document.querySelector(`.${classes.backwardIcon}`);
         buttonForward.addEventListener('click',() => nextSlide(slides));
         buttonBackward.addEventListener('click', () => prevSlide(slides));
+
+        const imageContainer = document.querySelector(`.${classes.imageContainer}`);
+
+        if (imageContainer) {
+ 
+            const rotateCard = () => {
+                imageContainer.style.transform = 'rotateY(0.5turn)';
+                setTimeout(() => {
+                    imageContainer.style.transform = 'rotateY(0)';
+                }, 10*1000);
+            };
+            
+            setInterval(rotateCard, 20 * 1000);
+        }
+
     },[]);
 
     return (
@@ -166,7 +182,9 @@ function About() {
                             <img className={classes.waterMIUImage} src={waterMIUImage} alt="Water MIU Image" />
                         </div>
                         <div className={classes.cardFaceBack}>
-                            Water MIU<br/>
+                            <img className={classes.waterMIUImage} src={waterMIUMount} alt="Water MIU Image" />
+                            Water MIU: P/N SC7240<br/>
+                            Optional Wall Mount Bracket: P/N SC7240-31<br/>
                             &copy;Trilliant Networks Inc.
                         </div>
                     </div>

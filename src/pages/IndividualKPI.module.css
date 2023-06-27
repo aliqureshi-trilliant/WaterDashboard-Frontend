@@ -16,7 +16,7 @@
 
 .meterListContainer{
     width: 100%;
-    height: 95%;
+    height: 85%;
     overflow: hidden;
 }
 
@@ -30,7 +30,7 @@
 
 .titleContainer>h1{
     margin-right: auto;
-    font-size: 1.8cqw;
+    font-size: 1.5cqw;
     white-space: nowrap;
     padding-right: 0.5rem;
 }
@@ -130,7 +130,7 @@
 
 .rightContainer{
     display: grid;
-    grid-template-rows: 50% 50%;
+    grid-template-rows: 40% 60%;
 }
 
 .topRightContainer {
@@ -166,7 +166,7 @@
 }
 
 .graph{
-    height: 87%;
+    height: 72%;
     width: 95%;
 }
 

@@ -1,32 +1,43 @@
 import classes from './MetricCard.module.css';
-import { FcAlarmClock, FcDam, FcEngineering, FcBusinessContact, FcCloseUpMode} from 'react-icons/fc';
+import { FcHighPriority, FcDam, FcChargeBattery, FcBusinessContact, FcGenericSortingAsc} from 'react-icons/fc';
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 function MetricCard (props) {
 
     const additionalStyles = props.additionalStyles? props.additionalStyles : '';
+    const navigate = useNavigate();
 
     const getIcon = (title) => {
         switch(title) {
-        case 'Alarm':
-            return <FcAlarmClock className={classes.icon} />;
-        case 'Water Level':
+        case 'High Flow':
             return <FcDam className={classes.icon} />;
-        case 'Metric 3':
-            return <FcCloseUpMode className={classes.icon} />;
-        case 'Metric 4':
-            return <FcEngineering className={classes.icon} />;
-        case 'Metric 5':
+        case 'Back Flow':
+            return <FcGenericSortingAsc className={classes.icon} />;
+        case 'Battery':
+            return <FcChargeBattery className={classes.icon} />;
+        case 'Temperature':
+            return <FcHighPriority className={classes.icon} />;
+        case 'Failed Read':
             return <FcBusinessContact className={classes.icon} />;
         }
     };
 
+    useEffect(() => {
+        const cardEl = document.querySelector(`.${classes.card}[data-id='${props.title}']`);
+        cardEl.addEventListener('click', () => navigate(`/metrics/${props.title}`));
+    }, []);
+
     return (
-        <div className={`${classes.card} ${additionalStyles}`}>
+        <div className={`${classes.card} ${additionalStyles}`} data-id={props.title}>
             <div className={classes.cardText}>
                 {props.title}
             </div>
+            <div className={classes.cardValue}>
+                {props.value}
+            </div>
             <div className={classes.iconContainer}>
-                {getIcon(props.title)}
+                {getIcon(props.title)} Active Alarms
             </div>
         </div>
     );
