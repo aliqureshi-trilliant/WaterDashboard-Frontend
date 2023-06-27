@@ -9,6 +9,10 @@
     margin-right: 1rem;
 }
 
+.hiddenCard {
+    visibility:hidden;
+}
+
 .cardSkeletonContainer{
     margin:0
 }

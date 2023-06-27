@@ -37,6 +37,7 @@ function Maps() {
         meterInfoCards.forEach((el) => el.classList.remove(classes.active));
         const meter = document.querySelector(`[data-id='${device_mrid}']`);
         meter.classList.add(classes.active);
+        meter.scrollIntoView({behavior:'smooth', block:'start',inline:'nearest'})
         const marker = parsedData.find((data) => data.device_mrid == device_mrid);
         setSelectedMarker(marker);
         mapRef.current.panTo({lat:marker.lat, lng:marker.lng});

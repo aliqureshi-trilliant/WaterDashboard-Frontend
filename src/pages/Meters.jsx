@@ -15,6 +15,7 @@ function Meters() {
     const [data, setData] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const cardsPerRow = 5;
 
     const toggleFilter = (filter) => {
 
@@ -135,8 +136,8 @@ function Meters() {
                     { <>
                         { loading &&
                         (<SkeletonTheme baseColor='#F6F6F6' highlightColor='#EFEFEF'>
-                            {[0,1,2,3,4].map((el) => {
-                                return ( <Skeleton key={el} className={classes.cardSkeleton} containerClassName={classes.cardSkeletonContainer}/>);
+                            {[...Array(5)].map((_, index) => {
+                                return ( <Skeleton key={index} className={classes.cardSkeleton} containerClassName={classes.cardSkeletonContainer}/>);
                             })}
                         </SkeletonTheme>)
                         }
@@ -146,7 +147,7 @@ function Meters() {
                             </div>}</>)}
                         { data &&
                         data.reduce((accumulator, {device_mrid} , index) => {
-                            const meterListIndex = Math.floor(index / 5);
+                            const meterListIndex = Math.floor(index / cardsPerRow);
                             if (!accumulator[meterListIndex]){
                                 accumulator[meterListIndex] = [];
                             }
@@ -155,6 +156,9 @@ function Meters() {
                         }, []).map((meterList,index) => (
                             <div key={index} className={classes.meterList}>
                                 {meterList}
+                                {[...Array(cardsPerRow - meterList.length)].map((_,hiddenIndex) => (
+                                    <div key={hiddenIndex} className={`${classes.card} ${classes.hiddenCard}`}/>
+                                ))}
                             </div>
                         ))
                         }
