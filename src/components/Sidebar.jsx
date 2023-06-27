@@ -32,7 +32,7 @@ function Sidebar() {
 
     useEffect(() => {
         switch (location.pathname) {
-        case '/home': selectMenuItem('Home'); break;
+        case '/': selectMenuItem('Home'); break;
         case '/meters' : selectMenuItem('Meters'); break;
         case '/metrics' : selectMenuItem('Metrics'); break;
         case '/maps' : selectMenuItem('Maps'); break;
@@ -51,7 +51,7 @@ function Sidebar() {
             </div>
             <ul className={classes.menuItems}>
                 <li className={classes.menuItem}>
-                    <Link to="/home" onClick={toggleMenuItem}>
+                    <Link to="/" onClick={toggleMenuItem}>
                         <AiFillHome className={classes.icons}/>
                         <span>Home</span>
                     </Link>
