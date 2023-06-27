@@ -68,6 +68,9 @@ function Home() {
                 </div>
                 <div className={classes.middleContainerOne}>
                     <Tray listType="View Maps" listDesc="View a map of all the active Water MIUs" trayMap={true}>
+                        {[...Array(5)].map((_,hiddenIndex) => (
+                            <div key={hiddenIndex} className={`${classes.cardSkeleton} ${classes.hiddenCard}`}/>
+                        ))}
                         <ViewCard title="View Map"/>
                     </Tray>
                 </div>
