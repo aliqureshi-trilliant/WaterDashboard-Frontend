@@ -38,11 +38,12 @@
 
 .deviceCountContainer{
     height: 100%;
-    width: 30%;
+    width: 40%;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    margin-right: 3%;
 }
 
 .statusContainer{
@@ -80,6 +81,32 @@
     color: #b62a20;
     margin-right: 0.25rem;
     cursor: pointer;
+}
+
+.iconContainer {
+    width: 4rem;
+    height: 4rem;
+    background-color: #C5EAC5;
+    color: var(--pigment-green);
+    mix-blend-mode: normal;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-self: center;
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+}
+
+.iconContainer:hover {
+    transform: scale(1.1);
+}
+
+.icon{
+    width: 70%;
+    height: auto;
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
 }
 
 .statusTitle{
@@ -228,7 +255,7 @@
 .countStatusContainer{
     display: flex;
     flex-direction: row;
-    justify-content: start;
+    justify-content: space-evenly;
     align-items: center;
     padding: 0 1rem;
 }

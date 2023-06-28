@@ -4,12 +4,14 @@ import AlarmChart from '../components/AlarmChart';
 import { BsGraphUp, BsGraphDown,  BsThermometerHigh} from 'react-icons/bs';
 import {  GiBattery25 } from 'react-icons/gi';
 import { MdPieChartOutline, MdOutlineOfflineBolt } from 'react-icons/md';
-import { useEffect } from 'react';
+import { HiOutlineRefresh } from 'react-icons/hi';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 function Metrics() {
 
     const navigate = useNavigate();
+    const [refresh,setRefresh] = useState(false);
 
     useEffect(() => {
         const statusBar = document.querySelector(`.${classes.statusBarContainer}`);
@@ -19,6 +21,8 @@ function Metrics() {
                 navigate(`/metrics/${statusBarItemEl.dataset.id}`);
             }
         });
+        const refreshEl = document.querySelector(`.${classes.iconContainer}[data-refresh='${true}']`);
+        refreshEl.addEventListener('click', () => setRefresh((r) => !r));
     },[]);
 
     return (
@@ -41,6 +45,9 @@ function Metrics() {
                     <div className={classes.statusContainer}>
                         <MdOutlineOfflineBolt className={classes.iconOffline}/>
                         <div className={classes.deviceCount}><p className={classes.statusTitle}> Offline</p><p>24</p></div>
+                    </div>
+                    <div title='Refresh' className={classes.iconContainer} data-refresh={true}>
+                                <HiOutlineRefresh className={classes.icon} />
                     </div>
                 </div>
             </div>

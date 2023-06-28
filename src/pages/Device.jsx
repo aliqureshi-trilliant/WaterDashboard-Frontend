@@ -108,10 +108,12 @@ function Device(props) {
             try {
                 const allData = await Promise.all(['reading','alarm','gps'].map(fetchData),);
                 setData(allData);
+                console.log(allData);
             } catch(err) {
                 setError(err);
             } finally {
                 setLoading(false);
+                
             }
         };
 
@@ -127,7 +129,19 @@ function Device(props) {
                             <h1 className={classes.title}>
                                 {deviceName}
                             </h1>
-                            <p>View data for {deviceName} water MIU here !</p>
+                            <div className={classes.idContainer}>
+                                {loading && <p>Loading Data...</p>}
+                                {error && <>
+                                    <p>RPMA ID: No Data</p>
+                                    <p>Meter ID: No Data</p>
+                                    <p>Node ID: No Data</p>
+                                </>}
+                                {data && <>
+                                    <p>RPMA ID: {data[2].serial_number}</p>
+                                    <p>Meter ID: {data[2].serial_number}</p>
+                                    <p>Node ID: {data[2].node_id}</p>
+                                </>}
+                            </div>
                         </div>
                         <div className={classes.buttonContainer}>
                             <div title={`Device is ${props.deviceStatus || 'offline'}`}className={`${classes.iconContainer} ${iconContainerStyle}`}>

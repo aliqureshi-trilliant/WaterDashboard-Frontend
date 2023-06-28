@@ -183,7 +183,7 @@ function About() {
                             <img className={classes.waterMIUImage} src={waterMIUImage} alt="Water MIU Image" />
                         </div>
                         <div className={classes.cardFaceBack}>
-                            <img className={classes.waterMIUImage} src={waterMIUMount} alt="Water MIU Image" />
+                            <img className={classes.waterMIUMountImage} src={waterMIUMount} alt="Water MIU Image" />
                             Water MIU: P/N SC7240<br/>
                             Optional Wall Mount Bracket: P/N SC7240-31<br/>
                             &copy;Trilliant Networks Inc.

@@ -69,9 +69,9 @@ function Home() {
                             <p>View metrics for the water dashboard here !</p>
                         </div>
                         <div className={classes.tileContainer}>
+                            <Tile title="Total" value="300"/>
                             <Tile title="Active" value="276"/>
                             <Tile title="Inactive" value="24"/>
-                            <Tile title="Total" value="300"/>
                             <div title='Refresh' className={classes.iconContainer} data-refresh={true}>
                                 <HiOutlineRefresh className={classes.icon} />
                             </div>

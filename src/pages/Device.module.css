@@ -44,6 +44,22 @@
     justify-content: flex-end;
 }
 
+.idContainer{
+    width: 90%;
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.idContainer>p{
+    color: #6C7172;
+    font-size: 1.25rem;
+    font-weight: 500;
+    white-space: nowrap;
+    padding-right: 1rem;
+}
+
 .buttonContainer {
     width: 100%;
     display: flex;

@@ -7,6 +7,8 @@
 
 .leftContainer {
     grid-column: 1;
+    height: 100%;
+    width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -16,7 +18,7 @@
 
 .meterListContainer{
     width: 100%;
-    height: 85%;
+    max-height: 100vh;
     overflow: hidden;
 }
 
@@ -69,7 +71,7 @@
 
 .meterList{
     width: 100%;
-    height: 73%;
+    height: 90%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -130,7 +132,7 @@
 
 .rightContainer{
     display: grid;
-    grid-template-rows: 40% 60%;
+    grid-template-rows: 50% 50%;
 }
 
 .topRightContainer {
@@ -166,7 +168,7 @@
 }
 
 .graph{
-    height: 46%;
+    height: 98%;
     width: 95%;
 }
 
