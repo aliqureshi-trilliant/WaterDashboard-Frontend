@@ -41,10 +41,11 @@ function About() {
                 imageContainer.style.transform = 'rotateY(0.5turn)';
                 setTimeout(() => {
                     imageContainer.style.transform = 'rotateY(0)';
-                }, 10*1000);
+                }, 7*1000)
             };
             
-            setInterval(rotateCard, 20 * 1000);
+            setTimeout(rotateCard, 3 * 1000);
+            setInterval(rotateCard, 17 * 1000);
         }
 
     },[]);

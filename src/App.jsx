@@ -7,6 +7,7 @@ import Meters from './pages/Meters';
 import Maps from './pages/Maps';
 import { useState, useEffect } from 'react';
 import IndividualKPI from './pages/IndividualKPI';
+import Metrics from './pages/Metrics';
 
 
 function App(){
@@ -39,6 +40,7 @@ function App(){
                     <Route exact path="/meters/" element={<Meters />} />
                     <Route exact path="/meters/:deviceName" element={<Device />} />
                     <Route exact path="/maps/" element={<Maps />} />
+                    <Route exact path="/metrics/" element={<Metrics />} />
                     <Route exact path="/metrics/:kpiName" element={<IndividualKPI />} />
                     <Route exact path="/about" element={<About />} />
                 </Routes>

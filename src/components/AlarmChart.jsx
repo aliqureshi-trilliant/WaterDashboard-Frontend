@@ -76,9 +76,12 @@ const options = {
     },
 };
 
-function AlarmChart(){
+function AlarmChart(props){
+
+    const additionalStyles = props.additionalStyles? props.additionalStyles : '';
+
     return (
-        <div className={classes.card}>
+        <div className={`${classes.card} ${additionalStyles}`}>
             <div className={classes.headingContainer}>
                 <div className={classes.titleContainer}>
                     <h1>Active Alarms</h1>

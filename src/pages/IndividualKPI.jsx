@@ -13,7 +13,6 @@ import { HiOutlineStatusOnline, HiOutlineStatusOffline } from 'react-icons/hi';
 function IndividualKPI(props) {
 
     const {kpiName} = useParams();
-    console.log(kpiName);
     const [data, setData] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
