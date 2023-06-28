@@ -57,6 +57,12 @@ function Sidebar() {
                     </Link>
                 </li>
                 <li className={classes.menuItem}>
+                    <Link to="/maps" onClick={toggleMenuItem}>
+                        <IoMapSharp className={classes.icons}/>
+                        <span>Maps</span>
+                    </Link>
+                </li>
+                <li className={classes.menuItem}>
                     <Link to="/meters" onClick={toggleMenuItem}>
                         <MdElectricMeter className={classes.icons}/>
                         <span>Meters</span>
@@ -66,12 +72,6 @@ function Sidebar() {
                     <Link to="/metrics" onClick={toggleMenuItem}>
                         <SiGoogleanalytics className={classes.icons}/>
                         <span>Metrics</span>
-                    </Link>
-                </li>
-                <li className={classes.menuItem}>
-                    <Link to="/maps" onClick={toggleMenuItem}>
-                        <IoMapSharp className={classes.icons}/>
-                        <span>Maps</span>
                     </Link>
                 </li>
                 <li className={classes.menuItem}>

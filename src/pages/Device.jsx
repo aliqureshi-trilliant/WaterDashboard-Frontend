@@ -137,7 +137,7 @@ function Device(props) {
                                         <HiOutlineStatusOffline className={classes.icon}/>
                                 }
                             </div>
-                            <div title={'Refresh'} className={classes.iconContainer} data-refresh={true}>
+                            <div title='Refresh' className={classes.iconContainer} data-refresh={true}>
                                 <HiOutlineRefresh className={classes.icon} />
                             </div>
                             <div className={classes.tabContainer}>

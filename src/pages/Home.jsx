@@ -10,15 +10,17 @@ import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
 import { BiError } from 'react-icons/bi';
 import { useNavigate } from 'react-router-dom';
+import { HiOutlineRefresh } from 'react-icons/hi';
 
 function Home() {
 
     const [data, setData] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [refresh,setRefresh] = useState(false);
     const navigate = useNavigate();
 
-    useEffect(() => {
+    const fetchData = () => {
         fetch('http://localhost:3000/api/waterMIUs?count=5')
             .then((response) => {
                 if(!response.ok) {
@@ -35,6 +37,10 @@ function Home() {
                 setData(null);
             })
             .finally(() => setLoading(false));
+    }
+
+    useEffect(() => {
+        fetchData();    
         const meterTrayEl = document.querySelector(`.${classes.middleContainerTwo}`).children[0];
         const metricTrayEl = document.querySelector(`.${classes.bottomContainer}`).children[0];
         meterTrayEl.addEventListener('click', (e) => {
@@ -45,7 +51,13 @@ function Home() {
             if (e.target.closest(`.${classes.card}`)) return;
             navigate('/metrics');
         });
+        const refreshEl = document.querySelector(`.${classes.iconContainer}[data-refresh='${true}']`);
+        refreshEl.addEventListener('click', () => setRefresh((r) => !r));
     },[]);
+
+    useEffect(() => {
+        fetchData();
+    },[refresh]);
 
     return (
         <>
@@ -60,6 +72,9 @@ function Home() {
                             <Tile title="Active" value="276"/>
                             <Tile title="Inactive" value="24"/>
                             <Tile title="Total" value="300"/>
+                            <div title='Refresh' className={classes.iconContainer} data-refresh={true}>
+                                <HiOutlineRefresh className={classes.icon} />
+                            </div>
                         </div>
                     </div>
                     <div className={classes.summaryContainer}>
