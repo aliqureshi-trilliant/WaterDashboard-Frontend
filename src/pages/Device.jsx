@@ -3,6 +3,7 @@ import AlarmTile from '../components/AlarmTile';
 import ValueCard from '../components/ValueCard';
 import AlarmChart from '../components/AlarmChart';
 import Graph from '../components/Graph';
+import BarGraph from '../components/BarGraph';
 import { HiOutlineStatusOnline, HiOutlineStatusOffline, HiOutlineRefresh } from 'react-icons/hi';
 import { BiError } from 'react-icons/bi';
 import { useEffect, useState } from 'react';
@@ -181,7 +182,7 @@ function Device(props) {
                         {alarm?<Graph key={Math.random()} title="Alarm data over time" graphId={1} />:<Graph title="Water level data over time" graphId={1} />}
                     </div>
                     <div className={classes.secondChart}>
-                        {alarm?<Graph key={Math.random()} title="Alarms triggered per month" graphId={2}/>:<Graph title="Water level flow per month" graphId={2}/>}
+                        {alarm?<BarGraph key={Math.random()} title="Alarms triggered per month" graphId={2}/>:<BarGraph title="Water level flow per month" graphId={2}/>}
                     </div>
                 </div>
                 <div className={classes.sideContainer}>
