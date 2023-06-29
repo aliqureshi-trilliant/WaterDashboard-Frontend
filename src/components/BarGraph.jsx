@@ -76,13 +76,13 @@ function Graph(props){
         labels,
         datasets: [
             {
-                label: 'Failed Reads',
+                label: 'Water Level (Gallons)',
                 data: labels.map(() => Math.round(Math.random() * labels.length) + 1),
                 borderColor: '#52DBB2',
                 backgroundColor: '#52DBB2',
             },
             {
-                label: 'High Flow',
+                label: 'Water Level (Gallons)',
                 data: labels.map(() => Math.round(Math.random() * labels.length) + 1),
                 borderColor: '#71c36f',
                 backgroundColor: '#71c36f',

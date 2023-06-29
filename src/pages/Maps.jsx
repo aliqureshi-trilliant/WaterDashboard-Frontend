@@ -16,7 +16,7 @@ function Maps() {
     const mapRef = useRef(null);
 
     const { isLoaded } = useLoadScript({
-        googleMapsApiKey: import.meta.env.MAPS_API_KEY,
+        googleMapsApiKey: import.meta.env.VITE_MAPS_API_KEY,
     });
 
     const parseData = (data) => {
@@ -56,6 +56,7 @@ function Maps() {
         fullscreenControl: false,
         disableDefaultUI: true,
         keyboardShortcuts: false,
+        maxZoom: 17,
     };
 
     const fetchData = (type = 'All') => {

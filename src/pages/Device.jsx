@@ -48,7 +48,7 @@ function Device(props) {
     const [error, setError] = useState(null);
     const [selectedMarker, setSelectedMarker] = useState(null);
     const { isLoaded } = useLoadScript({
-        googleMapsApiKey: import.meta.env.MAPS_API_KEY,
+        googleMapsApiKey: import.meta.env.VITE_MAPS_API_KEY,
     });
     const center = useMemo(() => ({ lat: parseFloat(data?.[2].gps_location?.split(',')[0]) || 35.83162343101685, lng: parseFloat(data?.[2].gps_location?.split(',')[1]) || -78.76705964937196 }), [data]);
     const mapOptions = {

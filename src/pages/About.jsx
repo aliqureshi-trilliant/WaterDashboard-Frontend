@@ -64,10 +64,14 @@ function About() {
                             </div>
                             <div className={classes.descriptionText}>
                                 <div className={classes.descriptionHeading}>About Me</div>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo.<br />
+                                The SC7240/WaterMIU is targeted for use in AMR applications. It is well suited to installations requiring exceptional range and long battery life.
+                                The embedded battery and radio provide users with a stand-alone device that simplifies installation and helps minimize infrastructure costs in large scale deployments. Under typical AMR conditions, the device can be expected to operate maintenance free and achieve a battery life of (15-20) years.
                                 <br />
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo.
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo.
+                                <br />
+                                Canary products incorporate a wireless modem, compatible with RPMA Private and Public Networks. RPMA is a groundbreaking wireless technology built from the ground up, specifically targeting sensors and other low data rate devices. RPMA is an IoT solution that provides an optimal mix of coverage, capacity, low-power consumption, and cost. It fills a significant gap between currently available short-range mesh radios and cellular modems.
+                                <br />
+                                <br />
+                                The wireless link is a half-duplex system that operates in a star configuration. It is deployed using industry standard and time-tested modeling tools, similar to those used in the mobile telephony industry. The system delivers the lowest cost of ownership in the industry and is simple to deploy, operate, and maintain.
                             </div>
                         </div>
                     </div>
