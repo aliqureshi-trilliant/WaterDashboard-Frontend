@@ -41,7 +41,6 @@
     height: 45%;
     background: url(/images/green_waves.jpg);
     border-radius: 1rem;
-    background-size: cover;
     background-position: center;
     animation: waves 60s linear infinite;
 }
