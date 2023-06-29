@@ -28,7 +28,7 @@ function Maps() {
     const onLoad = (map) => {
         const bounds = new google.maps.LatLngBounds();
         parsedData.forEach(({ lat, lng }) => bounds.extend({ lat, lng }));
-        map.fitBounds(bounds, {top:450, bottom:450, right:300});
+        map.fitBounds(bounds, {top:250, bottom:250, right:450});
         mapRef.current = map;
     };
 
@@ -56,6 +56,7 @@ function Maps() {
         fullscreenControl: false,
         disableDefaultUI: true,
         keyboardShortcuts: false,
+        maxZoom: 17,
     };
 
     const fetchData = (type = 'All') => {

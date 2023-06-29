@@ -133,9 +133,9 @@ function Device(props) {
                             <div className={classes.idContainer}>
                                 {loading && <p>Loading Data...</p>}
                                 {error && <>
-                                    <p>RPMA ID: No Data</p>
-                                    <p>Meter ID: No Data</p>
-                                    <p>Node ID: No Data</p>
+                                    <p>RPMA ID:</p>
+                                    <p>Meter ID:</p>
+                                    <p>Node ID:</p>
                                 </>}
                                 {data && <>
                                     <p>RPMA ID: {data[2].serial_number}</p>
@@ -152,9 +152,9 @@ function Device(props) {
                                         <HiOutlineStatusOffline className={classes.icon}/>
                                 }
                             </div>
-                            <div title='Refresh' className={classes.iconContainer} data-refresh={true}>
+                            <button title='Refresh' className={classes.iconContainer} data-refresh={true}>
                                 <HiOutlineRefresh className={classes.icon} />
-                            </div>
+                            </button>
                             <div className={classes.tabContainer}>
                                 <div className={classes.toggle}>
                                     <div className={`${classes.waterToggle} ${classes.active} `}>

@@ -72,9 +72,9 @@ function Home() {
                             <Tile title="Total" value="300"/>
                             <Tile title="Active" value="276"/>
                             <Tile title="Inactive" value="24"/>
-                            <div title='Refresh' className={classes.iconContainer} data-refresh={true}>
+                            <button title='Refresh' className={classes.iconContainer} data-refresh={true}>
                                 <HiOutlineRefresh className={classes.icon} />
-                            </div>
+                            </button>
                         </div>
                     </div>
                     <div className={classes.summaryContainer}>
@@ -103,7 +103,7 @@ function Home() {
                         })}</>)}
                         { data &&
                             data.map(({device_mrid}) => {
-                                return ( <DeviceCard key={device_mrid} deviceName={device_mrid} deviceStatus="Online" additionalStyles={classes.card}/>);
+                                return ( <DeviceCard key={device_mrid} deviceName={device_mrid} deviceStatus={Math.round(Math.random())==1?'Online':'Offline'} additionalStyles={classes.card}/>);
                             })
                         }
                         <ViewCard title="View All"/>
