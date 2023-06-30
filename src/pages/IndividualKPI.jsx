@@ -102,12 +102,12 @@ function IndividualKPI(props) {
                                 <>
                                     { loading &&
                                 (<SkeletonTheme baseColor='#F6F6F6' highlightColor='#EFEFEF'>
-                                    {[0,1,2,3,4,5].map((el) => {
+                                    {[...Array(7)].map((el) => {
                                         return ( <Skeleton key={el} className={classes.cardSkeleton} containerClassName={classes.cardSkeletonContainer}/>);
                                     })}
                                 </SkeletonTheme>)
                                     }
-                                    { error && (<>{[0,1,2,3,4,5].map((el) => {
+                                    { error && (<>{[...Array(7)].map((el) => {
                                         return ( <div key={el} className={classes.errorCard}><BiError></BiError>Error loading data !</div>);
                                     })}</>)}
                                     { data &&
@@ -153,11 +153,25 @@ function IndividualKPI(props) {
                                     )}
                                 </GoogleMap>
                             </>)}
+                            {loading &&
+                                <Skeleton className={classes.errorMap} containerClassName={classes.cardSkeletonContainer}/>
+                            }
+                            { error &&
+                                <div className={classes.errorMap}><BiError></BiError>Error loading data !</div>
+                            }
                         </div>
                     </div>
                     <div className={classes.bottomRightContainer}>
                         <div className={classes.graph}>
-                            <Graph title={`${kpiName} data over time`} graphId={1} />
+                            {loading &&
+                                <Skeleton className={classes.errorMap} containerClassName={classes.cardSkeletonContainer}/>
+                            }
+                            { data &&
+                                <Graph title={`${kpiName} data over time`} graphId={1} />
+                            }
+                            { error &&
+                                <div className={classes.errorMap}><BiError></BiError>Error loading data !</div>
+                            }
                         </div>
                     </div>
                 </div>
