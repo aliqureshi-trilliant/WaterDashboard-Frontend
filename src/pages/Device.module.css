@@ -44,6 +44,22 @@
     justify-content: flex-end;
 }
 
+.idContainer{
+    width: 90%;
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.idContainer>p{
+    color: #6C7172;
+    font-size: 1.25rem;
+    font-weight: 500;
+    white-space: nowrap;
+    padding-right: 1rem;
+}
+
 .buttonContainer {
     width: 100%;
     display: flex;
@@ -146,12 +162,55 @@
 
 .statusBar {
     grid-row: 2/2;
-    width: 95%;
+    width: 100%;
     height: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.statusBarContainer {
+    grid-row: 2/2;
+    width: 95%;
+    height: 70%;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    background-color: #D6EDD4;
+    border-radius: 1.5rem;
+    padding-right: 1rem;
+}
+
+.statusBarTitle{
+    font-size: 1.5rem;
+    height: 100%;
+    color: var(--black);
+    background-color:#78B277;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding-left: 1rem;
+    border-radius: 1.5rem 0 0 1.5rem;
+}
+
+.statusBarIcon {
+    color: var(--black);
+    font-size: 1.5rem;
+    display: flex;
+    width: 40%;
+    height: 40%;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    padding: 0 1rem;
+}
+
+.statusBarIcon:hover {
+    animation: ring 4s ease-in-out;
+    transform-origin: 50% 0.05px;
 }
 
 .firstChart{
@@ -225,9 +284,6 @@
     border-radius: 32px;
 }
 
-.cardSkeletonContainer{
-    margin:0
-}
 
 .valueCardSkeleton {
     width: 18.4rem;
@@ -235,3 +291,69 @@
     mix-blend-mode: normal;
     border-radius: 15px;
 }
+
+.valueCardError {
+    width: 18.4rem;
+    height: 6.875rem;
+    background: #96DE95;
+    mix-blend-mode: normal;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.mapContainer {
+    width: 18.4rem;
+    height: 45%;
+    cursor: pointer;
+    background: #96DE95;
+    mix-blend-mode: normal;
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.2s ease-in-out;
+}
+
+.mapSkeleton {
+    width: 18.4rem;
+    height: 14.25rem;
+    cursor: pointer;
+    background: #96DE95;
+    mix-blend-mode: normal;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.2s ease-in-out;
+}
+
+.mapContainer:hover {
+    transform: scale(1.075);
+}
+
+@keyframes ring {
+    0% { transform: rotate(0); }
+    1% { transform: rotate(20deg); }
+    3% { transform: rotate(-18deg); }
+    5% { transform: rotate(24deg); }
+    7% { transform: rotate(-22deg); }
+    9% { transform: rotate(20deg); }
+    11% { transform: rotate(-18deg); }
+    13% { transform: rotate(16deg); }
+    15% { transform: rotate(-14deg); }
+    17% { transform: rotate(12deg); }
+    19% { transform: rotate(-10deg); }
+    21% { transform: rotate(8deg); }
+    23% { transform: rotate(-6deg); }
+    25% { transform: rotate(4deg); }
+    27% { transform: rotate(-2deg); }
+    29% { transform: rotate(1deg); }
+    31% { transform: rotate(-1deg); }
+    33% { transform: rotate(0deg); }
+    35% { transform: rotate(0deg); }
+    100% { transform: rotate(0); }
+  }

@@ -1,0 +1,61 @@
+.card {
+    height: 6.5rem;
+    width: 90%;
+    border-radius: 1rem;
+    background: #FFF;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+.card:hover {
+    background: linear-gradient(151.56deg, #F9FAF9 -50.5%, #F9FAF9 13.33%, #C5EAC5 104.22%);
+}
+
+.titleContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    padding: 0.5rem;
+}
+
+
+.deviceStatus {
+    border-radius: 12px;
+    padding: 0 0.5rem;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 1rem;
+    margin-left: auto;
+}
+
+.online{
+    background-color: var(--nyanza);
+    color: var(--pigment-green);
+}
+
+.offline{
+    background-color: #FF564B;
+    color:#b62a20;
+}
+
+.contentContainer{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+}
+
+.content{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.25rem 0.75rem;
+}
+
+.content>p{
+    color: #ABAEAF;
+    font-size: 0.875rem;
+}

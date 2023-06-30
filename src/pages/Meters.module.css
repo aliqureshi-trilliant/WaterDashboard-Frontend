@@ -1,0 +1,249 @@
+.meters {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: 25% 75%;
+}
+
+.leftContainer {
+    grid-column: 1;
+    width: 100%;
+    height: 100%;
+    margin-top: 5%;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    position: relative;
+}
+
+.coverImage{
+    width: 95%;
+    height: 20%;
+    background: url(/images/green_waves.jpg);
+    border-radius: 1rem;
+    background-position: center;
+    animation: waves 90s linear infinite;
+}
+
+
+@keyframes waves {
+    from {background-position: top left;}
+    to {background-position: bottom right;}
+}
+
+.meterCard {
+    margin-top: -25%;
+    width: 95%;
+    height: 26rem;
+    border-radius: 2rem;
+    background: linear-gradient(152deg, #F9FAF9 0.38%, #F9FAF9 41.48%, #C5EAC5 100%);
+    box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.15);
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+}
+
+.waterMIUImage{
+    width: 35%;
+    height: auto;
+    filter: drop-shadow(0px 7px 5px rgba(0, 0, 0, 0.2));
+}
+
+.meterCard>h1 {
+    text-align: center;
+    font-size: 2.75rem;
+    font-weight: 500;
+    line-height: 140%;
+}
+
+.meterCard>p {
+    text-align: center;
+    font-size: 1.1rem;
+    font-weight: 400;
+    line-height: 170%;
+}
+
+.searchContainer{
+    width: 90%;
+    height: 4rem;
+    margin: 1rem 0;
+    background: rgba(237, 246, 237, 0.95);
+    mix-blend-mode: normal;
+    box-shadow: 0px 8px 35px rgba(0, 0, 0, 0.2);
+    border-radius: 1.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+}
+
+.searchBar{
+    width: 90%;
+    height: 70%;
+    background: #FEFEFE;
+    border-radius: 1.5rem;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    color: #D5D6D7;
+}
+
+.searchIcon {
+    height: 70%;
+    width: auto;
+    color: #D5D6D7;
+    margin: 0 1rem;
+}
+
+.searchBar>input {
+    height: 70%;
+    width: 65%;
+    border: none;
+    font-family: 'Reem Kufi';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 1.25rem;
+    line-height: 1.5rem;
+    color: #A5a6a7;
+}
+
+.searchBar>input::placeholder {
+    color: #D5D6D7;
+}
+
+.filterContainer {
+    margin-top: 1.5rem;
+    width: 100%;
+    height: 40%;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: start;
+}
+
+.filterContainer>p {
+    color: #ABAEAF;
+    font-size: 1.25rem;
+    font-weight: 500;
+    line-height: 176.7%;
+}
+
+.filter{
+    width: 100%;
+    padding: 1rem;
+    border-radius: 1rem;
+    background: #D6EDD4;
+    margin: 0.5rem 0;
+    display: flex;
+    align-items: center;
+    transition: all 0.2s ease-in-out;
+    cursor: pointer;
+}
+
+.icon{
+    width: 10%;
+    height: auto;
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+}
+
+.filter>p{
+    padding-left: 1rem;
+    font-size: 1.25rem;
+    font-weight: 400;
+    line-height: 176.7%;
+}
+
+.filter:hover {
+    transform: scale(1.075);
+}
+
+.filterActive {
+    background: #A2E1A1;
+}
+
+.rightContainer {
+    grid-column: 2;
+    width: 98%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+    overflow-y: scroll;
+}
+
+.meterList {
+    width: 95%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: start;
+    padding: 1rem 0;
+}
+
+.rightContainer::-webkit-scrollbar {
+    width: 12px;
+    background-color: var(--nyanza);
+}
+
+.rightContainer::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.1); 
+    border-radius: 10px;
+}
+
+.rightContainer::-webkit-scrollbar-thumb {
+    background-color: #96DE95;
+    border-radius: 50px;
+    box-shadow:0px 0px 4px 4px rgba(0, 0, 0, 0.1) inset;
+}
+
+.card{
+    margin-right: 1rem;
+    height: 13rem;
+    width: 12rem;
+}
+
+.hiddenCard {
+    visibility: hidden;
+}
+
+.cardSkeletonContainer{
+    margin:0;
+}
+
+.cardSkeleton {
+    height: 13rem;
+    width: 12rem !important;
+    margin: 0;
+    padding: 0;
+    margin-right: 1rem;
+    box-shadow: 0px 4px 35px -15px rgba(0, 0, 0, 0.25);
+    border-radius: 15px !important;
+}
+
+.errorCard {
+    height: 30vh;
+    width: 30% !important;
+    background: #F6F6F6;
+    mix-blend-mode: normal;
+    margin: 0;
+    padding: 0;
+    margin-right: 1rem;
+    box-shadow: 0px 4px 35px -15px rgba(0, 0, 0, 0.25);
+    border-radius: 15px !important;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.errorContainer {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}

@@ -9,11 +9,11 @@ function DeviceCard (props) {
 
     const statusClass = classes.deviceStatus + ' ' +(props.deviceStatus === 'Online'? classes.online : classes.offline);
     const additionalStyles = props.additionalStyles? props.additionalStyles : '';
-    
+
     useEffect(() => {
         const cardEl = document.querySelector(`.${classes.card}[data-id='${props.deviceName}']`);
         cardEl.addEventListener('click', () => navigate(`/meters/${props.deviceName}`));
-    });
+    }, []);
 
     return (
         <div className={`${classes.card} ${additionalStyles}`} data-id={props.deviceName}>

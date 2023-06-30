@@ -40,6 +40,10 @@ body {
   height: 100%;
 }
 
+button {
+  border: none;
+}
+
 .sidebar {
     position: fixed;
     top: 0;

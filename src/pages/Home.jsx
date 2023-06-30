@@ -6,37 +6,62 @@ import Summary from '../components/Summary';
 import Tile from '../components/Tile';
 import MetricCard from '../components/MetricCard';
 import { useState, useEffect } from 'react';
-import Skeleton, { SkeletonTheme } from 'react-loading-skeleton'
-import 'react-loading-skeleton/dist/skeleton.css'
+import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css';
+import { BiError } from 'react-icons/bi';
+import { useNavigate } from 'react-router-dom';
+import { HiOutlineRefresh } from 'react-icons/hi';
 
 function Home() {
-    
+
     const [data, setData] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [refresh,setRefresh] = useState(false);
+    const navigate = useNavigate();
+
+    const fetchData = () => {
+        fetch('http://localhost:3000/api/waterMIUs?count=5')
+            .then((response) => {
+                if(!response.ok) {
+                    throw new Error(`Error ${response.status}: ${response.message}`);
+                }
+                return response.json();
+            })
+            .then((data) => {
+                setData(data);
+                setError(null);
+            })
+            .catch((error) => {
+                setError(error);
+                setData(null);
+            })
+            .finally(() => setLoading(false));
+    }
 
     useEffect(() => {
-       fetch(`http://localhost:3000/api/waterMIUs/`)
-       .then((response) => {
-            if(!response.ok) {
-                throw new Error(`Error ${response.status}: ${response.message}`);
-            }
-            return response.json();
-       })
-       .then((data) => {
-            setData(data);
-            setError(null);
-       })
-       .catch((error) => {
-            setError(error);
-            setData(null);
-       })
-       .finally(() => setLoading(false));
+        fetchData();    
+        const meterTrayEl = document.querySelector(`.${classes.middleContainerTwo}`).children[0];
+        const metricTrayEl = document.querySelector(`.${classes.bottomContainer}`).children[0];
+        meterTrayEl.addEventListener('click', (e) => {
+            if (e.target.closest(`.${classes.card}`)) return;
+            navigate('/meters');
+        });
+        metricTrayEl.addEventListener('click', (e) => {
+            if (e.target.closest(`.${classes.card}`)) return;
+            navigate('/metrics');
+        });
+        const refreshEl = document.querySelector(`.${classes.iconContainer}[data-refresh='${true}']`);
+        refreshEl.addEventListener('click', () => setRefresh((r) => !r));
     },[]);
+
+    useEffect(() => {
+        fetchData();
+    },[refresh]);
 
     return (
         <>
-            <div className={classes.home} key={Math.round(Math.random()*10000)}>
+            <div className={classes.home}>
                 <div className= {classes.topContainer}>
                     <div className={classes.titleTileContainer}>
                         <div className= {classes.pageTitle}>
@@ -44,9 +69,12 @@ function Home() {
                             <p>View metrics for the water dashboard here !</p>
                         </div>
                         <div className={classes.tileContainer}>
+                            <Tile title="Total" value="300"/>
                             <Tile title="Active" value="276"/>
                             <Tile title="Inactive" value="24"/>
-                            <Tile title="Total" value="300"/>
+                            <button title='Refresh' className={classes.iconContainer} data-refresh={true}>
+                                <HiOutlineRefresh className={classes.icon} />
+                            </button>
                         </div>
                     </div>
                     <div className={classes.summaryContainer}>
@@ -55,35 +83,40 @@ function Home() {
                 </div>
                 <div className={classes.middleContainerOne}>
                     <Tray listType="View Maps" listDesc="View a map of all the active Water MIUs" trayMap={true}>
-                        <ViewCard />
+                        {[...Array(5)].map((_,hiddenIndex) => (
+                            <div key={hiddenIndex} className={`${classes.cardSkeleton} ${classes.hiddenCard}`}/>
+                        ))}
+                        <ViewCard title="View Map"/>
                     </Tray>
                 </div>
                 <div className={classes.middleContainerTwo}>
                     <Tray listType="Meter List" listDesc="View a list of meters for the Water MIU">
-                        { loading && 
+                        { loading &&
                             (<SkeletonTheme baseColor='#F6F6F6' highlightColor='#EFEFEF'>
                                 {[0,1,2,3,4].map((el) => {
-                                    return ( <Skeleton key={el} className={classes.cardSkeleton} containerClassName={classes.cardSkeletonContainer} w/>)
+                                    return ( <Skeleton key={el} className={classes.cardSkeleton} containerClassName={classes.cardSkeletonContainer}/>);
                                 })}
                             </SkeletonTheme>)
                         }
-                        { error && (<div>Error Fetching Data</div>)}
-                        { data && 
+                        { error && (<>{[0,1,2,3,4].map((el) => {
+                            return ( <div key={el} className={classes.errorCard}><BiError></BiError>Error loading data !</div>);
+                        })}</>)}
+                        { data &&
                             data.map(({device_mrid}) => {
-                                return ( <DeviceCard key={device_mrid} deviceName={device_mrid} deviceStatus="Online" additionalStyles={classes.card}/>)
+                                return ( <DeviceCard key={device_mrid} deviceName={device_mrid} deviceStatus={Math.round(Math.random())==1?'Online':'Offline'} additionalStyles={classes.card}/>);
                             })
                         }
-                        <ViewCard />
+                        <ViewCard title="View All"/>
                     </Tray>
                 </div>
                 <div className={classes.bottomContainer}>
                     <Tray listType="KPI List" listDesc="View a list of KPIs for the Water MIU">
-                        <MetricCard title="Alarm" additionalStyles={classes.card}/>
-                        <MetricCard title="Water Level" additionalStyles={classes.card}/>
-                        <MetricCard title="Metric 3" additionalStyles={classes.card}/>
-                        <MetricCard title="Metric 4" additionalStyles={classes.card}/>
-                        <MetricCard title="Metric 5" additionalStyles={classes.card}/>
-                        <ViewCard />
+                        <MetricCard title="High Flow" value="15" additionalStyles={classes.card}/>
+                        <MetricCard title="Back Flow" value="12" additionalStyles={classes.card}/>
+                        <MetricCard title="Failed Read" value="22" additionalStyles={classes.card}/>
+                        <MetricCard title="Temperature" value="3" additionalStyles={classes.card}/>
+                        <MetricCard title="Battery" value="9" additionalStyles={classes.card}/>
+                        <ViewCard title="View KPIs"/>
                     </Tray>
                 </div>
             </div>

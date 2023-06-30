@@ -32,12 +32,15 @@ function Sidebar() {
 
     useEffect(() => {
         switch (location.pathname) {
-        case '/home': selectMenuItem('Home'); break;
+        case '/': selectMenuItem('Home'); break;
         case '/meters' : selectMenuItem('Meters'); break;
         case '/metrics' : selectMenuItem('Metrics'); break;
         case '/maps' : selectMenuItem('Maps'); break;
         case '/about' : selectMenuItem('About'); break;
+        default : document.querySelectorAll(`.${classes.menuItem}`).forEach((el) => el.classList.remove(classes.active));
         }
+        const logoEl = document.querySelector(`.${classes.trilliantContainer}`);
+        logoEl.addEventListener('click', () => window.location.href = 'http://localhost:8080');
     }, [location]);
 
     return (
@@ -48,9 +51,15 @@ function Sidebar() {
             </div>
             <ul className={classes.menuItems}>
                 <li className={classes.menuItem}>
-                    <Link to="/home" onClick={toggleMenuItem}>
+                    <Link to="/" onClick={toggleMenuItem}>
                         <AiFillHome className={classes.icons}/>
                         <span>Home</span>
+                    </Link>
+                </li>
+                <li className={classes.menuItem}>
+                    <Link to="/maps" onClick={toggleMenuItem}>
+                        <IoMapSharp className={classes.icons}/>
+                        <span>Maps</span>
                     </Link>
                 </li>
                 <li className={classes.menuItem}>
@@ -63,12 +72,6 @@ function Sidebar() {
                     <Link to="/metrics" onClick={toggleMenuItem}>
                         <SiGoogleanalytics className={classes.icons}/>
                         <span>Metrics</span>
-                    </Link>
-                </li>
-                <li className={classes.menuItem}>
-                    <Link to="/maps" onClick={toggleMenuItem}>
-                        <IoMapSharp className={classes.icons}/>
-                        <span>Maps</span>
                     </Link>
                 </li>
                 <li className={classes.menuItem}>

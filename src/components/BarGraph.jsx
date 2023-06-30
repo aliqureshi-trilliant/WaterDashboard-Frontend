@@ -1,17 +1,17 @@
-import classes from './Graph.module.css';
+import classes from './BarGraph.module.css';
 
 import {
     Chart as ChartJS,
     CategoryScale,
     LinearScale,
     PointElement,
-    LineElement,
+    BarElement,
     Title,
     Tooltip,
     Legend,
 } from 'chart.js';
-import { useEffect, useRef } from 'react';
-import { Line } from 'react-chartjs-2';
+import { useEffect, useMemo, useRef } from 'react';
+import { Bar } from 'react-chartjs-2';
 
 const getLastSevenDays = () => {
     let dayNames = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
@@ -46,8 +46,7 @@ function Graph(props){
     ChartJS.register(
         CategoryScale,
         LinearScale,
-        PointElement,
-        LineElement,
+        BarElement,
         Title,
         Tooltip,
         Legend
@@ -77,14 +76,14 @@ function Graph(props){
         labels,
         datasets: [
             {
-                label: 'Failed Reads',
-                data: labels.map(() => Math.round(Math.random() * labels.length)),
+                label: 'Water Level (Gallons)',
+                data: labels.map(() => Math.round(Math.random() * labels.length) + 1),
                 borderColor: '#52DBB2',
                 backgroundColor: '#52DBB2',
             },
             {
-                label: 'High Flow',
-                data: labels.map(() => Math.round(Math.random() * labels.length)),
+                label: 'Water Level (Gallons)',
+                data: labels.map(() => Math.round(Math.random() * labels.length) + 1),
                 borderColor: '#71c36f',
                 backgroundColor: '#71c36f',
             },
@@ -145,17 +144,17 @@ function Graph(props){
         switch(this.value) {
         case '7 days': {
             labels = getLastSevenDays();
-            data = labels.map(() => Math.round(Math.random() * labels.length));
+            data = labels.map(() => Math.round(Math.random() * labels.length)+1);
             break;
         }
         case '1 month': {
             labels = ['Week 1', 'Week 2', 'Week 3', 'Week 4'];
-            data = labels.map(() => Math.round(Math.random() * labels.length) * 3);
+            data = labels.map(() => (Math.round(Math.random() * labels.length)+1) * 3);
             break;
         }
         case '3 months':{
             labels = getLastThreeMonths();
-            data = labels.map(() => Math.round(Math.random() * labels.length) * 8);
+            data = labels.map(() => (Math.round(Math.random() * labels.length)+1) * 8);
             break;
         }
         }
@@ -181,7 +180,7 @@ function Graph(props){
                         <option value="3 months" className={classes.options}>3 months</option>
                     </select>
                 </div>
-                <Line options={options} data={data} ref={chartReference}/>
+                <Bar options={options} data={data} ref={chartReference}/>
             </div>
         </div>);
 }
