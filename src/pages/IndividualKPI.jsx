@@ -102,13 +102,13 @@ function IndividualKPI(props) {
                                 <>
                                     { loading &&
                                 (<SkeletonTheme baseColor='#F6F6F6' highlightColor='#EFEFEF'>
-                                    {[...Array(7)].map((el) => {
-                                        return ( <Skeleton key={el} className={classes.cardSkeleton} containerClassName={classes.cardSkeletonContainer}/>);
+                                    {[...Array(7)].map((_,index) => {
+                                        return ( <Skeleton key={index} className={classes.cardSkeleton} containerClassName={classes.cardSkeletonContainer}/>);
                                     })}
                                 </SkeletonTheme>)
                                     }
-                                    { error && (<>{[...Array(7)].map((el) => {
-                                        return ( <div key={el} className={classes.errorCard}><BiError></BiError>Error loading data !</div>);
+                                    { error && (<>{[...Array(7)].map((_,index) => {
+                                        return ( <div key={index} className={classes.errorCard}><BiError></BiError>Error loading data !</div>);
                                     })}</>)}
                                     { data &&
                                     data.map(({device_mrid},index) => {

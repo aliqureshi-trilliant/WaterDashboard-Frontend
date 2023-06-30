@@ -137,7 +137,7 @@ function Meters() {
                         { loading &&
                         (<SkeletonTheme baseColor='#F6F6F6' highlightColor='#EFEFEF'>
                             {[...Array(5)].map((_, index) => {
-                                return ( <div className={classes.meterList}>{[...Array(cardsPerRow)].map((_,index) => <Skeleton key={index} className={classes.cardSkeleton} containerClassName={classes.cardSkeletonContainer}/>)}</div>);
+                                return ( <div key={index} className={classes.meterList}>{[...Array(cardsPerRow)].map((_,index) => <Skeleton key={index} className={classes.cardSkeleton} containerClassName={classes.cardSkeletonContainer}/>)}</div>);
                             })}
                         </SkeletonTheme>)
                         }

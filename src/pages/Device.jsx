@@ -109,7 +109,6 @@ function Device(props) {
             try {
                 const allData = await Promise.all(['reading','alarm','gps'].map(fetchData),);
                 setData(allData);
-                console.log(allData);
             } catch(err) {
                 setError(err);
             } finally {
