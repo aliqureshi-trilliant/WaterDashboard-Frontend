@@ -15,7 +15,7 @@ function Metrics() {
     const [error, setError] = useState(null);
     const navigate = useNavigate();
     const [refresh,setRefresh] = useState(false);
-    const clearAlarms = ['24.21.87.49','24.5.48.293','24.5.48.216','24.2.22.37','24.35.0.74'];
+    const clearAlarms = new Set(['24.21.87.49','24.5.48.293','24.5.48.216','24.2.22.37','24.35.0.74']);
 
     const fetchData = async (type) => {
         const response = await fetch(`http://localhost:3000/api/waterMIUs${type}`);
@@ -121,7 +121,7 @@ function Metrics() {
                             <p>Alarms triggered in the past 24 hours</p>
                         </div>
                         <div className={classes.infoCard}>
-                            <h3>{data && data[2].filter((el)=> clearAlarms.includes(el.event_id)).length}{error && '-'}</h3>
+                            <h3>{data && data[2].filter((el)=> clearAlarms.has(el.event_id)).length}{error && '-'}</h3>
                             <BsGraphDown className={classes.infoIcon}/>
                             <p>Alarms cleared in the past 24 hours</p>
                         </div>

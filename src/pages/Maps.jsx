@@ -14,6 +14,7 @@ function Maps() {
     const [error, setError] = useState(null);
     const [selectedMarker, setSelectedMarker] = useState(null);
     const mapRef = useRef(null);
+    const initialData = useRef(null);
 
     const { isLoaded } = useLoadScript({
         googleMapsApiKey: import.meta.env.VITE_MAPS_API_KEY,
@@ -69,6 +70,7 @@ function Maps() {
             })
             .then((data) => {
                 setData(data);
+                initialData.current = data;
                 setError(null);
             })
             .catch((error) => {
@@ -81,6 +83,26 @@ function Maps() {
     useEffect(() => {
         fetchData();
     },[]);
+
+    useEffect(() => {
+        const titleEl = document.querySelector(`.${classes.titleContainer}`).children[0];
+        titleEl.addEventListener('click', (e) => {
+            e.preventDefault();
+            setData(initialData.current);
+        });
+        const onlineIcon = document.querySelector(`.${classes.iconOnline}`);
+        onlineIcon.addEventListener('click', (e) => {
+            e.preventDefault();
+            const onlineData = initialData.current.filter((el) => el.alarm !== 'Failed Read');
+            setData(onlineData);
+        });
+        const offlineIcon = document.querySelector(`.${classes.iconOffline}`);
+        offlineIcon.addEventListener('click', (e) => {
+            e.preventDefault();
+            const offlineData = initialData.current.filter((el) => el.alarm === 'Failed Read');
+            setData(offlineData);
+        });
+    },[initialData]);
 
     return (
         <>
@@ -121,9 +143,9 @@ function Maps() {
                     <div className={classes.titleContainer}>
                         <h1>Meter List</h1>
                         <HiOutlineStatusOnline className={classes.iconOnline}/>
-                        <div className={classes.deviceCount}><p className={classes.statusTitle}>Online</p><p>{data && data.reduce((accumulator, el)=> accumulator + (el.alarm === 'Failed Read'?0:1),0)}{error && '-'}</p></div>
+                        <div className={classes.deviceCount}><p className={classes.statusTitle}>Online</p><p>{initialData && initialData.current?.reduce((accumulator, el)=> accumulator + (el.alarm === 'Failed Read'?0:1),0)}{error && '-'}</p></div>
                         <HiOutlineStatusOffline className={classes.iconOffline}/>
-                        <div className={classes.deviceCount}><p className={classes.statusTitle}> Offline</p><p>{data && data.reduce((accumulator, el)=> accumulator + (el.alarm === 'Failed Read'?1:0),0)}{error && '-'}</p></div>
+                        <div className={classes.deviceCount}><p className={classes.statusTitle}> Offline</p><p>{initialData && initialData.current?.reduce((accumulator, el)=> accumulator + (el.alarm === 'Failed Read'?1:0),0)}{error && '-'}</p></div>
                     </div>
                     <div className={classes.meterList}>
                         {

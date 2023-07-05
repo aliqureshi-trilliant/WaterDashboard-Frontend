@@ -45,6 +45,7 @@
     font-size: 1.8cqw;
     white-space: nowrap;
     padding-right: 0.5rem;
+    cursor: pointer;
 }
 
 .deviceCount{
