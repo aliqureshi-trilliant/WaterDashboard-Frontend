@@ -10,8 +10,34 @@ import { useNavigate } from 'react-router-dom';
 
 function Metrics() {
 
+    const [data, setData] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
     const navigate = useNavigate();
     const [refresh,setRefresh] = useState(false);
+
+    const fetchData = async (type) => {
+        const response = await fetch(`http://localhost:3000/api/waterMIUs${type}`);
+        if(!response.ok) {
+            throw new Error(`Error ${response.status}: ${response.message}`);
+        }
+        const data = await response.json();
+        if (data.length == 0) {
+            throw new Error(`There is no data available for ${deviceName}`);
+        }
+        return data;
+    };
+
+    const fetchAllData = async () => {
+        try {
+            const allData = await Promise.all(['/alarms',''].map(fetchData),);
+            setData(allData);
+        } catch(err) {
+            setError(err);
+        } finally {
+            setLoading(false);
+        }
+    };
 
     useEffect(() => {
         const statusBar = document.querySelector(`.${classes.statusBarContainer}`);
@@ -25,6 +51,10 @@ function Metrics() {
         refreshEl.addEventListener('click', () => setRefresh((r) => !r));
     },[]);
 
+    useEffect(() => {
+        fetchAllData();
+    },[refresh])
+
     return (
         <>
         <div className={classes.metrics}>
@@ -36,41 +66,41 @@ function Metrics() {
                 <div className={classes.deviceCountContainer}>
                     <div className={classes.statusContainer}>
                         <MdPieChartOutline className={classes.iconTotal}/>
-                        <div className={classes.deviceCount}><p className={classes.statusTitle}>Total</p><p>300</p></div>
+                        <div className={classes.deviceCount}><p className={classes.statusTitle}>Total</p><p>{data && data[1].length}{error && '-'}</p></div>
                     </div>
                     <div className={classes.statusContainer}>
                         <MdOutlineOfflineBolt className={classes.iconOnline}/>
-                        <div className={classes.deviceCount}><p className={classes.statusTitle}>Online</p><p>276</p></div>
+                        <div className={classes.deviceCount}><p className={classes.statusTitle}>Online</p><p>{data && data[1].length - (data[0].Failed_Read || 0)}{error && '-'}</p></div>
                     </div>
                     <div className={classes.statusContainer}>
                         <MdOutlineOfflineBolt className={classes.iconOffline}/>
-                        <div className={classes.deviceCount}><p className={classes.statusTitle}> Offline</p><p>24</p></div>
+                        <div className={classes.deviceCount}><p className={classes.statusTitle}> Offline</p><p>{data && (data[0].Failed_Read || 0)}{error && '-'}</p></div>
                     </div>
                     <div title='Refresh' className={classes.iconContainer} data-refresh={true}>
-                                <HiOutlineRefresh className={classes.icon} />
+                        <HiOutlineRefresh className={classes.icon} />
                     </div>
                 </div>
             </div>
             <div className={classes.statusBarContainer}>
                 <div className={classes.statusBarItem} data-id='High Flow'>
                     <h3>High Flow</h3>
-                    <p>22</p>
+                    <p>{data && (data[0].High_Flow || 0)}{error && '-'}</p>
                 </div>
                 <div className={classes.statusBarItem} data-id='Back Flow'>
                     <h3>Back Flow</h3>
-                    <p>12</p>
+                    <p>{data && (data[0].Back_Flow || 0)}{error && '-'}</p>
                 </div>
                 <div className={classes.statusBarItem} data-id='Failed Read'>
                     <h3>Failed Read</h3>
-                    <p>13</p>
+                    <p>{data && (data[0].Failed_Read || 0)}{error && '-'}</p>
                 </div>
                 <div className={classes.statusBarItem} data-id='Temperature'>
                     <h3>Temperature</h3>
-                    <p>34</p>
+                    <p>{data && (data[0].Temperature || 0)}{error && '-'}</p>
                 </div>
                 <div className={classes.statusBarItem} data-id='Battery'>
                     <h3>Battery</h3>
-                    <p>5</p>
+                    <p>{data && (data[0].Battery || 0)}{error && '-'}</p>
                 </div>
             </div>
             <div className={classes.bottomContainer}>

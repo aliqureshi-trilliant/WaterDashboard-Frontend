@@ -1,6 +1,6 @@
 import classes from './Meters.module.css';
 import { AiOutlineSearch } from 'react-icons/ai';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import DeviceCard from '../components/DeviceCard';
 import waterMIUImage from '/images/WaterMIU.png';
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
@@ -13,23 +13,20 @@ import { MdCancel, MdIncompleteCircle } from 'react-icons/md';
 function Meters() {
 
     const [data, setData] = useState(null);
+    const initialData = useRef(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const cardsPerRow = 5;
 
-    const toggleFilter = (filter) => {
-
+    const toggleFilter = (filterEl) => {
         const filters = document.querySelectorAll(`.${classes.filter}`);
         filters.forEach((el) => el.classList.remove(classes.filterActive));
-
-        filter.classList.add(classes.filterActive);
-        searchFilter(filter);
-    };
-
-    const searchFilter = (filter) => {
-        // switch(filter.dataset.type){
-        // case "All":
-        // }
+        filterEl.classList.add(classes.filterActive);
+        switch(filterEl.dataset.type){
+        case 'All': setData(initialData.current); break;
+        case "Online": const onlineData = initialData.current.filter((el) => el.alarm !== 'Failed Read');setData(onlineData);break;
+        case "Offline": const offlineData = initialData.current.filter((el) => el.alarm === 'Failed Read');setData(offlineData);break;
+        }
     };
 
     const searchMeter = (searchValue) => {
@@ -46,6 +43,7 @@ function Meters() {
                     throw new Error(`There is no data available for ${searchValue}`);
                 }
                 setData(data);
+                initialData.current = data;
                 setError(null);
             })
             .catch((error) => {
@@ -55,7 +53,7 @@ function Meters() {
             .finally(() => setLoading(false));
     };
 
-    const fetchData = (type = 'All') => {
+    const fetchData = () => {
         fetch('http://localhost:3000/api/waterMIUs')
             .then((response) => {
                 if(!response.ok) {
@@ -65,6 +63,7 @@ function Meters() {
             })
             .then((data) => {
                 setData(data);
+                initialData.current = data;
                 setError(null);
             })
             .catch((error) => {
@@ -76,14 +75,7 @@ function Meters() {
 
     useEffect(() => {
         fetchData();
-        const filterContainer = document.querySelector(`.${classes.filterContainer}`);
-        filterContainer.addEventListener('click', (e) => {
-            e.preventDefault();
-            const filter = e.target.closest(`.${classes.filter}`);
-            if (filter){
-                toggleFilter(filter);
-            }
-        });
+        
 
         const searchEl = document.querySelector(`.${classes.searchBar}`).children[1];
         searchEl.addEventListener('keypress', (e) => {
@@ -98,6 +90,17 @@ function Meters() {
             }
         });
     },[]);
+
+    useEffect(() => {
+        const filterContainer = document.querySelector(`.${classes.filterContainer}`);
+        filterContainer.addEventListener('click', (e) => {
+            e.preventDefault();
+            const filterEl = e.target.closest(`.${classes.filter}`);
+            if (filterEl){
+                toggleFilter(filterEl);
+            }
+        });
+    },[data]);
 
     return (
         <>
@@ -146,12 +149,12 @@ function Meters() {
                                 <div className={classes.errorCard}><BiError></BiError>Error loading data !</div>
                             </div>}</>)}
                         { data &&
-                        data.reduce((accumulator, {device_mrid} , index) => {
+                        data.reduce((accumulator, {device_mrid, alarm} , index) => {
                             const meterListIndex = Math.floor(index / cardsPerRow);
                             if (!accumulator[meterListIndex]){
                                 accumulator[meterListIndex] = [];
                             }
-                            accumulator[meterListIndex].push(<DeviceCard key={device_mrid} deviceName={device_mrid} deviceStatus={Math.round(Math.random())==1?'Online':'Offline'} additionalStyles={classes.card}/>);
+                            accumulator[meterListIndex].push(<DeviceCard key={device_mrid} deviceName={device_mrid} deviceStatus={alarm ==='Failed Read'?"Offline":"Online"} additionalStyles={classes.card}/>);
                             return accumulator;
                         }, []).map((meterList,index) => (
                             <div key={index} className={classes.meterList}>

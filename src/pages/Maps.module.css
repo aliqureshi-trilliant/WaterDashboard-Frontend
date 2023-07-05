@@ -87,7 +87,7 @@
     align-items: center;
     justify-content: start;
     overflow-y: scroll;
-    padding-top: 0.5rem;
+    padding: 0.5rem 0;
 }
 
 .meterInfoCard {
@@ -126,6 +126,7 @@
 
 .meterList::-webkit-scrollbar {
     width: 12px;
+    border-radius: 10px;
     background-color: var(--nyanza);
 }
 

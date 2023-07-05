@@ -59,8 +59,6 @@ function Device(props) {
         keyboardShortcuts: false,
     };
 
-    const iconContainerStyle = props.deviceStatus? classes.online:classes.offline;
-
     const toggle = (event) => {
         const alarmToggle = document.querySelector(`.${classes.alarmToggle}`);
         const waterToggle = document.querySelector(`.${classes.waterToggle}`);
@@ -79,11 +77,11 @@ function Device(props) {
 
     const isActive = (alarm) => {
         switch(alarm){
-        case 'Failed Read': return data[1].event_id === '24.5.48.219';
-        case 'Highflow': return data[1].event_id === '24.5.48.209';
-        case 'Backflow': return data[1].event_id === '24.5.48.214';
-        case 'Temperature': return data[1].event_id === '24.5.48.211';
-        case 'Battery': return data[1].event_id === '24.5.48.249';
+        case 'Failed Read': return data[1].event_id === '24.21.87.47';
+        case 'Highflow': return data[1].event_id === '24.5.48.93';
+        case 'Backflow': return data[1].event_id === '24.5.48.219';
+        case 'Temperature': return data[1].event_id === '24.35.0.40';
+        case 'Battery': return data[1].event_id === '24.2.22.150';
         }
     };
 
@@ -109,11 +107,11 @@ function Device(props) {
             try {
                 const allData = await Promise.all(['reading','alarm','gps'].map(fetchData),);
                 setData(allData);
+                console.log(allData);
             } catch(err) {
                 setError(err);
             } finally {
                 setLoading(false);
-                
             }
         };
 
@@ -144,11 +142,11 @@ function Device(props) {
                             </div>
                         </div>
                         <div className={classes.buttonContainer}>
-                            <div title={`Device is ${props.deviceStatus || 'offline'}`}className={`${classes.iconContainer} ${iconContainerStyle}`}>
-                                {
-                                    props.deviceStatus === 'Online'?
-                                        <HiOutlineStatusOnline className={classes.icon}/>:
-                                        <HiOutlineStatusOffline className={classes.icon}/>
+                            <div title={`Device is ${ data && isActive('Failed Read')?'offline':'online'}`} className={`${classes.iconContainer} ${data && isActive('Failed Read')?classes.offline:classes.online}`}>
+                                { data &&
+                                    isActive('Failed Read')?
+                                    <HiOutlineStatusOffline className={classes.icon}/>:
+                                    <HiOutlineStatusOnline className={classes.icon}/>
                                 }
                             </div>
                             <button title='Refresh' className={classes.iconContainer} data-refresh={true}>

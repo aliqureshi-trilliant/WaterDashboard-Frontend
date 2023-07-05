@@ -28,7 +28,7 @@ function Maps() {
     const onLoad = (map) => {
         const bounds = new google.maps.LatLngBounds();
         parsedData.forEach(({ lat, lng }) => bounds.extend({ lat, lng }));
-        map.fitBounds(bounds, {top:250, bottom:250, right:450});
+        map.fitBounds(bounds, {right:400});
         mapRef.current = map;
     };
 
@@ -121,9 +121,9 @@ function Maps() {
                     <div className={classes.titleContainer}>
                         <h1>Meter List</h1>
                         <HiOutlineStatusOnline className={classes.iconOnline}/>
-                        <div className={classes.deviceCount}><p className={classes.statusTitle}>Online</p><p>276</p></div>
+                        <div className={classes.deviceCount}><p className={classes.statusTitle}>Online</p><p>{data && data.reduce((accumulator, el)=> accumulator + (el.alarm === 'Failed Read'?0:1),0)}{error && '-'}</p></div>
                         <HiOutlineStatusOffline className={classes.iconOffline}/>
-                        <div className={classes.deviceCount}><p className={classes.statusTitle}> Offline</p><p>24</p></div>
+                        <div className={classes.deviceCount}><p className={classes.statusTitle}> Offline</p><p>{data && data.reduce((accumulator, el)=> accumulator + (el.alarm === 'Failed Read'?1:0),0)}{error && '-'}</p></div>
                     </div>
                     <div className={classes.meterList}>
                         {
@@ -139,8 +139,8 @@ function Maps() {
                                     return ( <div key={el} className={classes.errorCard}><BiError></BiError>Error loading data !</div>);
                                 })}</>)}
                                 { data &&
-                                data.map(({device_mrid},index) => {
-                                    return ( <MeterInfoCard key={index} deviceName={device_mrid} deviceStatus={Math.round(Math.random())==1?'Online':'Offline'} serialNo="12392" rpmaID="150122" nodeID="1301" additionalStyles={classes.meterInfoCard} onClick={() => {selectMarker(device_mrid);}}/>);
+                                data.map(({device_mrid, alarm},index) => {
+                                    return ( <MeterInfoCard key={index} deviceName={device_mrid} deviceStatus={alarm ==='Failed Read'?"Offline":"Online"} serialNo="12392" rpmaID="150122" nodeID="1301" additionalStyles={classes.meterInfoCard} onClick={() => {selectMarker(device_mrid);}}/>);
                                 })
                                 }
                             </>
