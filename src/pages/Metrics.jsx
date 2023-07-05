@@ -1,8 +1,8 @@
 import classes from './Metrics.module.css';
 import Graph from '../components/Graph';
-import AlarmChart from '../components/AlarmChart';
+import AllAlarmChart from '../components/AllAlarmChart';
 import { BsGraphUp, BsGraphDown,  BsThermometerHigh} from 'react-icons/bs';
-import {  GiBattery25 } from 'react-icons/gi';
+import { GiBattery25 } from 'react-icons/gi';
 import { MdPieChartOutline, MdOutlineOfflineBolt } from 'react-icons/md';
 import { HiOutlineRefresh } from 'react-icons/hi';
 import { useEffect, useState } from 'react';
@@ -15,6 +15,7 @@ function Metrics() {
     const [error, setError] = useState(null);
     const navigate = useNavigate();
     const [refresh,setRefresh] = useState(false);
+    const clearAlarms = ['24.21.87.49','24.5.48.293','24.5.48.216','24.2.22.37','24.35.0.74'];
 
     const fetchData = async (type) => {
         const response = await fetch(`http://localhost:3000/api/waterMIUs${type}`);
@@ -30,7 +31,7 @@ function Metrics() {
 
     const fetchAllData = async () => {
         try {
-            const allData = await Promise.all(['/alarms',''].map(fetchData),);
+            const allData = await Promise.all(['/alarms','','/KPIs/alarms?days=1'].map(fetchData),);
             setData(allData);
         } catch(err) {
             setError(err);
@@ -115,12 +116,12 @@ function Metrics() {
                 <div className={classes.rightContainer}>
                     <div className={classes.infoCardContainer}>
                         <div className={classes.infoCard}>
-                            <h3>630</h3>
+                            <h3>{data && data[2].length}{error && '-'}</h3>
                             <BsGraphUp className={classes.infoIcon}/>
                             <p>Alarms triggered in the past 24 hours</p>
                         </div>
                         <div className={classes.infoCard}>
-                            <h3>224</h3>
+                            <h3>{data && data[2].filter((el)=> clearAlarms.includes(el.event_id)).length}{error && '-'}</h3>
                             <BsGraphDown className={classes.infoIcon}/>
                             <p>Alarms cleared in the past 24 hours</p>
                         </div>
@@ -131,17 +132,17 @@ function Metrics() {
                             <div className={classes.countStatusContainer}>
                                 <div className={classes.batteryStatusCountContainer}>
                                     <GiBattery25 className={classes.batteryStatusIconContainer}/>
-                                    <p>15</p>
+                                    <p>{data && data[2].filter((el) => el.event_id === '24.2.22.150').length}{error && '-'}</p>
                                 </div>
                                 <div className={classes.batteryStatusCountContainer}>
                                     <BsThermometerHigh className={classes.batteryStatusIconContainer}/>
-                                    <p>4</p>
+                                    <p>{data && data[2].filter((el) => el.event_id === '24.35.0.40').length}{error && '-'}</p>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div className={classes.alarmChartContainer}>
-                        <AlarmChart additionalStyles={classes.alarmChart}/>
+                        <AllAlarmChart additionalStyles={classes.alarmChart} refresh={refresh}/>
                     </div>
                 </div>
             </div>
