@@ -13,7 +13,7 @@
     background: #C5EAC5;
     border-radius: 32px;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
 }
