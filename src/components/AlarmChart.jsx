@@ -132,6 +132,12 @@ function AlarmChart(props){
         ],
     };
 
+    const calculatePercentage = (data, index) => {
+        const total = data.reduce((acc, el) => acc + el, 0);
+        const percentage = isNaN((data[index] / total) * 100) ? 0 : (data[index] / total).toFixed(3) * 100;
+        return `${percentage}%`;
+      };
+
     useEffect(() => {
         fetchData();
     },[props.refresh]);
@@ -172,7 +178,7 @@ function AlarmChart(props){
                             Back Flow
                         </div>
                         <div className={classes.dataNumber}>
-                            {alarmData && isNaN((alarmData[1]/alarmData.reduce((acc,el) => acc + el,0)).toFixed(3)*100) ? 0 : (alarmData[1]/alarmData.reduce((acc,el) => acc + el,0)).toFixed(3)*100}%
+                            {alarmData && calculatePercentage(alarmData, 1)}
                         </div>
                     </div>
                     <div className={classes.data}>
@@ -180,7 +186,7 @@ function AlarmChart(props){
                             High Flow
                         </div>
                         <div className={classes.dataNumber}>
-                            {alarmData && isNaN((alarmData[0]/alarmData.reduce((acc,el) => acc + el,0)).toFixed(3)*100) ? 0 : (alarmData[0]/alarmData.reduce((acc,el) => acc + el,0)).toFixed(3)*100}%
+                            {alarmData && calculatePercentage(alarmData, 0)}
                         </div>
                     </div>
                     <div className={classes.data}>
@@ -188,7 +194,7 @@ function AlarmChart(props){
                             Failed Read
                         </div>
                         <div className={classes.dataNumber}>
-                            {alarmData && isNaN((alarmData[2]/alarmData.reduce((acc,el) => acc + el,0)).toFixed(3)*100) ? 0 : (alarmData[2]/alarmData.reduce((acc,el) => acc + el,0)).toFixed(3)*100}%
+                            {alarmData && calculatePercentage(alarmData, 2)}
                         </div>
                     </div>
                     <div className={classes.data}>
@@ -196,7 +202,7 @@ function AlarmChart(props){
                             Battery
                         </div>
                         <div className={classes.dataNumber}>
-                            {alarmData && isNaN((alarmData[3]/alarmData.reduce((acc,el) => acc + el,0)).toFixed(3)*100) ? 0 : (alarmData[3]/alarmData.reduce((acc,el) => acc + el,0)).toFixed(3)*100}%
+                            {alarmData && calculatePercentage(alarmData, 3)}
                         </div>
                     </div>
                     <div className={classes.data}>
@@ -204,7 +210,7 @@ function AlarmChart(props){
                             Temperature
                         </div>
                         <div className={classes.dataNumber}>
-                            {alarmData && isNaN((alarmData[4]/alarmData.reduce((acc,el) => acc + el,0)).toFixed(3)*100) ? 0 : (alarmData[4]/alarmData.reduce((acc,el) => acc + el,0)).toFixed(3)*100}%
+                            {alarmData && calculatePercentage(alarmData, 4)}
                         </div>
                     </div>
                 </div>
