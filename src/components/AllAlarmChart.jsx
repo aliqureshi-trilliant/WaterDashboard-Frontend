@@ -132,7 +132,7 @@ function AllAlarmChart(props){
 
     const calculatePercentage = (data, index) => {
         const total = data.reduce((acc, el) => acc + el, 0);
-        const percentage = isNaN((data[index] / total) * 100) ? 0 : (data[index] / total).toFixed(3) * 100;
+        const percentage = isNaN((data[index] / total) * 100) ? 0 : Math.round(data[index] * 100/ total);
         return `${percentage}%`;
       };
 

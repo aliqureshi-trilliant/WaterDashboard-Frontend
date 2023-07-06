@@ -88,6 +88,12 @@ function Graph(props){
                 borderColor: '#71c36f',
                 backgroundColor: '#71c36f',
             },
+            {
+                label: 'Back Flow',
+                data: labels.map(() => Math.round(Math.random() * labels.length)),
+                borderColor: '#95C623',
+                backgroundColor: '#95C623',
+            },
         ],
     };
 
